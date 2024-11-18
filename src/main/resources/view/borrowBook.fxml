@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studypal.view.first.gui.studente.CercaRipetizioneGui">
+   <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" stylesheets="@style/base.css">
+      <effect>
+         <DropShadow height="24.75" radius="11.9375" width="25.0">
+            <color>
+               <Color red="0.49803921580314636" green="0.6509804129600525" blue="0.7568627595901489" />
+            </color>
+         </DropShadow>
+      </effect>
+      <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets top="60.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <Image url="@../view/images/readerIcon.png" />
+      </ImageView>
+      <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="My profile" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#goToGestisciPrenotazioni" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a book" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button mnemonicParsing="false" onMouseClicked="#goToLogout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" text="Logout">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+   </VBox>
+   <Text fx:id="titolo" fill="#000000ab" layoutX="374.0" layoutY="69.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Borrow A Book" textAlignment="CENTER" wrappingWidth="428.8001129627228" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="197.19988703727722" AnchorPane.topAnchor="30.0">
+      <font>
+         <Font size="40.0" />
+      </font>
+   </Text>
+   <AnchorPane fx:id="zonaInfo" layoutX="253.0" layoutY="98.0" prefHeight="468.0" prefWidth="692.0" style="-fx-background-color: d9e7df;" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/menu.css">
+      <VBox layoutX="112.0" layoutY="143.0" prefHeight="217.0" prefWidth="200.0">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Luogo:">
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <ComboBox fx:id="luogo" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="207.0" styleClass="combo-box" />
+         <Label fx:id="luogoError" prefHeight="18.0" prefWidth="310.0" textFill="#bf0000" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Modalità di lezione:">
+            <VBox.margin>
+               <Insets top="12.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <CheckBox fx:id="inPresenza" mnemonicParsing="false" text="In Presenza">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="online" mnemonicParsing="false" text="Online">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+      </VBox>
+      <TextField fx:id="cercaMateria" layoutX="180.0" layoutY="63.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="271.0" styleClass="testo">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.38362574577331543" green="0.5778557658195496" blue="0.6315789222717285" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <Text layoutX="180.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Cerca Materia:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Filtri Aggiuntivi">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <VBox layoutX="451.0" layoutY="143.0" prefHeight="217.0" prefWidth="200.0">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Giorni d'interesse:">
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <CheckBox fx:id="lunediBox" mnemonicParsing="false" text="Lunedì">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="martediBox" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" text="Martedì">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="mercolediBox" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" text="Mercoledì">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="giovediBox" layoutX="10.0" layoutY="95.0" mnemonicParsing="false" text="Giovedì">
+            <VBox.margin>
+               <Insets top="7.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="venerdiBox" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" text="Venerdì">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="sabatoBox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Sabato">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+         <CheckBox fx:id="domenicaBox" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" text="Domenica">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </CheckBox>
+      </VBox>
+      <Button layoutX="484.0" layoutY="63.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#ricercaMethod" prefHeight="26.0" prefWidth="83.0" styleClass="custom-button2" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/button.css" text="Cerca" />
+      <Line endX="86.5999755859375" layoutX="194.0" layoutY="143.0" startX="-100.0" stroke="#50944f" />
+      <Line endX="100.0" layoutX="497.0" layoutY="142.0" startX="-84.4000244140625" stroke="#50944f" />
+      <Label fx:id="campiError" layoutX="286.0" layoutY="110.0" prefHeight="18.0" prefWidth="107.0" textAlignment="CENTER" textFill="#d40000" wrapText="true" />
+      <Text layoutX="147.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="277.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo" text="Tariffa max. (€/h):">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Slider fx:id="tariffaSlider" blockIncrement="5.0" layoutX="222.0" layoutY="399.0" majorTickUnit="5.0" max="50.0" min="5.0" prefHeight="38.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+      <Label fx:id="tariffaValue" contentDisplay="RIGHT" layoutX="329.0" layoutY="437.0" prefHeight="18.0" prefWidth="33.0" />
+   </AnchorPane>
+   <stylesheets>
+      <URL value="@style/base.css" />
+      <URL value="@style/button.css" />
+   </stylesheets>
+</AnchorPane>

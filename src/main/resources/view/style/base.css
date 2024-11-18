@@ -1,0 +1,213 @@
+.lw { font-size: 60px; }
+/* Definizione del colore di sfondo */
+
+
+/* Definizione del font per tutto il testo */
+body {
+    background-color: #000000; /* Colore nero */
+    font-family: Abel, Verdana, serif; /* Utilizza il font Arial o un font sans-serif di backup */
+}
+
+
+/* Stile per l'intestazione */
+h1 {
+    color: #000000; /* Colore del testo nero */
+    font-size: 24px; /* Dimensione del font 24px */
+}
+
+/* Stile per i paragrafi */
+p {
+    color: #333333; /* Colore del testo grigio */
+    font-size: 10px; /* Dimensione del font 16px */
+    line-height: 1.5; /* Altezza della riga 1.5 volte la dimensione del font */
+}
+/* Stile per i pulsanti */
+Button {
+    -fx-background-color: #dedfdd; /* Colore di sfondo bianchino */
+
+    -fx-color: #658863; /* Colore del testo blu */
+    -fx-padding: 10px 20px; /* Spazio intorno al testo */
+    -fx-font-family: Verdana, sans-serif; /* Utilizza il font Arial o un font sans-serif di backup */
+
+    -fx-font-size: 14px; /* Dimensione del font */
+    -fx-cursor: pointer; /* Cambia il cursore quando si passa sopra */
+    -fx-border-radius: 8px; /* Bordo arrotondato */
+}
+
+/* Stile per il passaggio del mouse sui pulsanti */
+Button:hover {
+    -fx-background-color: #658863; /* Colore di sfondo più scuro */
+    -fx-color: #d9e7df; /* Colore del testo blu */
+}
+
+#titolo {
+    -fx-font-size: 40px; /* Imposta la dimensione del carattere a 40px */
+    -fx-font-weight: bold; /* Imposta il grassetto */
+    -fx-text-fill: #333333; /* Imposta il colore del testo */
+    -fx-font-style: italic;
+    -fx-font-family: Rockwell;
+}
+
+/*colore di sfondo*/
+.root {
+    -fx-background-color: #7FFFD4;
+}
+
+/*colore menu*/
+#menu {
+    -fx-background-color: #d9e7df;
+}
+
+#zonaInfo {
+    -fx-background-color: rgb(143, 194, 140);
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#sfondoChiaro {
+    -fx-background-color: #d9e7df;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.anchor-verde {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 10, 0, 0, 0);
+    -fx-background-color: #d9e7df;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.anchor-verde:hover {
+    -fx-effect: dropshadow(gaussian, rgba(12, 132, 10, 0.81), 10, 0.7, 0, 0);
+    -fx-background-color: #d9e7df;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+.anchor-blu {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 10, 0, 0, 0);
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.anchor-blu:hover {
+    -fx-effect: dropshadow(gaussian, rgba(39, 112, 180, 0.81), 10, 0.7, 0, 0);
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+
+.anchor-rosso {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 10, 0, 0, 0);
+    -fx-background-color: #d9e7df;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.anchor-rosso:hover {
+    -fx-effect: dropshadow(gaussian, rgba(196, 36, 66, 0.81), 10, 0.7, 0, 0);
+    -fx-background-color: #d9e7df;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+.testo {
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow(gaussian, rgba(60, 161, 57, 0.34), 10, 0.7, 0, 0);
+    -fx-background-color: white;
+    -fx-border-radius: 30; /* Arrotonda solo l'angolo*/
+    -fx-min-width: 200px; /* Larghezza minima */
+    -fx-min-height: 40px; /* Altezza minima */
+    -fx-max-width: 300px; /* Larghezza massima */
+    -fx-max-height: 60px; /* Altezza massima */
+    -fx-font-size: 14px;
+}
+
+.testo-grande{
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow(gaussian, rgba(39, 147, 180, 0.38), 10, 0.7, 0, 0);
+    -fx-background-color: white;
+    -fx-border-radius: 30; /* Arrotonda solo l'angolo*/
+    -fx-min-width: 200px; /* Larghezza minima */
+    -fx-min-height: 40px; /* Altezza minima */
+    -fx-max-width: 300px; /* Larghezza massima */
+    -fx-max-height: 60px; /* Altezza massima */
+    -fx-font-size: 16px;
+}
+
+
+#email {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#materia {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#visualizza {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#tariffa {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#giorni{
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#prenota {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#nome {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+#cognome {
+    -fx-font-size: 15px; /* Imposta la grandezza del testo a 15 pixel */
+    -fx-alignment: center-left;
+}
+
+
+.check-box .box{
+    -fx-effect: dropshadow(gaussian, rgba(60, 161, 57, 0.34), 10, 0.7, 0, 0);
+    -fx-border-width: 2; /* Cambia la larghezza del contorno */
+    -fx-border-radius: 0; /* Cambia l'angolatura degli spigoli */
+}
+
+
+.slider .track {
+    -fx-background-color: linear-gradient(to right, #8fc28c 0%, #68b763 50%, #245424 100%);
+    -fx-background-insets: 0 0 -1 0;
+}
+
+
+.combo-box {
+    -fx-effect: dropshadow(gaussian, rgba(60, 161, 57, 0.34), 10, 0.7, 0, 0);
+    -fx-border-radius: 30; /* Cambia l'angolatura degli spigoli */
+}
+
+
+.menu-button {
+    -fx-effect: dropshadow(gaussian, rgba(60, 161, 57, 0.34), 10, 0.7, 0, 0);
+    -fx-border-radius: 30; /* Cambia l'angolatura degli spigoli */
+}
+
+#sfondoVerdeChiaro {
+    -fx-background-color: rgba(136, 176, 133, 0.53);
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.HomeCostumerGUI">
+   <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: rgba(235, 246, 234, 0.84);">
+      <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets top="60.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <Image url="@../view/images/readerIcon.png" />
+      </ImageView>
+      <Button mnemonicParsing="false" onMouseClicked="#showProfile" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="My profile" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button fx:id="borrowBook" mnemonicParsing="false" onAction="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a book" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" onMouseClicked="#logout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" text="Logout">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="0.49803921580314636" green="0.6509804129600525" blue="0.7568627595901489" />
+            </color>
+         </DropShadow>
+      </effect>
+      <stylesheets>
+         <URL value="@style/button.css" />
+         <URL value="@style/menu.css" />
+      </stylesheets>
+   </VBox>
+   <Text fx:id="titolo" fill="#000000ab" layoutX="369.0" layoutY="165.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Welcome to MyLib" textAlignment="CENTER" wrappingWidth="451.800048828125" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="179.199951171875" AnchorPane.topAnchor="127.16796875">
+      <font>
+         <Font size="40.0" />
+      </font>
+   </Text>
+   <ImageView fitHeight="206.0" fitWidth="211.0" layoutX="486.0" layoutY="268.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../view/images/bookIcon.png" />
+   </ImageView>
+</AnchorPane>

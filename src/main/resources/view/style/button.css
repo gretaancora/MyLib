@@ -1,0 +1,81 @@
+.custom-button {
+    -fx-background-color:  #7FFFD4;
+    -fx-text-fill: #000000ac;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.custom-button2 {
+    -fx-background-color: #333333;
+    -fx-text-fill: #eceeeb;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.custom-button2:hover {
+    -fx-background-color: #da3131;
+}
+
+.custom-button:hover {
+    -fx-background-color: #4a7947;
+
+}
+
+.rounded-button {
+    -fx-background-color: #DEDFDDFF;
+    -fx-text-fill: #4f82a6;
+    -fx-border-radius: 20px; /* Bordo arrotondato */
+}
+
+.rounded-button:hover {
+    -fx-background-color: #4f82a6;
+    -fx-border-radius: 20px; /* Bordo arrotondato */
+    -fx-text-fill: #DEDFDDFF;
+
+}
+
+.info-button {
+    -fx-font-family: Perpetua;
+    -fx-background-color: #DEDFDDFF;
+    -fx-text-fill: #4f82a6;
+    -fx-border-radius: 20px;
+}
+
+.info-button:hover {
+    -fx-font-family: Perpetua;
+    -fx-background-color: #4f82a6;
+    -fx-border-radius: 20px; /* Bordo arrotondato */
+    -fx-text-fill: #DEDFDDFF;
+
+}
+
+.custom-button3 {
+    -fx-background-color: #DEDFDDFF;
+    -fx-text-fill: #0c840a;
+    -fx-border-radius: 20px;
+    -fx-padding: 5px 10px; /* Imposta i margini interni (alto/basso sinistra/destra) */
+    -fx-min-width: 50px;   /* Imposta la larghezza minima */
+    -fx-max-width: 50px;   /* Imposta la larghezza massima */
+    -fx-min-height: 25px;  /* Imposta l'altezza minima */
+    -fx-max-height: 25px;  /* Imposta l'altezza massima */
+}
+
+.custom-button3:hover {
+    -fx-effect: dropshadow(gaussian, rgba(25, 42, 25, 0.72), 10, 0, 0, 0);
+    -fx-background-color: rgba(17, 79, 17, 0.66);
+    -fx-text-fill: #DEDFDDFF;
+    -fx-border-radius: 20px;
+    -fx-padding: 5px 10px; /* Imposta i margini interni (alto/basso sinistra/destra) */
+}
+
+
+.custom-button_conferma {
+    -fx-background-color: rgb(104, 138, 102);
+    -fx-text-fill: #eceeeb;
+    -fx-border-radius: 15 15 15 15;
+    -fx-font-size: 17px;
+}
+
+.custom-button_conferma:hover {
+    -fx-background-color: #4a7947;
+    -fx-border-radius: 15 15 15 15;
+
+}

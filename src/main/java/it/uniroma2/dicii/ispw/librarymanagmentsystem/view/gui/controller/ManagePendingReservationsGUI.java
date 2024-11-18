@@ -1,0 +1,8 @@
+package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
+
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
+
+public class ManagePendingReservationsGUI {
+    public ManagePendingReservationsGUI(User user) {
+    }
+}
