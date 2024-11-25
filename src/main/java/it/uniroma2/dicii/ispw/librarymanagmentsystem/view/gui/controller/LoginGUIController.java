@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.LoginController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongCredentialsException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongPasswordException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
@@ -72,7 +73,7 @@ public class LoginGUIController {
         } catch (UnsupportedUserTypeException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText("Wrong credentials.");
-        } catch (WrongPasswordException e) {
+        } catch (WrongCredentialsException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText("Wrong credentials.");
         }

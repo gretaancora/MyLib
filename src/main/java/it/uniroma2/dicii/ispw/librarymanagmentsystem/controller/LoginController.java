@@ -10,8 +10,8 @@ public class LoginController {
 
     public LoginController() {}
 
-    public User start(LoginBean loginBean) throws WrongPasswordException, UserNotFoundException, UnsupportedUserTypeException {
-        UserDAO dao = DAOFactory.getDAOFactory().createUserDAO(); // Crea l'istanza corretta del DAO (Impostata nel file di configurazione)
+    public User start(LoginBean loginBean) throws WrongCredentialsException, UserNotFoundException, UnsupportedUserTypeException {
+        UserDAO dao = DAOFactory.getDAOFactory().createUserDAO();
         LoginBean loggedinBean = null;
 
         try {
@@ -23,12 +23,20 @@ public class LoginController {
         }
 
         if (!loggedinBean.getPassword().equals(loginBean.getPassword())){
-            throw new WrongPasswordException();
+            throw new WrongCredentialsException();
         }else{
             if(loggedinBean.getUserType().equalsIgnoreCase("librarian")) {
-                return dao.loadLibrarian(loggedinBean.getEmail());
+                try {
+                    return dao.loadLibrarian(loggedinBean.getEmail());
+                } catch (DAOException e) {
+                    throw new RuntimeException(e);
+                }
             }else if (loggedinBean.getUserType().equalsIgnoreCase("costumer")) {
-                return dao.loadCostumer(loggedinBean.getEmail());
+                try {
+                    return dao.loadCostumer(loggedinBean.getEmail());
+                } catch (DAOException e) {
+                    throw new RuntimeException(e);
+                }
             }else{
                 throw new UnsupportedUserTypeException();
             }

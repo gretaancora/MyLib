@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.LoginController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UnsupportedUserTypeException;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongCredentialsException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongPasswordException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
@@ -29,7 +30,7 @@ public class LoginState extends State {
         } catch (UserNotFoundException e) {
             Printer.errorPrint("User not found. Try again...");
             stateMachine.goBack();
-        } catch (WrongPasswordException e) {
+        } catch (WrongCredentialsException e) {
             Printer.errorPrint("Wrong password. Try again...");
             this.execute(stateMachine);
         } catch (UnsupportedUserTypeException e) {

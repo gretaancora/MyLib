@@ -19,14 +19,10 @@ public class UserJSONDAO implements UserDAO {
     private static final String BASE_DIRECTORY = ConfigurationJSON.USER_BASE_DIRECTORY;
 
     @Override
-    public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, UsernameAlreadyInUseException {
+    public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException {
 
     }
 
-    @Override
-    public void insertLibrarian(Librarian librarian) throws EmailAlreadyInUseException, UsernameAlreadyInUseException {
-
-    }
 
     @Override
     public Costumer loadCostumer(String email) throws UserNotFoundException {
@@ -36,11 +32,6 @@ public class UserJSONDAO implements UserDAO {
     @Override
     public Librarian loadLibrarian(String email) throws UserNotFoundException {
         return null;
-    }
-
-    @Override
-    public void tryCredentialsExisting(String email, String username) throws EmailAlreadyInUseException, UsernameAlreadyInUseException {
-
     }
 
     @Override

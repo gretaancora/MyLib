@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.controller;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.RegisterBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.dao.UserDAO;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.factory.DAOFactory;
@@ -19,6 +20,8 @@ public class RegisterController {
         } catch (EmailAlreadyInUseException e) {
             Printer.println("Email already in use.");
             throw new EmailAlreadyInUseException();
+        } catch (DAOException e) {
+            throw new RuntimeException(e);
         }
     }
 

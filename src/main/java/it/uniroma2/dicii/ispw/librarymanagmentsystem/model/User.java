@@ -20,6 +20,7 @@ public abstract class User {
     }
 
     public String getEmail() {return this.email;}
+    public String getPassword() {return this.getPassword();}
 
     public String getName() {return this.name;}
     public String getSurname() {return this.surname;}

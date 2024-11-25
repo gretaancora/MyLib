@@ -14,9 +14,4 @@ public class Librarian extends User {
         this.role = role;
     }
 
-    public Librarian(String email, String password, String name, String surname, LocalDate empDate, SupportedRoleTypes role) {
-        super(email, name, surname, password);
-        this.employmentDate = empDate;
-        this.role = role;
-    }
 }
