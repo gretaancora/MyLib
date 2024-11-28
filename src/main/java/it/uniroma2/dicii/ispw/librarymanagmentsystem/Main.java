@@ -2,7 +2,6 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.StateMachineImpl;
-import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.utils.FxmlFiles;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
