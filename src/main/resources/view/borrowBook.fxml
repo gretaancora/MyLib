@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studypal.view.first.gui.studente.CercaRipetizioneGui">
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.BorrowBookGUI">
    <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" stylesheets="@style/base.css">
       <effect>
          <DropShadow height="24.75" radius="11.9375" width="25.0">
@@ -35,7 +35,7 @@
             <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
          </effect>
       </Button>
-      <Button mnemonicParsing="false" onMouseClicked="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a book" textAlignment="CENTER" wrapText="true">
+      <Button mnemonicParsing="false" onMouseClicked="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a bookBean" textAlignment="CENTER" wrapText="true">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>
@@ -57,7 +57,7 @@
          <Font size="40.0" />
       </font>
    </Text>
-   <AnchorPane fx:id="zonaInfo" layoutX="253.0" layoutY="98.0" prefHeight="468.0" prefWidth="692.0" style="-fx-background-color: d9e7df;" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/menu.css">
+   <AnchorPane fx:id="zonaInfo" layoutX="253.0" layoutY="98.0" prefHeight="468.0" prefWidth="692.0" style="-fx-background-color: d9e7df;" stylesheets="@../view/style/menu.css">
       <TextField fx:id="searchBook" layoutX="183.0" layoutY="63.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="271.0" styleClass="testo">
          <effect>
             <DropShadow>
@@ -72,8 +72,8 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="292.0" layoutY="251.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#searchMethod" prefHeight="39.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/button.css" text="Search" />
-      <Label fx:id="campiError" layoutX="286.0" layoutY="110.0" prefHeight="18.0" prefWidth="107.0" textAlignment="CENTER" textFill="#d40000" wrapText="true" />
+      <Button layoutX="292.0" layoutY="251.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#searchMethod" prefHeight="39.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@../view/style/button.css" text="Search" />
+      <Label fx:id="fieldsError" layoutX="286.0" layoutY="110.0" prefHeight="18.0" prefWidth="107.0" textAlignment="CENTER" textFill="#d40000" wrapText="true" />
       <Text layoutX="147.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo">
          <font>
             <Font size="16.0" />

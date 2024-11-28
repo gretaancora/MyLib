@@ -33,11 +33,11 @@ public class Query {
             FROM 
                 borrow bo
             JOIN 
-                book b ON bo.ISBN = b.ISBN
+                bookBean b ON bo.ISBN = b.ISBN
             LEFT JOIN 
-                bookauthor ba ON b.ISBN = ba.book
+                bookauthor ba ON b.ISBN = ba.bookBean
             LEFT JOIN 
-                bookgenre bg ON b.ISBN = bg.book
+                bookgenre bg ON b.ISBN = bg.bookBean
             WHERE 
                 bo.costumer = ?
             GROUP BY 
@@ -67,11 +67,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT CONCAT(ba.name, ' ', ba.surname) SEPARATOR ', ') AS authors,
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres
                 FROM 
-                    book b
+                    bookBean b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.book
+                    bookauthor ba ON b.ISBN = ba.bookBean
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.book
+                    bookgenre bg ON b.ISBN = bg.bookBean
                 WHERE 
                     ba.name = ? AND ba.surname = ?
                 GROUP BY 
@@ -88,11 +88,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT CONCAT(ba.name, ' ', ba.surname) SEPARATOR ', ') AS authors,
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres
                 FROM 
-                    book b
+                    bookBean b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.book
+                    bookauthor ba ON b.ISBN = ba.bookBean
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.book
+                    bookgenre bg ON b.ISBN = bg.bookBean
                 WHERE 
                     b.title = ?
                 GROUP BY 
@@ -110,11 +110,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres,
                     MATCH(b.title, b.editor) AGAINST(?) AS relevance
                 FROM 
-                    book b
+                    bookBean b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.book
+                    bookauthor ba ON b.ISBN = ba.bookBean
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.book
+                    bookgenre bg ON b.ISBN = bg.bookBean
                 WHERE 
                     MATCH(b.title, b.editor) AGAINST(?)
                     OR MATCH(ba.name, ba.surname) AGAINST(? IN BOOLEAN MODE)
@@ -124,5 +124,36 @@ public class Query {
                 ORDER BY 
                     relevance DESC;
                 """;
+
+
+    /*--------------------Borrow Queries Costumer-------------------*/
+    public static final String SEARCH_BOOK_COPY = """
+            SELECT 
+                bc.ISBN, 
+                bc.copyNum
+            FROM 
+                bookcopy bc
+            JOIN 
+                book b ON bc.ISBN = b.ISBN
+            WHERE 
+                bc.ISBN = ?
+                AND bc.availability = 1
+            LIMIT 1;
+        """;
+
+    public static final String ADD_BORROW = """
+            INSERT INTO borrow (costumer, ISBN, copyNum) 
+            VALUES (?, ?, ?);
+        """;
+
+    public static final String UPDATE_STATUS_COPY = "UPDATE bookcopy SET availability = 0 WHERE ISBN = ? AND copyNum = ?";
+
+    public static final String UPDATE_NUM_AVAIL_COPIES = "UPDATE book SET numAvailableCopies = numAvailableCopies - 1 WHERE ISBN = ? AND numAvailableCopies > 0";
+
+
+    /*--------------------Activate Borrow Queries Librarian-------------------*/
+    public static final String UPDATE_STATUS_BORROW = "UPDATE borrow SET state = ? WHERE costumer = ? AND book = ? AND copyNum = ? AND inReq = ?";
+
+    public static final String GET_PENDING_BORROWS = "SELECT costumer, book, copyNum, inReq FROM borrow WHERE costumer = ? and status = 'pending'";
 
 }

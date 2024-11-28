@@ -59,7 +59,7 @@
             <Font size="32.0" />
         </font>
     </Text>
-    <AnchorPane fx:id="sfondoChiaro" layoutX="301.0" layoutY="172.0" onMouseClicked="#managePendingReservations" prefHeight="256.0" prefWidth="150.0" styleClass="anchor-blu" stylesheets="@style/base.css">
+    <AnchorPane fx:id="pendingBox" layoutX="301.0" layoutY="172.0" onMouseClicked="#managePendingReservations" prefHeight="256.0" prefWidth="150.0" styleClass="anchor-blu" stylesheets="@style/base.css">
         <effect>
             <DropShadow>
                 <color>

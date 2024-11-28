@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.BookBean;
-import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Book;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import javafx.fxml.FXML;
@@ -16,23 +15,20 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class BorrowBookGUI extends HomeCostumerGUI{
     @FXML
-    private TextField input;
+    private TextField searchBook;
     @FXML
     private ComboBox<String> filterType;
     @FXML
-    private Label inputError;
+    private Label fieldsError;
     private String filter;
     private String type;
 
     private static final Logger logger = Logger.getLogger(BorrowBookGUI.class.getName());
-    BookBean filtri = new BookBean();
-    List<BookBean> searchResultsBeans = new ArrayList<>();
 
     public BorrowBookGUI(User user) {this.user = user;}
 
@@ -43,11 +39,11 @@ public class BorrowBookGUI extends HomeCostumerGUI{
 
     public void searchMethod(){
 
-        if(this.input.getText().isEmpty()) {
-            inputError.setText("Required field.");
+        if(this.searchBook.getText().isEmpty()) {
+            fieldsError.setText("Required field.");
 
         } else {
-            this.filter = this.input.getText();
+            this.filter = this.searchBook.getText();
             this.type = filterType.getValue();
 
             //creo bean con i filtri della ricerca da passare <l controller
@@ -64,17 +60,17 @@ public class BorrowBookGUI extends HomeCostumerGUI{
     }
 
 
-    public void loadResults (List<Book> books) {
+    public void loadResults (List<BookBean> books) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(BorrowBookGUI.class.getResource("/com/example/studypal/view/studente/searchResults.fxml"));
-            loader.setControllerFactory(c -> new RisultatiRicercaGuiController(user, risultatiRicercaBean, filtri));
+            FXMLLoader loader = new FXMLLoader(BorrowBookGUI.class.getResource("src/main/resources/view/searchResults.fxml"));
+            loader.setControllerFactory(c -> new SearchResultsGUI(user, books));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) cercaMateria.getScene().getWindow();
+            Stage stage = (Stage) searchBook.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
-            logger.severe("errore in CercaRipetizioneGui " + e.getMessage());
+            logger.severe("Error in BorrwBookGUI " + e.getMessage());
         }
     }
 }

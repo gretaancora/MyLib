@@ -52,5 +52,6 @@ public class Costumer extends User {
     public void addActiveBorrows(Borrow borrow) {this.active_borrows.add(borrow);}
     public void addOverdueBorrows(Borrow borrow) {this.overdue_borrows.add(borrow);}
     public void addFinishedBorrows(Borrow borrow) {this.finished_borrows.add(borrow);}
+    public List<Borrow> getPending_borrows() {return this.pending_borrows;}
 
 }

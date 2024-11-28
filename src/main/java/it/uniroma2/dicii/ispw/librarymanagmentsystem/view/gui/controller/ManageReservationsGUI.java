@@ -15,13 +15,13 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
     //controller grafico che contiene i metodi di gestione delle prenotazioni
 
     @FXML
-    private AnchorPane sfondoChiaro;
+    private AnchorPane pendingBox;
     private static final Logger logger = Logger.getLogger(ManageReservationsGUI.class.getName());
 
     public ManageReservationsGUI(){}
     public ManageReservationsGUI(User user) {this.user = user;}
 
-    //vado alla pagina di tutte le richieste arrivate per questo tutor
+    //vado alla pagina di tutte le richieste arrivate
     public void managePendingReservations(){
 
         //metodo che porta alla pagina di gestione delle prenotazioni
@@ -30,7 +30,7 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
             loader.setControllerFactory(c -> new ManagePendingReservationsGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) sfondoChiaro.getScene().getWindow();
+            Stage stage = (Stage) pendingBox.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in ManageReservationsGUI " + e.getMessage());

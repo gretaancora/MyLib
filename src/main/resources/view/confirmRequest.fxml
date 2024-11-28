@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.MakeReservationGUI">
+    <stylesheets>
+        <URL value="@../view/style/button.css" />
+        <URL value="@../view/style/base.css" />
+    </stylesheets>
+    <VBox fx:id="barraMenu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: rgba(235, 246, 234, 0.84);" stylesheets="@style/menu.css">
+        <effect>
+            <DropShadow>
+                <color>
+                    <Color red="0.49803921580314636" green="0.6509804129600525" blue="0.7568627595901489" />
+                </color>
+            </DropShadow>
+        </effect>
+        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+            <VBox.margin>
+                <Insets top="60.0" />
+            </VBox.margin>
+            <effect>
+                <InnerShadow />
+            </effect>
+            <Image url="@images/readerIcon.png" />
+        </ImageView>
+        <Button mnemonicParsing="false" onMouseClicked="#showProfile" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="My Profile" textAlignment="CENTER" wrapText="true">
+            <VBox.margin>
+                <Insets top="40.0" />
+            </VBox.margin>
+            <stylesheets>
+                <URL value="@../view/style/base.css" />
+                <URL value="@../view/style/button.css" />
+            </stylesheets>
+            <effect>
+                <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+            </effect>
+        </Button>
+        <Button fx:id="gestisciPrenotazioni" mnemonicParsing="false" onAction="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Borrow a Book" textAlignment="CENTER" wrapText="true">
+            <VBox.margin>
+                <Insets top="30.0" />
+            </VBox.margin>
+            <effect>
+                <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+            </effect>
+        </Button>
+        <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Logout">
+            <VBox.margin>
+                <Insets top="30.0" />
+            </VBox.margin>
+            <effect>
+                <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+            </effect>
+        </Button>
+    </VBox>
+    <AnchorPane fx:id="sfondoChiaro" layoutX="329.0" layoutY="125.0" prefHeight="369.0" prefWidth="544.0" stylesheets="@../view/style/base.css">
+        <effect>
+            <DropShadow blurType="TWO_PASS_BOX">
+                <color>
+                    <Color red="0.33725491166114807" green="0.5843137502670288" blue="0.7490196228027344" />
+                </color>
+            </DropShadow>
+        </effect>
+        <Text fx:id="indicazioni" fill="#333333" layoutX="65.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation succeded! " textAlignment="CENTER" wrappingWidth="413.3706512451172">
+            <font>
+                <Font name="Microsoft YaHei UI" size="18.0" />
+            </font>
+        </Text>
+        <Text fx:id="indicazioni1" fill="#2e2e2e" layoutX="129.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verify the status of your reservation in the section &quot;My Profile&quot;" textAlignment="CENTER" wrappingWidth="319.17088317871094">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Text>
+        <ImageView layoutX="239.0" layoutY="202.0" opacity="0.39">
+            <Image url="@../view/images/congratsIcon.png" />
+        </ImageView>
+    </AnchorPane>
+</AnchorPane>

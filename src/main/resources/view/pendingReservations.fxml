@@ -9,9 +9,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studypal.view.first.gui.tutor.RichiesteTutorGui">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.ManagePendingReservationsGUI">
     <children>
-        <VBox fx:id="barraMenu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" styleClass="root">
+        <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" styleClass="root">
             <children>
                 <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -24,7 +24,7 @@
                         <InnerShadow />
                     </effect>
                 </ImageView>
-                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToGestisciProfilo" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/button.css" text="Gestisci Profilo" textAlignment="CENTER" wrapText="true">
+                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showProfile" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="My profile" textAlignment="CENTER" wrapText="true">
                     <VBox.margin>
                         <Insets top="40.0" />
                     </VBox.margin>
@@ -32,7 +32,7 @@
                         <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
                     </effect>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#goToGestisciPrenotazioni" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/button.css" text="Gestisci Prenotazioni" textAlignment="CENTER" wrapText="true">
+                <Button mnemonicParsing="false" onAction="#manageReservations" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Menage Reservations" textAlignment="CENTER" wrapText="true">
                     <VBox.margin>
                         <Insets top="30.0" />
                     </VBox.margin>
@@ -43,7 +43,7 @@
                         <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
                     </effect>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#goToLogout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/button.css" text="Esci">
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Logout">
                     <VBox.margin>
                         <Insets top="30.0" />
                     </VBox.margin>
@@ -69,20 +69,19 @@
                 <Font size="32.0" />
             </font>
         </Text>
-      <AnchorPane fx:id="zonaInfo" layoutX="222.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="764.0" style="-fx-background-color: #7FFFD4;" stylesheets="@../LibraryManagmentSystem/src/main/resources/view/base.css">
+      <AnchorPane fx:id="zonaInfo" layoutX="222.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="764.0" style="-fx-background-color: #7FFFD4;" stylesheets="@../view/style/base.css">
          <children>
-            <ScrollPane layoutX="7.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="750.0">
+            <ScrollPane layoutX="7.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="750.0">
               <content>
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="749.0">
                      <children>
-                        <TableView layoutX="-2.0" layoutY="-1.0" prefHeight="467.0" prefWidth="737.0">
+                        <TableView layoutX="-2.0" prefHeight="430.0" prefWidth="738.0">
                           <columns>
-                            <TableColumn prefWidth="105.0" text="email" />
-                            <TableColumn prefWidth="105.0" text="bookID" />
-                              <TableColumn prefWidth="105.0" text="ISBN" />
-                              <TableColumn prefWidth="105.0" text="Title" />
-                              <TableColumn prefWidth="105.0" text="Activate" />
-                              <TableColumn prefWidth="105.0" />
+                            <TableColumn prefWidth="193.1999785900116" text="Costumer" />
+                            <TableColumn prefWidth="171.00001525878906" text="Book" />
+                              <TableColumn prefWidth="115.39996337890625" text="Copy" />
+                              <TableColumn minWidth="0.0" prefWidth="163.60003662109375" text="Position" />
+                              <TableColumn prefWidth="98.20001220703125" text="Activate" />
                           </columns>
                         </TableView>
                      </children>
@@ -91,10 +90,11 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <ImageView fx:id="backButton" fitHeight="54.0" fitWidth="62.0" layoutX="203.0" layoutY="27.0" onMouseClicked="#goToGestisciPrenotazioni" preserveRatio="true">
+      <ImageView fx:id="backButton" fitHeight="54.0" fitWidth="62.0" layoutX="234.0" layoutY="26.0" onMouseClicked="#manageReservations" preserveRatio="true">
          <image>
-            <Image url="@../ISPW/StudyPal/src/main/resources/com/example/studypal/immagini/backButton.PNG" />
+            <Image url="@images/backButtonIcon.png" />
          </image>
       </ImageView>
+      <Label fx:id="ErrorLabel" layoutX="590.0" layoutY="99.0" text="Label" />
     </children>
 </AnchorPane>

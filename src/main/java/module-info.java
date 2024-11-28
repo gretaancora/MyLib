@@ -6,5 +6,5 @@ module it.uniroma2.dicii.ispw.librarymanagmentsystem {
 
 
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem to javafx.fxml;
-    exports it.uniroma2.dicii.ispw.librarymanagmentsystem;
+    exports it.uniroma2.dicii.ispw.librarymanagmentsystem to javafx.fxml;
 }

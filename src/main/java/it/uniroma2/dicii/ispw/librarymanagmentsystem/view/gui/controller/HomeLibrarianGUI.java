@@ -35,7 +35,7 @@ public class HomeLibrarianGUI {
 
         //metodo che porta alla pagina di gestione delle prenotazioni
         try {
-            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("src/main/resources/view/homeLibrarian.fxml"));
+            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("src/main/resources/view/manageReservation.fxml"));
             loader.setControllerFactory(c -> new ManageReservationsGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -49,13 +49,6 @@ public class HomeLibrarianGUI {
 
     public void logout(){
         try {
-
-            /*
-            prima mantenevamo i dati relativi alla sessione passando un bean di controller in controller.
-            eliminare la sessione significa tornare alla pagina di login senza passare alcun parametro contenente i dati della sessione
-             quindi di base il controller grafico deve al massimo portare ad una pagina di conferma del logout (qui non è fatto), poi semplicemente carica il login
-             */
-
             FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("src/main/resources/view/login.fxml"));
             loader.setControllerFactory(c -> new LoginGUIController());
             Parent parent = loader.load();

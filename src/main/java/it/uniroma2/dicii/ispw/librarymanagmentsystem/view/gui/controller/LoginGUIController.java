@@ -5,7 +5,6 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongCredentialsException;
-import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongPasswordException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
 import javafx.fxml.FXML;

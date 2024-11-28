@@ -1,19 +1,22 @@
 package it.uniroma2.dicii.ispw.librarymanagmentsystem.model;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Borrow {
     private Book book;
     private short copy;
-    private Costumer costumer;
+    private String costumer;
     private LocalDate inDate;
     private LocalDate endDate;
     private LocalDate restDate;
     private float fine;
+    private Timestamp inReq;
 
 
-    public Borrow(Book book, short copy, Costumer costumer, LocalDate inDate, LocalDate endDate, LocalDate restDate, float fine){
+    public Borrow(Book book, short copy, String costumer, LocalDate inDate, LocalDate endDate, LocalDate restDate, float fine){
         this.book = book;
         this.copy = copy;
         this. costumer = costumer;
@@ -29,7 +32,6 @@ public class Borrow {
         this.inDate = inDate;
         this.endDate = endDate;
         this.restDate = restDate;
-        this.fine = 0;
     }
 
     public Borrow(Book book, short copy, LocalDate inDate, LocalDate endDate, float fine){
@@ -45,15 +47,29 @@ public class Borrow {
         this.copy = copy;
         this.inDate = inDate;
         this.endDate = endDate;
-        this.fine = 0;
+    }
+
+    public Borrow(Book book, String costumer){
+        this.book = book;
+        this.costumer = costumer;
     }
 
     public Borrow(Book book, short copy){
         this.book = book;
         this.copy = copy;
-        this.inDate = inDate;
-        this.endDate = endDate;
-        this.fine = 0;
+    }
+
+    public Borrow(Book book, String costumer, short copy){
+        this.book = book;
+        this.costumer = costumer;
+        this.copy = copy;
+    }
+
+    public Borrow(Book book, String costumer, short copy, Timestamp inReq){
+        this.book = book;
+        this.costumer = costumer;
+        this.copy = copy;
+        this.inReq = inReq;
     }
 
     public String toString() {
@@ -78,4 +94,10 @@ public class Borrow {
         // Applica il tetto massimo di 30 euro
         return (float) Math.min(fine, 30.0);
     }
+
+    public Book getBook() {return this.book;}
+    public String getCostumer() {return this.costumer;}
+    public short getCopy() {return this.copy;}
+    public Timestamp getInReq() {return this.inReq;}
+
 }

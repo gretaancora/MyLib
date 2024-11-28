@@ -1,9 +1,11 @@
 package it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.dao;
 
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.*;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.query.LoginQuery;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.singleton.Connector;
+
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Book;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Borrow;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;

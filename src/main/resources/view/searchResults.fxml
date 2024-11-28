@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.SearchResultsGUI">
+   <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0">
+      <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets top="60.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <Image url="@images/readerIcon.png" />
+      </ImageView>
+      <Button mnemonicParsing="false" onMouseClicked="#showProfile" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="My profile" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+         <stylesheets>
+            <URL value="@../view/style/base.css" />
+            <URL value="@../view/style/button.css" />
+         </stylesheets>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Borrow a Book" textAlignment="CENTER" wrapText="true">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="33.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Logout">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="0.4157504737377167" green="0.6768239140510559" blue="0.9052631855010986" opacity="0.8799999952316284" />
+            </color>
+         </DropShadow>
+      </effect>
+      <stylesheets>
+         <URL value="@style/button.css" />
+         <URL value="@style/menu.css" />
+         <URL value="@style/menu.css" />
+      </stylesheets>
+   </VBox>
+   <Text fx:id="titolo" fill="#000000ab" layoutX="374.0" layoutY="66.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Make a Reservation" textAlignment="CENTER" wrappingWidth="451.2001373767853" AnchorPane.leftAnchor="374.0" AnchorPane.rightAnchor="174.79986262321472" AnchorPane.topAnchor="30.0">
+      <font>
+         <Font size="40.0" />
+      </font>
+   </Text>
+   <ImageView fx:id="backButton" fitHeight="60.0" fitWidth="68.0" layoutX="228.0" layoutY="26.0" onMouseClicked="#goToBorrowBook" preserveRatio="true">
+      <Image url="@images/backButtonIcon.png" />
+   </ImageView>
+   <AnchorPane layoutX="257.0" layoutY="122.0" prefHeight="442.0" prefWidth="703.0">
+      <children>
+         <ScrollPane>
+            <content>
+               <TableView fx:id="resultsTable" prefHeight="421.0" prefWidth="682.0">
+                 <columns>
+                   <TableColumn fx:id="ISBN" prefWidth="75.0" text="ISBN" />
+                   <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
+                     <TableColumn fx:id="Authors" prefWidth="75.0" text="Authors" />
+                     <TableColumn fx:id="Editor" prefWidth="75.0" text="Editor" />
+                     <TableColumn fx:id="Year" prefWidth="75.0" text="Year" />
+                     <TableColumn fx:id="Genres" prefWidth="75.0" text="Genres" />
+                     <TableColumn fx:id="Availability" prefWidth="75.0" text="Availability" />
+                     <TableColumn fx:id="Borrow" prefWidth="75.0" />
+                 </columns>
+               </TableView>
+            </content>
+         </ScrollPane>
+      </children>
+   </AnchorPane>
+   <Text layoutX="436.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+</AnchorPane>
