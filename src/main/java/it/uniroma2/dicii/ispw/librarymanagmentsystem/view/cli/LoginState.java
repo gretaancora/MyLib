@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.LoginController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongCredentialsException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
@@ -27,14 +28,17 @@ public class LoginState extends State {
         try {
             user = loginController.start(loginBean);
         } catch (UserNotFoundException e) {
-            Printer.errorPrint("User not found. Try again...");
-            stateMachine.goBack();
+            Printer.errorPrint("Wrong credentials. Try again...");
+            this.execute(stateMachine);
         } catch (WrongCredentialsException e) {
-            Printer.errorPrint("Wrong password. Try again...");
+            Printer.errorPrint("Wrong credentials. Try again...");
             this.execute(stateMachine);
         } catch (UnsupportedUserTypeException e) {
             Printer.errorPrint("Unsupported user type. Try again...");
             stateMachine.goBack();
+        } catch (DAOException e) {
+            Printer.errorPrint("Error occurred during login. Try again...");
+            this.execute(stateMachine);
         }
         //ho finito, mi preparo al passaggio di stato
         State homeState;

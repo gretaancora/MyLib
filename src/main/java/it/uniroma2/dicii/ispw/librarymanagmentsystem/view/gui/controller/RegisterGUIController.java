@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.RegisterController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.RegisterBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.InvalidEmail;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
@@ -79,7 +80,7 @@ public class RegisterGUIController {
 
             //controllo sulle password
             if (!confirmPassword.equals(password)){
-                fieldsError.setText("Password non corrispondenti");
+                fieldsError.setText("You inserted two different passwords!");
                 return;
             }
 
@@ -102,8 +103,11 @@ public class RegisterGUIController {
             loadConfirmation();
 
         }catch(EmailAlreadyInUseException e) {
-            Printer.errorPrint("Application controller: email already in use.");
+            Printer.errorPrint("Application controller: " + e.getMessage());
             fieldsError.setText("Email already in use.");
+        } catch (DAOException e) {
+            Printer.errorPrint("Application controller: " + e.getMessage());
+            fieldsError.setText("Error occurred during registration. Try again...");
         }
     }
 

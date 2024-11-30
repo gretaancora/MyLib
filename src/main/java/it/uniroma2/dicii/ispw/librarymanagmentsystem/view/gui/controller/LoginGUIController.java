@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.LoginController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.LoginBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.WrongCredentialsException;
@@ -68,13 +69,16 @@ public class LoginGUIController {
 
         } catch (UserNotFoundException u) {
             credentialsError.setVisible(false);
-            wrongCredentials.setText("User not found.");
+            wrongCredentials.setText("Wrong credentials.");
         } catch (UnsupportedUserTypeException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText("Wrong credentials.");
         } catch (WrongCredentialsException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText("Wrong credentials.");
+        } catch (DAOException e) {
+            credentialsError.setVisible(false);
+            wrongCredentials.setText("Error occurred during login. Try again....");
         }
 
     }

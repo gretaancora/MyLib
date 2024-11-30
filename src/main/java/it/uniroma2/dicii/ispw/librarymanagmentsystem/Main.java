@@ -35,7 +35,7 @@ public class Main extends Application {
     }
 
     private void launchGUI(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(getClass().getResource("src/main/resources/view/login.fxml"));
+        var fxmlLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
         var scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
         stage.setScene(scene);

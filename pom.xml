@@ -65,9 +65,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>
-                                it.uniroma2.dicii.ispw.librarymanagmentsystem/it.uniroma2.dicii.ispw.librarymanagmentsystem.HelloApplication
-                            </mainClass>
+                            <mainClass>it.uniroma2.dicii.ispw.librarymanagmentsystem.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

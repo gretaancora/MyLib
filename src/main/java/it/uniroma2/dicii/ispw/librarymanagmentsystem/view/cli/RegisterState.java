@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.RegisterController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.RegisterBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.InvalidEmail;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
@@ -54,6 +55,9 @@ public class RegisterState extends State {
             registerController.registerCostumer(new RegisterBean(name, surname, email, password));
         } catch (EmailAlreadyInUseException e) {
             stateMachine.goBack();
+        } catch (DAOException e) {
+            Printer.errorPrint("Error occurred during registration. Try again...");
+            this.execute(stateMachine);
         }
 
         stateMachine.goBack();

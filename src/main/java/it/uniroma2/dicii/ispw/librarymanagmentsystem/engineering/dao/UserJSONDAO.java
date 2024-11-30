@@ -19,19 +19,74 @@ public class UserJSONDAO implements UserDAO {
     private static final String BASE_DIRECTORY = ConfigurationJSON.USER_BASE_DIRECTORY;
 
     @Override
-    public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException {
+    public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, DAOException {
+        try {
+            // Verifica se la cartella persistence esiste, altrimenti la crea
+            Path persistenceDirectory = Paths.get(ConfigurationJSON.PERSISTENCE_BASE_DIRECTORY);
+            if (!Files.exists(persistenceDirectory)) {
+                Files.createDirectories(persistenceDirectory);
+            }
 
+            // Verifica se l'utente esiste già
+            if (checkIfUserExists(costumer.getEmail())) {
+                throw new EmailAlreadyInUseException();
+            }
+
+            // Crea la directory dell'utente e il file di informazioni
+            Path userDirectory = Files.createDirectories(Paths.get(BASE_DIRECTORY, costumer.getEmail()));
+            Path userInfoFile = userDirectory.resolve(ConfigurationJSON.USER_INFO_FILE_NAME);
+
+            // Serializza l'oggetto Login in formato JSON e scrivi nel file
+            String json = new GsonBuilder().setPrettyPrinting().create().toJson(costumer);
+            Files.writeString(userInfoFile, json);
+
+        } catch (IOException e) {
+            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+        }
+    }
+
+    private boolean checkIfUserExists(String email) {
+        // Costruito il percorso della directory dell'utente basandosi sulla mail come nome utente
+        Path userDirectory = Paths.get(BASE_DIRECTORY, email);
+
+        // Verifica se la directory dell'utente esiste
+        return Files.exists(userDirectory);
     }
 
 
     @Override
-    public Costumer loadCostumer(String email) throws UserNotFoundException {
-        return null;
+    public Costumer loadCostumer(String email) throws UserNotFoundException, DAOException {
+        try {
+            Path costumerInfoFile = Paths.get(BASE_DIRECTORY, email, ConfigurationJSON.COSTUMER_INFO_FILE_NAME);
+
+            if (Files.exists(costumerInfoFile)) {
+                String content = Files.readString(costumerInfoFile);
+                return new GsonBuilder().setPrettyPrinting().create().fromJson(content, Costumer.class);
+
+            } else {
+                throw new UserNotFoundException();
+            }
+        } catch (IOException e) {
+            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+        }
     }
 
+
     @Override
-    public Librarian loadLibrarian(String email) throws UserNotFoundException {
-        return null;
+    public Librarian loadLibrarian(String email) throws UserNotFoundException, DAOException {
+        try {
+            Path librarianInfoFile = Paths.get(BASE_DIRECTORY, email, ConfigurationJSON.LIBRARIAN_INFO_FILE_NAME);
+
+            if (Files.exists(librarianInfoFile)) {
+                String content = Files.readString(librarianInfoFile);
+                return new GsonBuilder().setPrettyPrinting().create().fromJson(content, Librarian.class);
+
+            } else {
+                throw new UserNotFoundException();
+            }
+        } catch (IOException e) {
+            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+        }
     }
 
     @Override
@@ -56,4 +111,5 @@ public class UserJSONDAO implements UserDAO {
         }
 
     }
+
 }
