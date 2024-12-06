@@ -35,7 +35,7 @@ public class HomeLibrarianGUI {
 
         //metodo che porta alla pagina di gestione delle prenotazioni
         try {
-            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("src/main/resources/view/manageReservation.fxml"));
+            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("/view/manageReservation.fxml"));
             loader.setControllerFactory(c -> new ManageReservationsGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -49,7 +49,7 @@ public class HomeLibrarianGUI {
 
     public void logout(){
         try {
-            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("src/main/resources/view/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("/view/login.fxml"));
             loader.setControllerFactory(c -> new LoginGUIController());
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

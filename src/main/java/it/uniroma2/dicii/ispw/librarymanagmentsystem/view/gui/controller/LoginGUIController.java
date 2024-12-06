@@ -86,7 +86,7 @@ public class LoginGUIController {
     //cambio pagina
     public void registerMethod () {
         try {
-            FXMLLoader loader = new FXMLLoader(LoginGUIController.class.getResource("src/main/resources/view/register.fxml"));
+            FXMLLoader loader = new FXMLLoader(LoginGUIController.class.getResource("/view/register.fxml"));
             loader.setControllerFactory(c -> new RegisterGUIController(this.user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -106,10 +106,10 @@ public class LoginGUIController {
             FXMLLoader loader;
 
             if (user instanceof Librarian) {
-                loader = new FXMLLoader(LoginGUIController.class.getResource("src/main/resources/view/homeLibrarian.fxml"));
+                loader = new FXMLLoader(LoginGUIController.class.getResource("/view/homeLibrarian.fxml"));
                 loader.setControllerFactory(c -> new HomeLibrarianGUI(user));
             } else {
-                loader = new FXMLLoader(LoginGUIController.class.getResource("src/main/resources/view/homeCostumer.fxml"));
+                loader = new FXMLLoader(LoginGUIController.class.getResource("/view/homeCostumer.fxml"));
                 loader.setControllerFactory(c -> new HomeCostumerGUI(user));
             }
             Parent parent = loader.load();

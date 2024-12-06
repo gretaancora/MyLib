@@ -117,7 +117,7 @@ public class SearchResultsGUI extends HomeCostumerGUI{
         /* carica la pagina di conferma della prenotazione */
 
         try {
-            FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("src/main/resources/view/makeReservation.fxml"));
+            FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("/view/makeReservation.fxml"));
             loader.setControllerFactory(c -> new MakeReservationGUI(this.user, bookBean));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -135,7 +135,7 @@ public class SearchResultsGUI extends HomeCostumerGUI{
     public void goToBorrowBook() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("src/main/resources/view/borrowBook.fxml"));
+            FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("/view/borrowBook.fxml"));
             loader.setControllerFactory(c -> new BorrowBookGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

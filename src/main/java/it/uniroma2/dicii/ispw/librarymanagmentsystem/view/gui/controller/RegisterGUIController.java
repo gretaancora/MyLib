@@ -123,7 +123,7 @@ public class RegisterGUIController {
     //cambio pagina: quando effettuato correttamente la registrazione--------------------------------------------------------------
     public void loadConfirmation () {
         try {
-            FXMLLoader loader = new FXMLLoader(RegisterGUIController.class.getResource("src/main/resources/view/regConfirmation.fxml"));
+            FXMLLoader loader = new FXMLLoader(RegisterGUIController.class.getResource("/view/regConfirmation.fxml"));
             loader.setControllerFactory(c -> new RegisterGUIController(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -137,7 +137,7 @@ public class RegisterGUIController {
 
     public void goToLogin () {
         try {
-            FXMLLoader loader = new FXMLLoader(RegisterGUIController.class.getResource("src/main/resources/view/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(RegisterGUIController.class.getResource("/view/login.fxml"));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
 

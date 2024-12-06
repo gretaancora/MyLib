@@ -73,6 +73,7 @@ public class UserMySQLDAO implements UserDAO {
         try (ResultSet rs = LoginQuery.loadCostumerInfo(Connector.getConnection(), email)) {
 
             if (!rs.next()) {
+
                 throw new UserNotFoundException();
             } else {
                 costumer = new Costumer(email, rs.getString("name"), rs.getString("surname"), rs.getDate("memDate").toLocalDate(), rs.getBoolean("memStatus"));
@@ -103,6 +104,8 @@ public class UserMySQLDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
+            System.out.println("Error in loadCostumerBorrows");
+            e.printStackTrace();
             throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
         }
 
@@ -116,9 +119,11 @@ public class UserMySQLDAO implements UserDAO {
             if (!rs.next()) {
                 throw new UserNotFoundException();
             } else {
-                return new Librarian(email, rs.getString("name"), rs.getString("surname"), rs.getDate("memDate").toLocalDate(), rs.getBoolean("memStatus") ? SupportedRoleTypes.SUPERVISOR : SupportedRoleTypes.ASSISTANT);
+                return new Librarian(email, rs.getString("name"), rs.getString("surname"), rs.getDate("empDate").toLocalDate(), rs.getBoolean("role") ? SupportedRoleTypes.SUPERVISOR : SupportedRoleTypes.ASSISTANT);
             }
         } catch (SQLException e) {
+            System.out.println("Error in loadLibrarian");
+            e.printStackTrace();
             throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
         }
     }

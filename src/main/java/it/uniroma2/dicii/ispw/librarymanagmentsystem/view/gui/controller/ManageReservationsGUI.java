@@ -26,7 +26,7 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
 
         //metodo che porta alla pagina di gestione delle prenotazioni
         try {
-            FXMLLoader loader = new FXMLLoader(ManageReservationsGUI.class.getResource("src/main/resources/view/pendingReservations.fxml"));
+            FXMLLoader loader = new FXMLLoader(ManageReservationsGUI.class.getResource("/view/pendingReservations.fxml"));
             loader.setControllerFactory(c -> new ManagePendingReservationsGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

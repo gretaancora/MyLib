@@ -37,6 +37,4 @@ public abstract class DAOFactory {
     }
 
     public abstract UserDAO createUserDAO();
-    //public abstract PlaylistDAO createPlaylistDAO();
-    //public abstract NoticeDAO createNoticeDAO();
 }

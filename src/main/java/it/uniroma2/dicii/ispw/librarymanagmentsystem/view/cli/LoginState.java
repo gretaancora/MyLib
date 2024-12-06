@@ -55,21 +55,20 @@ public class LoginState extends State {
 
     public LoginBean authenticate(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String password = null;
-        String email = null;
+        String password;
+        String email;
 
-        try {
-            System.out.print("email: ");
-            email = reader.readLine();
-            System.out.print("password: ");
-            password = reader.readLine();
-
-        } catch (IOException e) {
-            Printer.errorPrint("Error getting credentials.");
-            e.printStackTrace();
+        while (true) {
+            try {
+                System.out.print("email: ");
+                email = reader.readLine();
+                System.out.print("password: ");
+                password = reader.readLine();
+                return new LoginBean(email, password);
+            } catch (IOException e) {
+                Printer.errorPrint("Error occurred getting credentials. Try again...");
+            }
         }
-
-        return new LoginBean(email, password);
     }
 
     @Override
