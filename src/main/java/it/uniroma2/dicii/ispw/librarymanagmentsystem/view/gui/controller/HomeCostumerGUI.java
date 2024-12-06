@@ -27,7 +27,7 @@ public class HomeCostumerGUI {
     public void borrowBook(){
         //metodo che porta alla pagina di gestione del profilo
         try {
-            FXMLLoader loader = new FXMLLoader(HomeCostumerGUI.class.getResource("src/main/resources/view/borrowBook.fxml"));
+            FXMLLoader loader = new FXMLLoader(HomeCostumerGUI.class.getResource("/view/borrowBook.fxml"));
             loader.setControllerFactory(c -> new BorrowBookGUI(user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -48,7 +48,7 @@ public class HomeCostumerGUI {
             quindi di base il controller grafico deve al massimo portare ad una pagina di conferma del logout (qui non è fatto), poi semplicemente carica il login
             */
 
-            FXMLLoader loader = new FXMLLoader(HomeCostumerGUI.class.getResource("src/main/resources/view/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(HomeCostumerGUI.class.getResource("/view/login.fxml"));
             loader.setControllerFactory(c -> new LoginGUIController());
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

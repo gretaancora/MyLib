@@ -63,7 +63,7 @@ public class BorrowBookGUI extends HomeCostumerGUI{
     public void loadResults (List<BookBean> books) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(BorrowBookGUI.class.getResource("src/main/resources/view/searchResults.fxml"));
+            FXMLLoader loader = new FXMLLoader(BorrowBookGUI.class.getResource("/view/searchResults.fxml"));
             loader.setControllerFactory(c -> new SearchResultsGUI(user, books));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

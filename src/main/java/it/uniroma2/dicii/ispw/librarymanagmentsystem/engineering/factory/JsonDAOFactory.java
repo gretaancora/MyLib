@@ -8,14 +8,4 @@ public class JsonDAOFactory extends DAOFactory {
     public UserDAO createUserDAO() {
         return new UserJSONDAO();
     }
-
-    /*@Override
-    public PlaylistDAO createPlaylistDAO() {
-        return new PlaylistDAOJSON();
-    }
-
-    @Override
-    public NoticeDAO createNoticeDAO() {
-        return new NoticeDAOJSON();
-    }*/
 }

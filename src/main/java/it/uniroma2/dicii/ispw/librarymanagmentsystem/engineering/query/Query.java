@@ -28,20 +28,19 @@ public class Query {
                 bo.inDate,
                 bo.endDate,
                 bo.restDate,
-                bo.fine,
                 bo.state
             FROM 
                 borrow bo
             JOIN 
-                bookBean b ON bo.ISBN = b.ISBN
+                book b ON bo.book = b.ISBN
             LEFT JOIN 
-                bookauthor ba ON b.ISBN = ba.bookBean
+                bookauthor ba ON b.ISBN = ba.book
             LEFT JOIN 
-                bookgenre bg ON b.ISBN = bg.bookBean
+                bookgenre bg ON b.ISBN = bg.book
             WHERE 
                 bo.costumer = ?
             GROUP BY 
-                b.ISBN, bo.copyNum, bo.inDate, bo.endDate, bo.restDate, bo.fine, bo.state
+                b.ISBN, bo.copyNum, bo.inDate, bo.endDate, bo.restDate, bo.state
             ORDER BY 
                 bo.state, bo.inDate DESC;
         """;
@@ -67,11 +66,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT CONCAT(ba.name, ' ', ba.surname) SEPARATOR ', ') AS authors,
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres
                 FROM 
-                    bookBean b
+                    book b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.bookBean
+                    bookauthor ba ON b.ISBN = ba.book
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.bookBean
+                    bookgenre bg ON b.ISBN = bg.book
                 WHERE 
                     ba.name = ? AND ba.surname = ?
                 GROUP BY 
@@ -88,11 +87,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT CONCAT(ba.name, ' ', ba.surname) SEPARATOR ', ') AS authors,
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres
                 FROM 
-                    bookBean b
+                    book b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.bookBean
+                    bookauthor ba ON b.ISBN = ba.book
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.bookBean
+                    bookgenre bg ON b.ISBN = bg.book
                 WHERE 
                     b.title = ?
                 GROUP BY 
@@ -110,11 +109,11 @@ public class Query {
                     GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres,
                     MATCH(b.title, b.editor) AGAINST(?) AS relevance
                 FROM 
-                    bookBean b
+                    book b
                 LEFT JOIN 
-                    bookauthor ba ON b.ISBN = ba.bookBean
+                    bookauthor ba ON b.ISBN = ba.book
                 LEFT JOIN 
-                    bookgenre bg ON b.ISBN = bg.bookBean
+                    bookgenre bg ON b.ISBN = bg.book
                 WHERE 
                     MATCH(b.title, b.editor) AGAINST(?)
                     OR MATCH(ba.name, ba.surname) AGAINST(? IN BOOLEAN MODE)

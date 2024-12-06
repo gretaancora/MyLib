@@ -13,12 +13,13 @@ public class LoginController {
 
     public User start(LoginBean loginBean) throws WrongCredentialsException, UserNotFoundException, UnsupportedUserTypeException, DAOException {
         UserDAO dao = DAOFactory.getDAOFactory().createUserDAO();
-        LoginBean loggedinBean = null;
+        LoginBean loggedinBean;
 
         loggedinBean = dao.getUserInfoByEmail(loginBean.getEmail());
 
 
         if (!BCrypt.checkpw(loginBean.getPassword(), loggedinBean.getPassword())){
+            System.out.println("Le password non corrispondono.");
             throw new WrongCredentialsException();
         }else{
             if(loggedinBean.getUserType().equalsIgnoreCase("librarian")) {

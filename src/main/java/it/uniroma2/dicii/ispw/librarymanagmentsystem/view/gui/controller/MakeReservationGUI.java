@@ -81,7 +81,7 @@ public class MakeReservationGUI extends HomeCostumerGUI{
 
         /*nota: istanzio come controller grafico della pagina di conferma il HomeStudenteGui che ha tutte le funzionalità che mi servono*/
         try {
-            FXMLLoader loader = new FXMLLoader(MakeReservationDAO.class.getResource("src/main/resources/view/confirmRequest.fxml"));
+            FXMLLoader loader = new FXMLLoader(MakeReservationDAO.class.getResource("/view/confirmRequest.fxml"));
             loader.setControllerFactory(c -> new HomeCostumerGUI(this.user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
