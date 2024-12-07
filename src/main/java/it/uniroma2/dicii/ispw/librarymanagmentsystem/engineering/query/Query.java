@@ -147,6 +147,8 @@ public class Query {
 
     public static final String UPDATE_STATUS_COPY = "UPDATE bookcopy SET availability = ? WHERE ISBN = ? AND copyNum = ?";
 
+    public static final String SET_RESERVATION_DATES = "UPDATE borrow SET inDate = ?, endDate = ? WHERE book = ? AND copyNum = ?";
+
     public static final String UPDATE_NUM_AVAIL_COPIES = "UPDATE book SET numAvailableCopies = numAvailableCopies - 1 WHERE ISBN = ? AND numAvailableCopies > 0";
 
 

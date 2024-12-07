@@ -35,7 +35,7 @@
             <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
          </effect>
       </Button>
-      <Button mnemonicParsing="false" onMouseClicked="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a bookBean" textAlignment="CENTER" wrapText="true">
+      <Button mnemonicParsing="false" onMouseClicked="#borrowBook" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" text="Borrow a Book" textAlignment="CENTER" wrapText="true">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>

@@ -22,13 +22,16 @@ public class BorrowBean {
     public BorrowBean(BookBean book, String costumer){
         this.book = book;
         this.costumer = costumer;
-        this.fine = 0;
     }
     public BorrowBean(BookBean book, String costumer, short copy){
         this.book = book;
         this.costumer = costumer;
         this.copy = copy;
-        this.fine = 0;
+    }
+
+    public BorrowBean(LocalDate inDate, LocalDate endDate){
+        this.inDate = inDate;
+        this.endDate = endDate;
     }
 
     public BorrowBean(BookBean book, String costumer, short copy, Timestamp inReq, String position){
@@ -44,4 +47,6 @@ public class BorrowBean {
     public short getCopy() {return this.copy;}
     public Timestamp getInReq() {return this.inReq;}
     public String getPosition() {return this.position;}
+    public LocalDate getInDate() {return this.inDate;}
+    public LocalDate getEndDate() {return this.endDate;}
 }

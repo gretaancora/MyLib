@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.query;
 
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class BorrowQuery {
 
@@ -29,6 +30,17 @@ public class BorrowQuery {
         stmt.setBoolean(1, false);
         stmt.setString(2, ISBN);
         stmt.setShort(3, copy);
+
+        return stmt.executeUpdate();
+    }
+
+    public static int setReservationDates(Connection conn, String ISBN, short copy) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement(Query.SET_RESERVATION_DATES);
+
+        stmt.setDate(1, Date.valueOf(LocalDate.now()));
+        stmt.setDate(2, Date.valueOf(LocalDate.now().plusMonths(1)));
+        stmt.setString(3, ISBN);
+        stmt.setShort(4, copy);
 
         return stmt.executeUpdate();
     }

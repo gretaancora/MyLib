@@ -94,11 +94,26 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
                 BorrowBean bean = getTableView().getItems().get(getIndex());
                 var manageReservationsController = new ManageReservationsController();
                 try {
-                    manageReservationsController.activateReservation(bean);
+                    bean = manageReservationsController.activateReservation(bean);
                 } catch (DAOException e) {
                     ErrorLabel.setText("Error in activating the selected borrow. Try again...");
                 }
+                loadConfirmation(bean);
             });
+        }
+
+        private void loadConfirmation(BorrowBean bean) {
+            try {
+                FXMLLoader loader = new FXMLLoader(ManagePendingReservationsGUI.class.getResource("/view/confirmActivation.fxml"));
+                loader.setControllerFactory(c -> new ConfirmActivationGUI(user, bean));
+                Parent parent = loader.load();
+                Scene scene = new Scene(parent);
+                Stage stage = (Stage) resultsTable.getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+                logger.severe("Error in ManagePendingReservationsGUI " + e.getMessage());
+            }
         }
 
         @Override

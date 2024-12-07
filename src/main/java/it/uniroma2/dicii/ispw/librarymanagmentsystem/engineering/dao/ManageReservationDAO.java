@@ -1,25 +1,55 @@
 package it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.dao;
 
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.BookBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.query.BorrowQuery;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.singleton.Connector;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Book;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Borrow;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ManageReservationDAO {
 
-    public void activateReservation(Borrow borrow) throws DAOException {
-        try{
-            int res = BorrowQuery.activateBorrow(Connector.getConnection(), borrow.getBook().getISBN(), borrow.getCostumer(), borrow.getCopy(), borrow.getInReq());
-            if (res==0) throw new SQLException();
+    public BorrowBean activateReservation(Borrow borrow) throws DAOException {
+        Connection conn = null;
+        try {
+            conn = Connector.getConnection();
+            conn.setAutoCommit(false);
+
+            int res = BorrowQuery.activateBorrow(conn, borrow.getBook().getISBN(), borrow.getCostumer(), borrow.getCopy(), borrow.getInReq());
+            if (res == 0) throw new SQLException();
+
+            res = BorrowQuery.setReservationDates(conn, borrow.getBook().getISBN(), borrow.getCopy());
+            if (res == 0) throw new SQLException();
+
+            conn.commit();
+
+            return new BorrowBean(LocalDate.now(), LocalDate.now().plusMonths(1));
 
         } catch (SQLException e) {
-            throw new DAOException("Error in ManageReservationDAO (activating reservation)");
+
+            e.printStackTrace();
+
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                    System.out.println("Error occurred activating reservation transaction: " + e.getMessage());
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                    throw new DAOException("Error in ManageReservationDAO (during rollback): " + e.getMessage());
+                }
+            }
+
+            throw new DAOException("Error in ManageReservationDAO: " + e.getMessage());
+
         }
     }
 
