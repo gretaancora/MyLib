@@ -8,11 +8,10 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Book;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Borrow;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageReservationsController {
-    private User user;
-    public ManageReservationsController(User user) {this.user = user;}
     public void activateReservation(BorrowBean bean) throws DAOException {
         var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
         var manageReservationDAO = new ManageReservationDAO();
@@ -21,7 +20,7 @@ public class ManageReservationsController {
 
     public List<BorrowBean> getPendingReservations() throws DAOException {
         List<Borrow> searchResults;
-        List<BorrowBean> searchResultsBean = null;
+        List<BorrowBean> searchResultsBean = new ArrayList<>();
 
         var menageReservationDAO = new ManageReservationDAO();
 
@@ -30,7 +29,7 @@ public class ManageReservationsController {
 
         for (Borrow result: searchResults){
             var bookBean = new BookBean(result.getBook().getISBN());
-            var borrowBean = new BorrowBean(bookBean, result.getCostumer(), result.getCopy());
+            var borrowBean = new BorrowBean(bookBean, result.getCostumer(), result.getCopy(), result.getInReq(), result.getPosition());
             searchResultsBean.add(borrowBean);
         }
         return searchResultsBean;

@@ -141,11 +141,11 @@ public class Query {
         """;
 
     public static final String ADD_BORROW = """
-            INSERT INTO borrow (costumer, ISBN, copyNum) 
+            INSERT INTO borrow (costumer, book, copyNum) 
             VALUES (?, ?, ?);
         """;
 
-    public static final String UPDATE_STATUS_COPY = "UPDATE bookcopy SET availability = 0 WHERE ISBN = ? AND copyNum = ?";
+    public static final String UPDATE_STATUS_COPY = "UPDATE bookcopy SET availability = ? WHERE ISBN = ? AND copyNum = ?";
 
     public static final String UPDATE_NUM_AVAIL_COPIES = "UPDATE book SET numAvailableCopies = numAvailableCopies - 1 WHERE ISBN = ? AND numAvailableCopies > 0";
 
@@ -153,6 +153,9 @@ public class Query {
     /*--------------------Activate Borrow Queries Librarian-------------------*/
     public static final String UPDATE_STATUS_BORROW = "UPDATE borrow SET state = ? WHERE costumer = ? AND book = ? AND copyNum = ? AND inReq = ?";
 
-    public static final String GET_PENDING_BORROWS = "SELECT costumer, book, copyNum, inReq FROM borrow WHERE costumer = ? and status = 'pending'";
+    public static final String GET_PENDING_BORROWS = "SELECT costumer, book, bo.copyNum, inReq, position " +
+            "FROM borrow AS bo " +
+            "JOIN bookcopy AS bc ON bo.book = bc.ISBN AND bo.copyNum = bc.copyNum " +
+            "WHERE bo.state = 'pending'";
 
 }

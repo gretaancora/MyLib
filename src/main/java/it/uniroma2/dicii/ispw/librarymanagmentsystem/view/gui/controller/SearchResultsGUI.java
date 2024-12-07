@@ -62,7 +62,7 @@ public class SearchResultsGUI extends HomeCostumerGUI{
         Title.setCellValueFactory(new PropertyValueFactory<>("title"));
         Authors.setCellValueFactory(new PropertyValueFactory<>("authors"));
         Editor.setCellValueFactory(new PropertyValueFactory<>("editor"));
-        Year.setCellValueFactory(new PropertyValueFactory<>("year"));
+        Year.setCellValueFactory(new PropertyValueFactory<>("pubYear"));
         Genres.setCellValueFactory(new PropertyValueFactory<>("genres"));
         Availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
 
@@ -118,13 +118,14 @@ public class SearchResultsGUI extends HomeCostumerGUI{
 
         try {
             FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("/view/makeReservation.fxml"));
-            loader.setControllerFactory(c -> new MakeReservationGUI(this.user, bookBean));
+            loader.setControllerFactory(c -> new MakeReservationGUI(this.user, bookBean, getBookBeans()));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) resultsTable.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
-            logger.severe("Error in SearchResultsGUI (choosing book): " + e.getMessage());
+            //logger.severe("Error in SearchResultsGUI (choosing book): " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -147,4 +148,6 @@ public class SearchResultsGUI extends HomeCostumerGUI{
         }
 
     }
+
+    public List<BookBean> getBookBeans() {return this.bookBeans;}
 }

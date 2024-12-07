@@ -12,6 +12,7 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,33 +21,31 @@ public class MakeReservationDAO {
 
     public List<Book> searchBooks(Filter filter) {
         ResultSet rs = null;
-        List<Book> books = null;
+        List<Book> books = new ArrayList<>();
         String name;
         String surname;
         String[] tokens;
 
         //controllo del filterType e ricerca associata
-        if (filter.getFilterType().equalsIgnoreCase("author")) {
-            tokens = filter.getFilter().split("\\s+");
-            name = tokens[0];
-            surname = tokens[1];
-
+        if (filter.getFilterType()==null) {
             try {
-                rs = SearchQuery.searchBookByAuthor(Connector.getConnection(), name, surname);
+                rs = SearchQuery.searchBookByAllFields(Connector.getConnection(), filter.getFilter());
             } catch (SQLException e) {
                 handleDAOException(e);
             }
-
         } else if (filter.getFilterType().equalsIgnoreCase("title")) {
             try {
                 rs = SearchQuery.searchBookByTitle(Connector.getConnection(), filter.getFilter());
             } catch (SQLException e) {
                 handleDAOException(e);
             }
-
         } else {
+            tokens = filter.getFilter().split("\\s+");
+            name = tokens[0];
+            surname = tokens[1];
+
             try {
-                rs = SearchQuery.searchBookByAllFields(Connector.getConnection(), filter.getFilter());
+                rs = SearchQuery.searchBookByAuthor(Connector.getConnection(), name, surname);
             } catch (SQLException e) {
                 handleDAOException(e);
             }
@@ -65,6 +64,7 @@ public class MakeReservationDAO {
     }
 
     private void handleDAOException(Exception e) {
+        e.printStackTrace();
         logger.severe(e.getMessage());
         Printer.errorPrint(String.format("MakeReservationDAO: %s", e.getMessage()));
     }
@@ -106,7 +106,7 @@ public class MakeReservationDAO {
             conn.commit();
 
         } catch (SQLException e) {
-            
+            e.printStackTrace();
             if (conn != null) {
                 try {
                     conn.rollback();

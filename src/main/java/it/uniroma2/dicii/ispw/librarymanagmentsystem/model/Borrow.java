@@ -14,7 +14,7 @@ public class Borrow {
     private LocalDate restDate;
     private float fine;
     private Timestamp inReq;
-
+    private String position;
 
     public Borrow(Book book, short copy, String costumer, LocalDate inDate, LocalDate endDate, LocalDate restDate, float fine){
         this.book = book;
@@ -72,6 +72,14 @@ public class Borrow {
         this.inReq = inReq;
     }
 
+    public Borrow(Book book, String costumer, short copy, Timestamp inReq, String position){
+        this.book = book;
+        this.costumer = costumer;
+        this.copy = copy;
+        this.inReq = inReq;
+        this.position = position;
+    }
+
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
@@ -99,5 +107,6 @@ public class Borrow {
     public String getCostumer() {return this.costumer;}
     public short getCopy() {return this.copy;}
     public Timestamp getInReq() {return this.inReq;}
+    public String getPosition() {return this.position;}
 
 }

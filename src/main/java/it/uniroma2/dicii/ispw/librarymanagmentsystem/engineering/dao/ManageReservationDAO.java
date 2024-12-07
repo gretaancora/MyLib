@@ -8,6 +8,7 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Borrow;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageReservationDAO {
@@ -23,14 +24,15 @@ public class ManageReservationDAO {
     }
 
     public List<Borrow> getPendingReservations() throws DAOException {
-        List<Borrow> pendingBorrows = null;
+        List<Borrow> pendingBorrows = new ArrayList<>();
 
         try(ResultSet rs = BorrowQuery.getPendingReservations(Connector.getConnection())){
             while(rs.next()){
-                var borrow = new Borrow(new Book(rs.getString("ISBN")), rs.getString("costumer"), rs.getShort("copyNum"), rs.getTimestamp("inReq"));
+                var borrow = new Borrow(new Book(rs.getString("book")), rs.getString("costumer"), rs.getShort("copyNum"), rs.getTimestamp("inReq"), rs.getString("position"));
                 pendingBorrows.add(borrow);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DAOException("Error in ManageReservationDAO (getting pending request): " + e.getMessage());
         }
 
