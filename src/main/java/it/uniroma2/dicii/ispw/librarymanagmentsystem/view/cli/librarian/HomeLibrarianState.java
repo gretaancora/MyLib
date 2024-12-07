@@ -32,7 +32,7 @@ public class HomeLibrarianState extends State {
                 scan.nextLine();
 
                 if(choice==1){
-                    stateMachine.goNext(new ManagePendingReservationsState(librarian));
+                    stateMachine.goNext(new ManageReservationsState(librarian));
                 }else if(choice==2){
                     new StateMachineImpl().start();
                 }else{
@@ -50,7 +50,7 @@ public class HomeLibrarianState extends State {
     @Override
     public void showMenu() {
         Printer.println("Choose one of the following options: ");
-        Printer.println("1) manage pending reservations");
+        Printer.println("1) manage reservations");
         Printer.println("2) logout");
     }
     @Override

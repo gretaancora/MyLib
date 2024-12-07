@@ -33,9 +33,9 @@ public class HomeCostumerState extends State {
                 scan.nextLine();
 
                 if(choice==1){
-                    stateMachine.goNext(new BorrowState(costumer));
+                    Printer.println("Feature not implemented yet.");
                 }else if(choice==2){
-                    stateMachine.goNext(new ManageReservationsState(costumer));
+                    stateMachine.goNext(new BorrowState(costumer));
                 }else if(choice==3){
                     new StateMachineImpl().start();
                 }else{
@@ -53,8 +53,8 @@ public class HomeCostumerState extends State {
     @Override
     public void showMenu() {
         Printer.println("Choose one of the following options: ");
-        Printer.println("1) borrow a book");
-        Printer.println("2) manage reservations");
+        Printer.println("1) show profile");
+        Printer.println("2) borrow a book");
         Printer.println("3) logout");
     }
     @Override
