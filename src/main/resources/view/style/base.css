@@ -87,14 +87,14 @@ Button:hover {
 
 .anchor-blu {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 10, 0, 0, 0);
-    -fx-background-color: #D3D3D3;
+    -fx-background-color: #d9e7df;
     -fx-background-radius: 15 15 15 15;
     -fx-border-radius: 15 15 15 15;
 }
 
 .anchor-blu:hover {
     -fx-effect: dropshadow(gaussian, rgba(39, 112, 180, 0.81), 10, 0.7, 0, 0);
-    -fx-background-color: #D3D3D3;
+    -fx-background-color: #d9e7df;
     -fx-background-radius: 15 15 15 15;
     -fx-border-radius: 15 15 15 15;
 }

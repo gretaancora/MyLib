@@ -32,7 +32,7 @@
                         <InnerShadow blurType="ONE_PASS_BOX" height="11.0" radius="5.0" width="11.0" />
                     </effect>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#manageReservations" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Menage Reservations" textAlignment="CENTER" wrapText="true">
+                <Button mnemonicParsing="false" onAction="#manageReservations" prefHeight="60.0" prefWidth="130.0" styleClass="custom-button" stylesheets="@../view/style/button.css" text="Menage reservations" textAlignment="CENTER" wrapText="true">
                     <VBox.margin>
                         <Insets top="30.0" />
                     </VBox.margin>

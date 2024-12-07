@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageReservationsController {
-    public void activateReservation(BorrowBean bean) throws DAOException {
+    public BorrowBean activateReservation(BorrowBean bean) throws DAOException {
         var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
         var manageReservationDAO = new ManageReservationDAO();
-        manageReservationDAO.activateReservation(borrow);
+        return manageReservationDAO.activateReservation(borrow);
     }
 
     public List<BorrowBean> getPendingReservations() throws DAOException {
