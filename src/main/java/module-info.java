@@ -30,7 +30,7 @@ module it.uniroma2.dicii.ispw.librarymanagmentsystem {
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.singleton to javafx.fxml;
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.model;
-    opens it.uniroma2.dicii.ispw.librarymanagmentsystem.model to javafx.fxml;
+    opens it.uniroma2.dicii.ispw.librarymanagmentsystem.model to javafx.fxml, com.google.gson;
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.other;
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.other to javafx.fxml;
@@ -43,7 +43,6 @@ module it.uniroma2.dicii.ispw.librarymanagmentsystem {
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli;
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli to javafx.fxml;
-
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller to javafx.fxml;

@@ -5,6 +5,7 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOE
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.ConfigurationJSON;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.LocalDateAdapter;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Costumer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 
 public class UserJSONDAO implements UserDAO {
     private static final String BASE_DIRECTORY = ConfigurationJSON.USER_BASE_DIRECTORY;
@@ -61,7 +63,11 @@ public class UserJSONDAO implements UserDAO {
 
             if (Files.exists(costumerInfoFile)) {
                 String content = Files.readString(costumerInfoFile);
-                return new GsonBuilder().setPrettyPrinting().create().fromJson(content, Costumer.class);
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+
+                Costumer costumer = gson.fromJson(content, Costumer.class);
+
+                return costumer;
 
             } else {
                 throw new UserNotFoundException();
@@ -79,7 +85,11 @@ public class UserJSONDAO implements UserDAO {
 
             if (Files.exists(librarianInfoFile)) {
                 String content = Files.readString(librarianInfoFile);
-                return new GsonBuilder().setPrettyPrinting().create().fromJson(content, Librarian.class);
+
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+                Librarian librarian = gson.fromJson(content, Librarian.class);
+
+                return librarian;
 
             } else {
                 throw new UserNotFoundException();
