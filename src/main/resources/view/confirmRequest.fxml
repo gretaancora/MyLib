@@ -14,7 +14,7 @@
         <URL value="@../view/style/button.css" />
         <URL value="@../view/style/base.css" />
     </stylesheets>
-    <VBox fx:id="barraMenu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: rgba(235, 246, 234, 0.84);" stylesheets="@style/menu.css">
+    <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: rgba(235, 246, 234, 0.84);" stylesheets="@style/menu.css">
         <effect>
             <DropShadow>
                 <color>

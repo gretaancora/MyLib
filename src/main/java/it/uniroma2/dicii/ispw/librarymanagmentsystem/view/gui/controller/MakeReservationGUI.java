@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class MakeReservationGUI extends HomeCostumerGUI{
@@ -37,11 +38,13 @@ public class MakeReservationGUI extends HomeCostumerGUI{
     private Label ErrorLabel;
 
     BookBean book;
+    List<BookBean> bookBeans = null;
     private static final Logger logger = Logger.getLogger(MakeReservationGUI.class.getName());
 
-    public MakeReservationGUI(User user, BookBean bookBean) {
+    public MakeReservationGUI(User user, BookBean bookBean, List<BookBean> bookBeans) {
         this.user = user;
         this.book = bookBean;
+        this.bookBeans = bookBeans;
     }
 
 
@@ -63,16 +66,16 @@ public class MakeReservationGUI extends HomeCostumerGUI{
         metodo lanciato quando viene premuto il pulsante invio di prenotazione*/
 
         //controlla che l'utente non abbia già due pending borrow
-        if(((Costumer)user).getPending_borrows().size() >= 2){
+        if (((Costumer) user).getPending_borrows()==null || ((Costumer) user).getPending_borrows().size() < 2) {
+            var borrowBean = new BorrowBean(book, user.getEmail());
+
+            var makeReservationController = new MakeReservationController();
+            makeReservationController.reserveBook(borrowBean);
+            loadConfirmation();
+        } else {
             ErrorLabel.setText("You have reached the maximum number of pending reservations.");
-            return;
         }
 
-        var borrowBean = new BorrowBean(book, user.getEmail());
-
-        var makeReservationController = new MakeReservationController();
-        makeReservationController.reserveBook(borrowBean);
-        loadConfirmation();
     }
 
 
@@ -89,6 +92,20 @@ public class MakeReservationGUI extends HomeCostumerGUI{
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in MakeReservationGUI (loading confirmation page): " + e.getMessage());
+        }
+    }
+
+    public void goToSearchResults() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MakeReservationDAO.class.getResource("/view/searchResults.fxml"));
+            loader.setControllerFactory(c -> new SearchResultsGUI(this.user, bookBeans));
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ISBNLabel.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.severe("Error in MakeReservationGUI (going back to search results): " + e.getMessage());
         }
     }
 }

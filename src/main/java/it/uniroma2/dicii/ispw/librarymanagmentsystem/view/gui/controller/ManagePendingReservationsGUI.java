@@ -27,7 +27,10 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
     private TableColumn<BorrowBean, String> Costumer;
     @FXML
     private TableColumn<BorrowBean, String> Book;
+    @FXML
     private TableColumn<BorrowBean, String> Copy;
+    @FXML
+    private TableColumn<BorrowBean, String> Position;
     @FXML
     private Label ErrorLabel;
     @FXML
@@ -56,7 +59,7 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
          */
 
         //creo un'istanza di controller applicativo corrispondente
-        var manageReservationsController = new ManageReservationsController(user);
+        var manageReservationsController = new ManageReservationsController();
 
         //chiamo la funzione nel controller applicativo per ottenere una lista di BEAN che contiene tutte le info per la tabella
         try {
@@ -65,6 +68,7 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
             ErrorLabel.setText("Error in getting pending borrows. Try again...");
         }
 
+        resultsTable.getItems().addAll(borrowBeans);
 
         Costumer.setCellValueFactory(new PropertyValueFactory<>("costumer"));
         Book.setCellValueFactory(cellData -> {
@@ -74,11 +78,7 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
             return new SimpleStringProperty(isbn);
         });
         Copy.setCellValueFactory(new PropertyValueFactory<>("copy"));
-
-        // Aggiungo tutti i nuovi elementi alla TableView
-        resultsTable.getItems().clear();
-        resultsTable.getItems().addAll(borrowBeans);
-
+        Position.setCellValueFactory(new PropertyValueFactory<>("position"));
         //Imposto la factory per la colonna "Activate"
         Activate.setCellFactory(param -> new ActivateButtonCell());
 
@@ -92,7 +92,7 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
         public ActivateButtonCell() {
             btn.setOnAction(event -> {
                 BorrowBean bean = getTableView().getItems().get(getIndex());
-                var manageReservationsController = new ManageReservationsController(user);
+                var manageReservationsController = new ManageReservationsController();
                 try {
                     manageReservationsController.activateReservation(bean);
                 } catch (DAOException e) {

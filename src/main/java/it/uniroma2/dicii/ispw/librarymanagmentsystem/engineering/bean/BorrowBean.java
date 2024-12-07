@@ -15,6 +15,7 @@ public class BorrowBean {
     private LocalDate endDate;
     private LocalDate restDate;
     private float fine;
+    private String position;
 
 
     //pending borrow
@@ -30,15 +31,17 @@ public class BorrowBean {
         this.fine = 0;
     }
 
-    public BorrowBean(BookBean book, String costumer, short copy, Timestamp inReq){
+    public BorrowBean(BookBean book, String costumer, short copy, Timestamp inReq, String position){
         this.book = book;
         this.costumer = costumer;
         this.copy = copy;
         this.inReq = inReq;
+        this.position = position;
     }
 
     public BookBean getBook() {return this.book;}
     public String getCostumer() {return this.costumer;}
     public short getCopy() {return this.copy;}
     public Timestamp getInReq() {return this.inReq;}
+    public String getPosition() {return this.position;}
 }

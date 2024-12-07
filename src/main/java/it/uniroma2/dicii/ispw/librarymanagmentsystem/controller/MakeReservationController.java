@@ -17,10 +17,10 @@ import java.util.List;
 
 public class MakeReservationController {
 
-    private List<Book> searchResults;
-    private final List<BookBean> searchResultsBean = new ArrayList<>();
-
     public List<BookBean> searchMethod(FilterBean filterBean) {
+
+        List<Book> searchResults;
+        List<BookBean> searchResultsBean = new ArrayList<>();
 
         Filter filter = new Filter(filterBean.getFilter(), filterBean.getFilterType());
 
@@ -30,7 +30,7 @@ public class MakeReservationController {
 
         //carico nella lista di ripetizioneInfoBean i risultati della ricerca
 
-        for ( Book book: searchResults){
+        for (Book book: searchResults){
             var result = new BookBean(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getYear(), book.getGenres(), book.getAvailability());
             searchResultsBean.add(result);
         }

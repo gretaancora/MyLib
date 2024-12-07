@@ -33,6 +33,7 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
             Stage stage = (Stage) pendingBox.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
+            e.printStackTrace();
             logger.severe("Error in ManageReservationsGUI " + e.getMessage());
         }
     }
