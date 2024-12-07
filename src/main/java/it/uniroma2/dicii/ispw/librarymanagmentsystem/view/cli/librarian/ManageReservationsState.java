@@ -3,16 +3,16 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.librarian;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.State;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.StateMachine;
-import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.StateMachineImpl;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.view.cli.StateMachineImpl;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class HomeLibrarianState extends State {
+public class ManageReservationsState extends State {
     private Librarian librarian;
-    public HomeLibrarianState(Librarian librarian) {
+    public ManageReservationsState(Librarian librarian) {
         super();
         this.librarian = librarian;
     }
@@ -32,8 +32,12 @@ public class HomeLibrarianState extends State {
                 scan.nextLine();
 
                 if(choice==1){
-                    stateMachine.goNext(new ManageReservationsState(librarian));
+                    stateMachine.goNext(new ManagePendingReservationsState(librarian));
                 }else if(choice==2){
+                    Printer.println("Feature not implemented yet.");
+                }else if(choice==3) {
+                    Printer.println("Feature not implemented yet.");
+                }else if(choice==4) {
                     new StateMachineImpl().start();
                 }else{
                     Printer.println("Invalid choice. Try again...");
@@ -50,11 +54,14 @@ public class HomeLibrarianState extends State {
     @Override
     public void showMenu() {
         Printer.println("Choose one of the following options: ");
-        Printer.println("1) manage reservations");
-        Printer.println("2) logout");
+        Printer.println("1) pending reservations");
+        Printer.println("2) active reservations");
+        Printer.println("3) expired reservations");
+        Printer.println("4) logout");
     }
     @Override
     public void showHeadline() {
-        Printer.printlnBlu("--------------HOME--------------");
+        Printer.printlnBlu("--------------MANAGE RESERVATIONS--------------");
     }
+
 }
