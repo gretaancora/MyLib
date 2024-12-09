@@ -39,6 +39,7 @@ public class UserMySQLDAO implements UserDAO {
 
     @Override
     public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, DAOException {
+        Connection conn;
 
         try {
 
@@ -47,11 +48,22 @@ public class UserMySQLDAO implements UserDAO {
             if (bool) {
                 try{
 
-                    if(LoginQuery.insertCostumer(Connector.getConnection(), costumer) == 0) {
+                    conn = Connector.getConnection();
+
+                    conn.setAutoCommit(false);
+
+                    if(LoginQuery.insertUser(conn, costumer) == 0) {
                         throw new DAOException("Error in UserMySQLDAO");
                     }
 
+                    if(LoginQuery.insertCostumer(conn, costumer) == 0) {
+                        throw new DAOException("Error in UserMySQLDAO");
+                    }
+
+                    conn.commit();
+
                 }catch (SQLException e) {
+                    e.printStackTrace();
                     throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
                 }
 
@@ -60,6 +72,7 @@ public class UserMySQLDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
         }
     }

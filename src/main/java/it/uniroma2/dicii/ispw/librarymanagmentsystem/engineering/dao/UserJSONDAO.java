@@ -42,7 +42,7 @@ public class UserJSONDAO implements UserDAO {
             Path costumerInfoFile = userDirectory.resolve(ConfigurationJSON.COSTUMER_INFO_FILE_NAME);
 
             //divido le info per i due file
-            var userInfo = new LoginBean(costumer.getEmail(), BCrypt.hashpw(costumer.getPassword(), BCrypt.gensalt()), "costumer");
+            var userInfo = new LoginBean(costumer.getEmail(), costumer.getPassword(), "costumer");
             var costumerInfo = new Costumer(costumer.getEmail(), costumer.getName(), costumer.getSurname(), LocalDate.now(), true);
 
             // Serializza l'oggetto Login in formato JSON e scrivi nel file
