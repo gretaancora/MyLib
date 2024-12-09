@@ -51,8 +51,9 @@ public class Query {
     public static final String SEARCH_EMAIL = "SELECT * FROM user WHERE email = ?";
 
     //query per registrare il costumer sia nella tabella user che costumer
-    public static final String REGISTER_COSTUMER = "INSERT INTO user (email, password, type) VALUES (?,?,'costumer');" +
-            "INSERT INTO costumer(email, name, surname, memDate, memStatus) VALUES (?,?,?,?,1);";
+    public static final String REGISTER_USER = "INSERT INTO user (email, password, type) VALUES (?,?,'costumer')";
+
+    public static final String REGISTER_COSTUMER = "INSERT INTO costumer(email, name, surname, memDate, memStatus) VALUES (?,?,?,?,1);";
 
 
     /*--------------------Search Queries Costumer-------------------*/

@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.librarymanagmentsystem.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Borrow;
@@ -18,10 +19,10 @@ public class Costumer extends User {
         super(email, name, surname);
         this.membership_date = subDate;
         this.membership_status = membership_status;
-        this.pending_borrows = null;
-        this.active_borrows = null;
-        this.overdue_borrows = null;
-        this.finished_borrows = null;
+        this.pending_borrows = new ArrayList<>();
+        this.active_borrows = new ArrayList<>();
+        this.overdue_borrows = new ArrayList<>();
+        this.finished_borrows = new ArrayList<>();
     }
 
     //registrazione
@@ -30,10 +31,10 @@ public class Costumer extends User {
         super(email, name, surname, password);
         this.membership_date = subDate;
         this.membership_status = true;
-        this.pending_borrows = null;
-        this.active_borrows = null;
-        this.overdue_borrows = null;
-        this.finished_borrows = null;
+        this.pending_borrows = new ArrayList<>();
+        this.active_borrows = new ArrayList<>();
+        this.overdue_borrows = new ArrayList<>();
+        this.finished_borrows = new ArrayList<>();
     }
 
     // se data non inserita attivazione odierna
@@ -41,10 +42,10 @@ public class Costumer extends User {
         super(email, name, surname, password);
         this.membership_date = LocalDate.now();
         this.membership_status = true;
-        this.pending_borrows = null;
-        this.active_borrows = null;
-        this.overdue_borrows = null;
-        this.finished_borrows = null;
+        this.pending_borrows = new ArrayList<>();
+        this.active_borrows = new ArrayList<>();
+        this.overdue_borrows = new ArrayList<>();
+        this.finished_borrows = new ArrayList<>();
     }
 
     public LocalDate getMemDate() {return this.membership_date;}
