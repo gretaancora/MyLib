@@ -22,11 +22,11 @@ public class LoginController {
             System.out.println("Le password non corrispondono.");
             throw new WrongCredentialsException();
         }else{
-            if(loggedinBean.getUserType().equalsIgnoreCase("librarian")) {
+            if(loggedinBean.getType().equalsIgnoreCase("librarian")) {
 
                 return dao.loadLibrarian(loggedinBean.getEmail());
 
-            } else if (loggedinBean.getUserType().equalsIgnoreCase("costumer")) {
+            } else if (loggedinBean.getType().equalsIgnoreCase("costumer")) {
 
                 return dao.loadCostumer(loggedinBean.getEmail());
 

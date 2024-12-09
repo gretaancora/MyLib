@@ -12,7 +12,7 @@ module it.uniroma2.dicii.ispw.librarymanagmentsystem {
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.controller to javafx.fxml;
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean;
-    opens it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean to javafx.fxml;
+    opens it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean to javafx.fxml, com.google.gson;
 
     exports it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.dao;
     opens it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.dao to javafx.fxml;
