@@ -2,6 +2,6 @@
   "email": "user1@gmail.com",
   "name": "user1",
   "surname": "user1",
-  "memDate": "06-12-2024",
-  "memStatus": "1"
+  "membership_date": "06-12-2024",
+  "membership_status": "1"
 }

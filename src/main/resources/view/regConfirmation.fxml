@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studypal.view.first.gui.RegistrazioneGuiController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.RegisterGUIController">
    <children>
       <Pane layoutX="199.0" layoutY="110.0" prefHeight="378.0" prefWidth="602.0" stylesheets="@style/base.css">
          <children>
@@ -13,12 +13,12 @@
                   <Font name="Bodoni MT Bold Italic" size="40.0" />
                </font>
             </Text>
-            <Button fx:id="tornaLogin" layoutX="254.0" layoutY="254.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="50.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@style/button.css" text="Login" />
+            <Button fx:id="login" layoutX="254.0" layoutY="254.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="50.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@style/button.css" text="Login" />
             <Text fx:id="indicazioni" layoutX="65.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go back to the Login page to enter the platform." textAlignment="CENTER" wrappingWidth="471.7706756591797">
                <font>
                   <Font size="17.0" />
                </font></Text>
-            <Label fx:id="campiError" layoutX="225.0" layoutY="237.0" />
+            <Label fx:id="fieldsError" layoutX="225.0" layoutY="237.0" />
          </children>
       </Pane>
    </children>

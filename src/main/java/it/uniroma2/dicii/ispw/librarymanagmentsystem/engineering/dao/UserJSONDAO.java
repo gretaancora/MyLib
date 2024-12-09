@@ -10,11 +10,11 @@ import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Costumer;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.Librarian;
 import com.google.gson.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 
 public class UserJSONDAO implements UserDAO {
@@ -22,6 +22,8 @@ public class UserJSONDAO implements UserDAO {
 
     @Override
     public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, DAOException {
+        Path userDirectory = null;
+
         try {
             // Verifica se la cartella persistence esiste, altrimenti la crea
             Path persistenceDirectory = Paths.get(ConfigurationJSON.PERSISTENCE_BASE_DIRECTORY);
@@ -35,14 +37,46 @@ public class UserJSONDAO implements UserDAO {
             }
 
             // Crea la directory dell'utente e il file di informazioni
-            Path userDirectory = Files.createDirectories(Paths.get(BASE_DIRECTORY, costumer.getEmail()));
+            userDirectory = Files.createDirectories(Paths.get(BASE_DIRECTORY, costumer.getEmail()));
             Path userInfoFile = userDirectory.resolve(ConfigurationJSON.USER_INFO_FILE_NAME);
+            Path costumerInfoFile = userDirectory.resolve(ConfigurationJSON.COSTUMER_INFO_FILE_NAME);
+
+            //divido le info per i due file
+            var userInfo = new LoginBean(costumer.getEmail(), BCrypt.hashpw(costumer.getPassword(), BCrypt.gensalt()), "costumer");
+            var costumerInfo = new Costumer(costumer.getEmail(), costumer.getName(), costumer.getSurname(), LocalDate.now(), true);
 
             // Serializza l'oggetto Login in formato JSON e scrivi nel file
-            String json = new GsonBuilder().setPrettyPrinting().create().toJson(costumer);
+            String json = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create().toJson(userInfo);
             Files.writeString(userInfoFile, json);
+            json = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create().toJson(costumerInfo);
+            Files.writeString(costumerInfoFile, json);
 
-        } catch (IOException e) {
+        } catch (JsonIOException | IOException e) {
+            if(userDirectory!=null) {
+                try {
+                    /*viene creata una classe anonima che estende SimpleFileVisitor<Path>.
+                    La classe anonima permette di sovrascrivere i metodi visitFile e postVisitDirectory senza
+                    dover dichiarare esplicitamente una nuova classe che estenda SimpleFileVisitor.
+                    */
+                    Files.walkFileTree(userDirectory, new SimpleFileVisitor<>() {
+                        @Override
+                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                            Files.delete(file); // Rimuove il file
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                        @Override
+                        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                            Files.delete(dir); // Rimuove la directory vuota
+                            return FileVisitResult.CONTINUE;
+                        }
+                    });
+                } catch (IOException ex) {
+                    Printer.errorPrint("Error occurred removing user directory: " + ex.getMessage());
+                    throw new DAOException("Error in UserJSONDAO (removing user directory: " + e.getMessage());
+                }
+            }
+
             throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
         }
     }
@@ -110,7 +144,6 @@ public class UserJSONDAO implements UserDAO {
 
             String content = Files.readString(userInfoFile);
 
-            //da controllare come funziona
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject jsonObject = gson.fromJson(content, JsonObject.class);
             return new LoginBean(email, jsonObject.getAsJsonPrimitive("password").getAsString(), jsonObject.getAsJsonPrimitive("type").getAsString());

@@ -16,7 +16,7 @@ public class RegisterBean extends LoginBean{
     }
 
 
-    public String getName() {return this.getName();}
-    public String getSurname() {return this.getSurname();}
+    public String getName() {return this.name;}
+    public String getSurname() {return this.surname;}
 
 }
