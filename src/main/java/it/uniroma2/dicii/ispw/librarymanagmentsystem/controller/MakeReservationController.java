@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MakeReservationController {
 
-    public List<BookBean> searchMethod(FilterBean filterBean) {
+    public List<BookBean> searchMethod(FilterBean filterBean) throws DAOException {
 
         List<Book> searchResults;
         List<BookBean> searchResultsBean = new ArrayList<>();
@@ -53,8 +53,7 @@ public class MakeReservationController {
             /*RichiesteArrivateCollection.getInstance().aggiungiRichiesta(prenotazioneModel); //pattern Observer*/
 
         } catch (DAOException e){
-            Printer.errorPrint("Error: " + e.getMessage());
-
+            Printer.errorPrint("Error: " + e.getMessage()); //questo dovrei printarlo sul logger e printare semplicemente un messaggio di errore generico sul terminale
         }
 
     }

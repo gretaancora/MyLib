@@ -11,7 +11,9 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ManageReservationsState extends State {
+
     private Librarian librarian;
+
     public ManageReservationsState(Librarian librarian) {
         super();
         this.librarian = librarian;
