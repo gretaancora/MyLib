@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller.ManageReservationsGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style/base.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.MyLib.view.gui.controller.ManageReservationsGUI">
     <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" stylesheets="@style/menu.css">
         <effect>
             <DropShadow>
