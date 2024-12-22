@@ -17,9 +17,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class MakeReservationDAO {
+
     private static final Logger logger = Logger.getLogger(MakeReservationDAO.class.getName());
 
-    public List<Book> searchBooks(Filter filter) {
+    public List<Book> searchBooks(Filter filter) throws DAOException {
         ResultSet rs = null;
         List<Book> books = new ArrayList<>();
         String name;
@@ -63,10 +64,10 @@ public class MakeReservationDAO {
         return books;
     }
 
-    private void handleDAOException(Exception e) {
-        e.printStackTrace();
+    private void handleDAOException(Exception e) throws DAOException {
         logger.severe(e.getMessage());
-        Printer.errorPrint(String.format("MakeReservationDAO: %s", e.getMessage()));
+        Printer.errorPrint("Error occurred making the reservation.");
+        throw new DAOException(e.getMessage());
     }
 
     public void reserveBook(Borrow borrow) throws DAOException {

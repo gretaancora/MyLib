@@ -81,7 +81,6 @@ public class Borrow {
     }
 
     public String toString() {
-
         StringBuilder sb = new StringBuilder();
         sb.append(this.book).append(" ").append(this.copy).append(" ").append(this.costumer).append(" ").append(this.inDate == null ? "" : this.inDate).append(" ").append(this.endDate == null ? "" : this.endDate).append(" ").append(this.restDate == null ? "" : this.restDate).append(" ").append(this.fine).append('\n');
         return sb.toString();

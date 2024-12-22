@@ -5,9 +5,7 @@ public class FilterBean {
     private String filter;
     private String filterType;
 
-    public FilterBean(String filter) {
-        this.filter = filter;
-    }
+
     public FilterBean(String filter, String filterType) {
         this.filter = filter;
         this.filterType = filterType;

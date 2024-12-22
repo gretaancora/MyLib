@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.librarymanagmentsystem.view.gui.controller;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.bean.BookBean;
+import it.uniroma2.dicii.ispw.librarymanagmentsystem.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.model.User;
 import it.uniroma2.dicii.ispw.librarymanagmentsystem.other.Printer;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class BorrowBookGUI extends HomeCostumerGUI{
     private ComboBox<String> filterType;
     @FXML
     private Label fieldsError;
+
     private String filter;
     private String type;
 
@@ -53,7 +55,12 @@ public class BorrowBookGUI extends HomeCostumerGUI{
             var makeReservationController = new MakeReservationController();
 
             //chiama il controller applicativo e gli passa il BEAN che contiene la subject
-            loadResults(makeReservationController.searchMethod(filterBean));
+            try {
+                loadResults(makeReservationController.searchMethod(filterBean));
+            } catch (DAOException e) {
+                logger.severe("Error in BorrowBookGUI: " + e.getMessage());
+                fieldsError.setText("Error searching for book.");
+            }
 
             Printer.println("Search finished.");
         }
@@ -71,6 +78,7 @@ public class BorrowBookGUI extends HomeCostumerGUI{
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in BorrwBookGUI " + e.getMessage());
+            fieldsError.setText("Error loading search results.");
         }
     }
 }

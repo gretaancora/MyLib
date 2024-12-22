@@ -42,4 +42,10 @@ public class BookBean {
     public String getPubYear() {return this.pubYear;}
     public String getAvailability() {return this.availability;}
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getISBN()).append(" ").append(this.getTitle()).append(" ").append(this.getAuthors()).append(" ").append(this.getEditor()).append(" ").append(this.getPubYear()).append(" ").append(this.getGenres()).append("\n");
+        return sb.toString();
+    }
+
 }
