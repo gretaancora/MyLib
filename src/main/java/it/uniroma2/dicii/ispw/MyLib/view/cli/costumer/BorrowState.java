@@ -67,6 +67,7 @@ public class BorrowState extends State {
         }else{
             var borrowBean = new BorrowBean(bookBean, costumer.getEmail());
             makeReservationController.reserveBook(borrowBean);
+            Printer.println("Reservation succeeded!\n Go into section 'show profile' in order to see it.");
 
             stateMachine.goBack();
         }

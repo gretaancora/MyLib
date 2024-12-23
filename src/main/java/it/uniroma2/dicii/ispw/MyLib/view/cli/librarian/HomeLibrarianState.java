@@ -32,8 +32,10 @@ public class HomeLibrarianState extends State {
                 scan.nextLine();
 
                 if(choice==1){
-                    stateMachine.goNext(new ManageReservationsState(librarian));
+                    Printer.println("Feature not implemented yet.");
                 }else if(choice==2){
+                    stateMachine.goNext(new ManageReservationsState(librarian));
+                }else if(choice==3){
                     new StateMachineImpl().start();
                 }else{
                     Printer.println("Invalid choice. Try again...");
@@ -50,8 +52,9 @@ public class HomeLibrarianState extends State {
     @Override
     public void showMenu() {
         Printer.println("Choose one of the following options: ");
-        Printer.println("1) manage reservations");
-        Printer.println("2) logout");
+        Printer.println("1) show profile");
+        Printer.println("2) manage reservations");
+        Printer.println("3) logout");
     }
     @Override
     public void showHeadline() {
