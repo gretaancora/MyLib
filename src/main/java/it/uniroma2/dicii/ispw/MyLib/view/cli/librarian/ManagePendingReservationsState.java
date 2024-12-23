@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.MyLib.view.cli.librarian;
 
 import it.uniroma2.dicii.ispw.MyLib.controller.ManageReservationsController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
+import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.BorrowNotFoundException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
@@ -40,15 +41,28 @@ public class ManagePendingReservationsState extends State {
             stateMachine.goBack();
         }
 
-        BorrowBean borrowBean = selectBorrow(borrows, in);
+        BorrowBean borrowBean = null;
 
         try {
-            manageReservationController.activateReservation(borrowBean);
-        } catch (DAOException e) {
-            log.severe(e.getMessage());
-            Printer.errorPrint("Error while getting pending reservations");
-
+            borrowBean = selectBorrow(borrows, in);
+        } catch (BorrowNotFoundException e) {
             stateMachine.goBack();
+        }
+
+        if(borrowBean==null){
+            stateMachine.goBack();
+        }else {
+            try {
+                borrowBean = manageReservationController.activateReservation(borrowBean);
+            } catch (DAOException e) {
+                log.severe(e.getMessage());
+                Printer.errorPrint("Error while getting pending reservations");
+
+                stateMachine.goBack();
+            }
+            Printer.println("Activation succeeded!");
+            Printer.println("Initial date: " + borrowBean.getInDate() + "\t" + "Ending date: " + borrowBean.getEndDate());
+            this.execute(stateMachine);
         }
 
     }
@@ -60,27 +74,40 @@ public class ManagePendingReservationsState extends State {
     }
 
 
-    public BorrowBean selectBorrow(List<BorrowBean> borrows, Scanner in) {
-        int i = 0;
+    public BorrowBean selectBorrow(List<BorrowBean> borrows, Scanner in) throws BorrowNotFoundException {
+        int i = 1;
         int choice;
 
-        for (BorrowBean borrow : borrows) {
-            Printer.println(i++ + ") " + borrow.toString());
-        }
+        if(borrows.isEmpty()) {
+            Printer.println("No pending reservations found.");
+            throw new BorrowNotFoundException();
 
-        while(true){
-            try {
-                choice = in.nextInt();
-                in.nextLine();
-                break;
-            }catch (InputMismatchException e) {
-                Printer.println("Please enter a valid option!");
-                in.nextLine();
-            } catch (NoSuchElementException e) {
-                Printer.println("Please enter a valid option!");
+        }else {
+
+            Printer.println("0) go back");
+
+            for (BorrowBean borrow : borrows) {
+                Printer.println(i++ + ") " + borrow.toString() + " -> activate");
+            }
+
+            while (true) {
+                try {
+                    choice = in.nextInt();
+                    in.nextLine();
+                    break;
+                } catch (InputMismatchException e) {
+                    Printer.println("Please enter a valid option!");
+                    in.nextLine();
+                } catch (NoSuchElementException e) {
+                    Printer.println("Please enter a valid option!");
+                }
             }
         }
 
-        return borrows.get(choice);
+        if(choice==0){
+            return null;
+        }else {
+            return borrows.get(--choice);
+        }
     }
 }

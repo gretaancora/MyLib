@@ -14,8 +14,8 @@ public class RegisterController {
 
         //creo costumer a partire dai dati del bean
         var costumer = new Costumer(regBean.getEmail(), BCrypt.hashpw(regBean.getPassword(), BCrypt.gensalt()), regBean.getName(), regBean.getSurname());
-        //chiamo la DAO per la registrazione del costumer
 
+        //chiamo la DAO per la registrazione del costumer
         dao.insertCostumer(costumer);
 
     }

@@ -16,7 +16,7 @@ public class InitialState extends State {
 
         while (true) {
             try {
-                Printer.println("Enter your choice: ");
+                Printer.print("Enter your choice: ");
                 choice = input.nextInt();
                 input.nextLine();
                 if(choice == 1) {

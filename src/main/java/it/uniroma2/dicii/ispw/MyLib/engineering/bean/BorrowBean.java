@@ -46,4 +46,10 @@ public class BorrowBean {
     public String getPosition() {return this.position;}
     public LocalDate getInDate() {return this.inDate;}
     public LocalDate getEndDate() {return this.endDate;}
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getCostumer()).append(" ").append(this.getBook().getISBN()).append(" ").append(this.getCopy()).append(" ").append(this.getPosition());
+        return sb.toString();
+    }
 }

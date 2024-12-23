@@ -23,11 +23,11 @@ public class RegisterState extends State {
         while (true) {
             try{
                 Printer.print("Email: ");
-                email = scanner.next();
+                email = scanner.nextLine();
                 isValidEmail(email);
                 break;
             } catch(InvalidEmail e){
-                Printer.errorPrint("Email non valida");
+                Printer.errorPrint("Invalid email! Try again...");
             }
         }
 
@@ -54,12 +54,14 @@ public class RegisterState extends State {
             var registerController = new RegisterController();
             registerController.registerCostumer(new RegisterBean(name, surname, email, password));
         } catch (EmailAlreadyInUseException e) {
+            Printer.errorPrint("Email already in use.");
             stateMachine.goBack();
         } catch (DAOException e) {
             Printer.errorPrint("Error occurred during registration. Try again...");
             this.execute(stateMachine);
         }
 
+        Printer.println("Registration succeeded!");
         stateMachine.goBack();
 
     }
