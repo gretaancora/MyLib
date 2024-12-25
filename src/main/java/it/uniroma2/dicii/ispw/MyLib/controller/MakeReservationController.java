@@ -3,7 +3,7 @@ package it.uniroma2.dicii.ispw.MyLib.controller;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationDAO;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
@@ -22,7 +22,7 @@ public class MakeReservationController {
 
         Filter filter = new Filter(filterBean.getFilter(), filterBean.getFilterType());
 
-        var makeReservationDAO = new MakeReservationDAO();
+        var makeReservationDAO = new MakeReservationMySQLDAO();
 
         searchResults = makeReservationDAO.searchBooks(filter);
 
@@ -45,7 +45,7 @@ public class MakeReservationController {
         // inserisce un borrow nel db e restituisce un model avente le info della copia selezionata*/
 
         try{
-            var reservationDAO = new MakeReservationDAO();
+            var reservationDAO = new MakeReservationMySQLDAO();
             reservationDAO.reserveBook(borrow);
 
             /*RichiesteArrivateCollection.getInstance().aggiungiRichiesta(prenotazioneModel); //pattern Observer*/

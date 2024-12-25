@@ -3,7 +3,7 @@ package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
 import it.uniroma2.dicii.ispw.MyLib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationDAO;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
@@ -84,7 +84,7 @@ public class MakeReservationGUI extends HomeCostumerGUI{
 
         /*nota: istanzio come controller grafico della pagina di conferma il HomeStudenteGui che ha tutte le funzionalità che mi servono*/
         try {
-            FXMLLoader loader = new FXMLLoader(MakeReservationDAO.class.getResource("/view/confirmRequest.fxml"));
+            FXMLLoader loader = new FXMLLoader(MakeReservationMySQLDAO.class.getResource("/view/confirmRequest.fxml"));
             loader.setControllerFactory(c -> new HomeCostumerGUI(this.user));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
@@ -97,7 +97,7 @@ public class MakeReservationGUI extends HomeCostumerGUI{
 
     public void goToSearchResults() {
         try {
-            FXMLLoader loader = new FXMLLoader(MakeReservationDAO.class.getResource("/view/searchResults.fxml"));
+            FXMLLoader loader = new FXMLLoader(MakeReservationMySQLDAO.class.getResource("/view/searchResults.fxml"));
             loader.setControllerFactory(c -> new SearchResultsGUI(this.user, bookBeans));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

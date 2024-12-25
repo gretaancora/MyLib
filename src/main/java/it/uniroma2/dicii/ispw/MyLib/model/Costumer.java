@@ -46,6 +46,18 @@ public class Costumer extends User {
         this.finished_borrows = new ArrayList<>();
     }
 
+    //creazione user per in memory mode
+    public Costumer(String email, String password, String name, String surname, List<Borrow> pending_borrows) {
+        super(email, name, surname, password);
+        this.membership_date = LocalDate.now();
+        this.membership_status = true;
+        this.pending_borrows = pending_borrows;
+        this.active_borrows = new ArrayList<>();
+        this.overdue_borrows = new ArrayList<>();
+        this.finished_borrows = new ArrayList<>();
+    }
+
+
     public LocalDate getMemDate() {return this.membership_date;}
     public void addPedingBorrows(Borrow borrow) {this.pending_borrows.add(borrow);}
     public void addActiveBorrows(Borrow borrow) {this.active_borrows.add(borrow);}

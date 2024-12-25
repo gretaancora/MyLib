@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.query;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class BorrowQuery {
 
@@ -56,14 +57,14 @@ public class BorrowQuery {
 
 
     /*--------------------Borrow Queries Librarian-------------------*/
-    public static int activateBorrow(Connection conn, String book, String costumer, short copy, Timestamp inReq) throws SQLException {
+    public static int activateBorrow(Connection conn, String book, String costumer, short copy, LocalDateTime inReq) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(Query.UPDATE_STATUS_BORROW);
 
         stmt.setString(1, "active");
         stmt.setString(2, costumer);
         stmt.setString(3, book);
         stmt.setShort(4, copy);
-        stmt.setTimestamp(5, inReq);
+        stmt.setTimestamp(5, Timestamp.valueOf(inReq));
 
         return stmt.executeUpdate();
     }
