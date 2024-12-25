@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.MyLib.controller;
 
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationDAO;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ManageReservationsController {
     public BorrowBean activateReservation(BorrowBean bean) throws DAOException {
         var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
-        var manageReservationDAO = new ManageReservationDAO();
+        var manageReservationDAO = new ManageReservationMySQLDAO();
         return manageReservationDAO.activateReservation(borrow);
     }
 
@@ -21,7 +21,7 @@ public class ManageReservationsController {
         List<Borrow> searchResults;
         List<BorrowBean> searchResultsBean = new ArrayList<>();
 
-        var menageReservationDAO = new ManageReservationDAO();
+        var menageReservationDAO = new ManageReservationMySQLDAO();
 
         searchResults = menageReservationDAO.getPendingReservations();
 

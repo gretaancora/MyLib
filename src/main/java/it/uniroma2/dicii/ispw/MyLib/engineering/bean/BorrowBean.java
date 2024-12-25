@@ -2,12 +2,13 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.bean;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class BorrowBean {
     private BookBean book;
     private short copy;
     private String costumer;
-    private Timestamp inReq;
+    private LocalDateTime inReq;
     private LocalDate inDate;
     private LocalDate endDate;
     private LocalDate restDate;
@@ -31,7 +32,7 @@ public class BorrowBean {
         this.endDate = endDate;
     }
 
-    public BorrowBean(BookBean book, String costumer, short copy, Timestamp inReq, String position){
+    public BorrowBean(BookBean book, String costumer, short copy, LocalDateTime inReq, String position){
         this.book = book;
         this.costumer = costumer;
         this.copy = copy;
@@ -42,7 +43,7 @@ public class BorrowBean {
     public BookBean getBook() {return this.book;}
     public String getCostumer() {return this.costumer;}
     public short getCopy() {return this.copy;}
-    public Timestamp getInReq() {return this.inReq;}
+    public LocalDateTime getInReq() {return this.inReq;}
     public String getPosition() {return this.position;}
     public LocalDate getInDate() {return this.inDate;}
     public LocalDate getEndDate() {return this.endDate;}

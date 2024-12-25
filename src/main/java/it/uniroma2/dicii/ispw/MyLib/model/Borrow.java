@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.MyLib.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Borrow {
@@ -12,7 +13,7 @@ public class Borrow {
     private LocalDate endDate;
     private LocalDate restDate;
     private float fine;
-    private Timestamp inReq;
+    private LocalDateTime inReq;
     private String position;
 
     public Borrow(Book book, short copy, String costumer, LocalDate inDate, LocalDate endDate, LocalDate restDate, float fine){
@@ -64,14 +65,14 @@ public class Borrow {
         this.copy = copy;
     }
 
-    public Borrow(Book book, String costumer, short copy, Timestamp inReq){
+    public Borrow(Book book, String costumer, short copy, LocalDateTime inReq){
         this.book = book;
         this.costumer = costumer;
         this.copy = copy;
         this.inReq = inReq;
     }
 
-    public Borrow(Book book, String costumer, short copy, Timestamp inReq, String position){
+    public Borrow(Book book, String costumer, short copy, LocalDateTime inReq, String position){
         this.book = book;
         this.costumer = costumer;
         this.copy = copy;
@@ -104,7 +105,7 @@ public class Borrow {
     public Book getBook() {return this.book;}
     public String getCostumer() {return this.costumer;}
     public short getCopy() {return this.copy;}
-    public Timestamp getInReq() {return this.inReq;}
+    public LocalDateTime getInReq() {return this.inReq;}
     public String getPosition() {return this.position;}
 
 }

@@ -29,8 +29,10 @@ public abstract class DAOFactory {
 
             if (persistenceType.equalsIgnoreCase("JSON")) {
                 me = new JsonDAOFactory();
-            }else {
+            }else if(persistenceType.equalsIgnoreCase("MySQL")){
                 me = new MySQLDAOFactory();
+            }else{
+                me = new InMemoryDAOFactory();
             }
         }
         return me;
