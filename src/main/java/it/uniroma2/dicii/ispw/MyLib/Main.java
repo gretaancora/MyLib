@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.MyLib;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import it.uniroma2.dicii.ispw.MyLib.view.cli.StateMachineImpl;
 import javafx.application.Application;
@@ -20,7 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         //Setup Logger
-        Logger logger = Logger.getLogger("MyLib");
+        Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
         FileHandler fh;
         try {
             logger.setUseParentHandlers(false);

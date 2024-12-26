@@ -6,15 +6,20 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.factory.DAOFactory;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.Filter;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MakeReservationController {
+
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public List<BookBean> searchMethod(FilterBean filterBean) throws DAOException {
 
@@ -25,7 +30,13 @@ public class MakeReservationController {
 
         MakeReservationDAO makeReservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
 
-        searchResults = makeReservationDAO.searchBooks(filter);
+        try {
+            searchResults = makeReservationDAO.searchBooks(filter);
+        } catch (DAOException e) {
+            log.severe("Error in MakeReservationController (searchMethod): " + e.getMessage());
+            Printer.errorPrint("Error borrowing book.");
+            throw new DAOException();
+        }
 
         //carico nella lista di ripetizioneInfoBean i risultati della ricerca
 
@@ -33,11 +44,12 @@ public class MakeReservationController {
             var result = new BookBean(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getYear(), book.getGenres(), book.getAvailability());
             searchResultsBean.add(result);
         }
+
         return searchResultsBean;
 
     }
 
-    public void reserveBook(BorrowBean borrowBean) {
+    public void reserveBook(BorrowBean borrowBean, Costumer costumer) {
         //creo model a partire dalla bean
         var book = new Book(borrowBean.getBook().getISBN(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
         var borrow = new Borrow(book, borrowBean.getCostumer());
@@ -47,12 +59,11 @@ public class MakeReservationController {
 
         try{
             MakeReservationDAO reservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
-            reservationDAO.reserveBook(borrow);
-
-            /*RichiesteArrivateCollection.getInstance().aggiungiRichiesta(prenotazioneModel); //pattern Observer*/
-
+            reservationDAO.reserveBook(borrow, costumer);
+            costumer.addPedingBorrows(borrow);
         } catch (DAOException e){
-            Printer.errorPrint("Error: " + e.getMessage()); //questo dovrei printarlo sul logger e printare semplicemente un messaggio di errore generico sul terminale
+            log.severe("Error in MakeReservationController (reserveBook): " + e.getMessage());
+            Printer.errorPrint("Error borrowing book.");
         }
 
     }

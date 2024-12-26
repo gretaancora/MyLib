@@ -46,9 +46,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     }
 
     @Override
-    public void reserveBook(Borrow borrow) {
-        //guarda bene questa cosa dell'add pending borrow al costumer, forse devo usare observer
-        var costumer = new Costumer(borrow.getCostumer(), "new", "costumer", LocalDate.now(), true);
+    public void reserveBook(Borrow borrow, Costumer costumer) {
 
         int choice = 0;
         for (BookCopy bookCopy : copies) {

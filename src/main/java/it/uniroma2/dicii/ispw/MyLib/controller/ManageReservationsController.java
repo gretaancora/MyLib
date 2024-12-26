@@ -6,17 +6,30 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.factory.DAOFactory;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
+import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ManageReservationsController {
+
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
+
     public BorrowBean activateReservation(BorrowBean bean) throws DAOException {
         var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
+
         ManageReservationDAO manageReservationDAO = DAOFactory.getDAOFactory().createManageReservationDAO();
-        return manageReservationDAO.activateReservation(borrow);
+        try {
+            return manageReservationDAO.activateReservation(borrow);
+        } catch (DAOException e) {
+            log.severe("Error in ManageReservationController (activateReservation): " + e.getMessage());
+            Printer.errorPrint("Error activating reservation.");
+            throw new DAOException();
+        }
     }
 
     public List<BorrowBean> getPendingReservations() throws DAOException {
@@ -25,7 +38,13 @@ public class ManageReservationsController {
 
         ManageReservationDAO menageReservationDAO = DAOFactory.getDAOFactory().createManageReservationDAO();
 
-        searchResults = menageReservationDAO.getPendingReservations();
+        try {
+            searchResults = menageReservationDAO.getPendingReservations();
+        } catch (DAOException e) {
+            log.severe("Error in ManageReservationController (getPendingReservation): " + e.getMessage());
+            Printer.errorPrint("Error getting pending reservation.");
+            throw new DAOException();
+        }
 
 
         for (Borrow result: searchResults){

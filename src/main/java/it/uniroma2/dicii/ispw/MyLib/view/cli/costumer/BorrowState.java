@@ -6,6 +6,7 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.BookNotFoundException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedFilterTypes;
 import it.uniroma2.dicii.ispw.MyLib.view.cli.State;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 
 public class BorrowState extends State {
 
-    private static final Logger log = Logger.getLogger(BorrowState.class.getName());
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     private Costumer costumer;
 
@@ -66,7 +67,7 @@ public class BorrowState extends State {
 
         }else{
             var borrowBean = new BorrowBean(bookBean, costumer.getEmail());
-            makeReservationController.reserveBook(borrowBean);
+            makeReservationController.reserveBook(borrowBean, costumer);
             Printer.println("Reservation succeeded!\n Go into section 'show profile' in order to see it.");
 
             stateMachine.goBack();

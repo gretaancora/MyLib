@@ -7,7 +7,5 @@ public class ConfigurationJSON {
     public static final String LIBRARIAN_INFO_FILE_NAME = "librarianInfo.json";
     public static final String PERSISTENCE_BASE_DIRECTORY = "src/main/resources/persistence";
 
-    //public static final String PENDING_RESERVATIONS_BASE_DIRECTORY = "src/main/resources/persistence/pendingReservations";
-
     private ConfigurationJSON(){}
 }

@@ -3,12 +3,14 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.dao;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.*;
 import it.uniroma2.dicii.ispw.MyLib.engineering.query.LoginQuery;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Connector;
 
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
+import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedRoleTypes;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
 
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 import java.util.logging.Logger;
 
 public class UserMySQLDAO implements UserDAO {
-    private static final Logger logger = Logger.getLogger(UserMySQLDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
     public UserMySQLDAO() {}
 
     @Override
@@ -32,7 +34,9 @@ public class UserMySQLDAO implements UserDAO {
 
             }
         } catch (SQLException e) {
-            throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+            logger.severe("Error in UserMySQLDAO (getUserInfoByEmail): " + e.getMessage());
+            Printer.errorPrint("Error getting user information.");
+            throw new DAOException();
         }
 
     }
@@ -63,8 +67,9 @@ public class UserMySQLDAO implements UserDAO {
                     conn.commit();
 
                 }catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+                    logger.severe("Error in UserMySQLDAO (insertCostumer): " + e.getMessage());
+                    Printer.errorPrint("Error adding costumer.");
+                    throw new DAOException();
                 }
 
             } else {
@@ -72,8 +77,9 @@ public class UserMySQLDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+            logger.severe("Error in UserMySQLDAO (insertCostumer): " + e.getMessage());
+            Printer.errorPrint("Error adding costumer.");
+            throw new DAOException();
         }
     }
 
@@ -92,7 +98,9 @@ public class UserMySQLDAO implements UserDAO {
                 costumer = new Costumer(email, rs.getString("name"), rs.getString("surname"), rs.getDate("memDate").toLocalDate(), rs.getBoolean("memStatus"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+            logger.severe("Error in UserMySQLDAO (loadCostumer): " + e.getMessage());
+            Printer.errorPrint("Error loading costumer.");
+            throw new DAOException();
         }
 
         try (ResultSet rs = LoginQuery.loadCostumerBorrows(Connector.getConnection(), email)) {
@@ -117,9 +125,9 @@ public class UserMySQLDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error in loadCostumerBorrows");
-            e.printStackTrace();
-            throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+            logger.severe("Error in UserMySQLDAO (loadCostumer): " + e.getMessage());
+            Printer.errorPrint("Error loading costumer.");
+            throw new DAOException();
         }
 
         return costumer;
@@ -135,9 +143,9 @@ public class UserMySQLDAO implements UserDAO {
                 return new Librarian(email, rs.getString("name"), rs.getString("surname"), rs.getDate("empDate").toLocalDate(), rs.getBoolean("role") ? SupportedRoleTypes.SUPERVISOR : SupportedRoleTypes.ASSISTANT);
             }
         } catch (SQLException e) {
-            System.out.println("Error in loadLibrarian");
-            e.printStackTrace();
-            throw new DAOException("Error in UserMySQLDAO: " + e.getMessage());
+            logger.severe("Error in UserMySQLDAO (loadLibrarian): " + e.getMessage());
+            Printer.errorPrint("Error loading librarian.");
+            throw new DAOException();
         }
     }
 }

@@ -1,6 +1,8 @@
 package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
 
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,12 +40,12 @@ public class SearchResultsGUI extends HomeCostumerGUI{
 
     //inizializzo una lista, in cui popolo gli elementi della tabella
     List<BookBean> bookBeans = null;
-    private static final Logger logger = Logger.getLogger(SearchResultsGUI.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public SearchResultsGUI() {}
 
-    protected SearchResultsGUI(User user,List<BookBean> bookBeans){
-        this.user = user;
+    protected SearchResultsGUI(Costumer costumer, List<BookBean> bookBeans){
+        this.costumer = costumer;
         this.bookBeans = bookBeans;
     }
 
@@ -118,7 +120,7 @@ public class SearchResultsGUI extends HomeCostumerGUI{
 
         try {
             FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("/view/makeReservation.fxml"));
-            loader.setControllerFactory(c -> new MakeReservationGUI(this.user, bookBean, getBookBeans()));
+            loader.setControllerFactory(c -> new MakeReservationGUI(this.costumer, bookBean, getBookBeans()));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) resultsTable.getScene().getWindow();
@@ -137,7 +139,7 @@ public class SearchResultsGUI extends HomeCostumerGUI{
 
         try {
             FXMLLoader loader = new FXMLLoader(SearchResultsGUI.class.getResource("/view/borrowBook.fxml"));
-            loader.setControllerFactory(c -> new BorrowBookGUI(user));
+            loader.setControllerFactory(c -> new BorrowBookGUI(costumer));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) resultsTable.getScene().getWindow();

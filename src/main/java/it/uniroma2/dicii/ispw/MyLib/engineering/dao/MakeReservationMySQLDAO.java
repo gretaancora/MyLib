@@ -3,8 +3,10 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.dao;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.query.BorrowQuery;
 import it.uniroma2.dicii.ispw.MyLib.engineering.query.SearchQuery;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.Filter;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Connector;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
@@ -12,13 +14,14 @@ import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class MakeReservationMySQLDAO implements MakeReservationDAO{
 
-    private static final Logger logger = Logger.getLogger(MakeReservationMySQLDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public List<Book> searchBooks(Filter filter) throws DAOException {
         ResultSet rs = null;
@@ -57,13 +60,8 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
         return books;
     }
 
-    private void handleDAOException(Exception e) throws DAOException {
-        logger.severe(e.getMessage());
-        Printer.errorPrint("Error occurred making the reservation.");
-        throw new DAOException(e.getMessage());
-    }
 
-    public void reserveBook(Borrow borrow) throws DAOException {
+    public void reserveBook(Borrow borrow, Costumer costumer) throws DAOException {
         Borrow borrowInfo;
         Connection conn = null;
 
@@ -79,9 +77,9 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
               restituisci le info del borrow per farle vedere all'utente*/
 
             if (rs.next()) {
-                borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"));
+                borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"), LocalDateTime.now());
 
-                int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getISBN(), borrowInfo.getCopy(), borrowInfo.getCostumer());
+                int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getISBN(), borrowInfo.getCopy(), borrowInfo.getCostumer(), borrowInfo.getInReq());
                 if(rs1==0){
                     throw new SQLException();
                 }
@@ -97,21 +95,22 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
                 }
 
                 conn.commit();
+
+                costumer.addPedingBorrows(borrowInfo);
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
             if (conn != null) {
                 try {
                     conn.rollback();
-                    System.out.println("Error occurred during borrow transaction: " + e.getMessage());
+                    handleDAOException(e);
                 } catch (SQLException r) {
-                    r.printStackTrace();
-                    throw new DAOException("Error in MakeReservationDAO (during rollback): " + e.getMessage());
+                    handleDAOException(r);
                 }
             }
 
-            throw new DAOException("Error in MakeReservationDAO: " + e.getMessage());
+            handleDAOException(e);
 
         } finally {
 
@@ -119,11 +118,18 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
                 try {
                     conn.setAutoCommit(true);
 
-                } catch (SQLException closeEx) {
-                    closeEx.printStackTrace();
+                } catch (SQLException e) {
+                    handleDAOException(e);
                 }
             }
 
         }
+    }
+
+
+    private void handleDAOException(Exception e) throws DAOException {
+        logger.severe(e.getMessage());
+        Printer.errorPrint("Error occurred making the reservation.");
+        throw new DAOException(e.getMessage());
     }
 }

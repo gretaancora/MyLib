@@ -142,8 +142,8 @@ public class Query {
         """;
 
     public static final String ADD_BORROW = """
-            INSERT INTO borrow (costumer, book, copyNum) 
-            VALUES (?, ?, ?);
+            INSERT INTO borrow (costumer, book, copyNum, inReq) 
+            VALUES (?, ?, ?, ?);
         """;
 
     public static final String UPDATE_STATUS_COPY = "UPDATE bookcopy SET availability = ? WHERE ISBN = ? AND copyNum = ?";
