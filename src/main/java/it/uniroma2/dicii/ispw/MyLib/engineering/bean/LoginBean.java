@@ -1,9 +1,11 @@
 package it.uniroma2.dicii.ispw.MyLib.engineering.bean;
 
+import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
+
 public class LoginBean {
     private String email;
     private String password;
-    private String type;
+    private SupportedUserTypes type;
 
     public LoginBean(String email, String password) {
         this.email = email;
@@ -11,7 +13,7 @@ public class LoginBean {
         this.type = null;
     }
 
-    public LoginBean(String email, String password, String userType) {
+    public LoginBean(String email, String password, SupportedUserTypes userType) {
         this.email = email;
         this.password = password;
         this.type = userType;
@@ -19,5 +21,5 @@ public class LoginBean {
 
     public String getEmail() {return this.email;}
     public String getPassword() {return this.password;}
-    public String getType() {return this.type;}
+    public SupportedUserTypes getType() {return this.type;}
 }

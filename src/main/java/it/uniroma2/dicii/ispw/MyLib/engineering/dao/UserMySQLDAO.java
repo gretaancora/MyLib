@@ -10,6 +10,7 @@ import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedRoleTypes;
+import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class UserMySQLDAO implements UserDAO {
             if (!rs.next()) {
                 throw new UserNotFoundException();
             } else {
-                return new LoginBean(email, rs.getString("password"), rs.getString("type"));
+                return new LoginBean(email, rs.getString("password"), SupportedUserTypes.valueOf(rs.getString("type")));
 
             }
         } catch (SQLException e) {

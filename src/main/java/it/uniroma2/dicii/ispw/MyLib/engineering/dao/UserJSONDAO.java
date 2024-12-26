@@ -10,6 +10,7 @@ import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import com.google.gson.*;
+import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -41,7 +42,7 @@ public class UserJSONDAO implements UserDAO {
             Path costumerInfoFile = userDirectory.resolve(ConfigurationJSON.COSTUMER_INFO_FILE_NAME);
 
             //divido le info per i due file
-            var userInfo = new LoginBean(costumer.getEmail(), costumer.getPassword(), "costumer");
+            var userInfo = new LoginBean(costumer.getEmail(), costumer.getPassword(), SupportedUserTypes.COSTUMER);
             var costumerInfo = new Costumer(costumer.getEmail(), costumer.getName(), costumer.getSurname(), LocalDate.now(), true);
 
             // Serializza l'oggetto Login in formato JSON e scrivi nel file
@@ -145,7 +146,7 @@ public class UserJSONDAO implements UserDAO {
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject jsonObject = gson.fromJson(content, JsonObject.class);
-            return new LoginBean(email, jsonObject.getAsJsonPrimitive("password").getAsString(), jsonObject.getAsJsonPrimitive("type").getAsString());
+            return new LoginBean(email, jsonObject.getAsJsonPrimitive("password").getAsString(), SupportedUserTypes.valueOf(jsonObject.getAsJsonPrimitive("type").getAsString()));
 
         } catch (IOException e) {
             Printer.errorPrint(String.format("ClientDAOJSON: %s", e.getMessage()));
