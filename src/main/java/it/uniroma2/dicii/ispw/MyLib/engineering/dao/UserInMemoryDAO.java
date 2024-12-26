@@ -7,11 +7,13 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.UserNotFoundException
 import it.uniroma2.dicii.ispw.MyLib.model.*;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInMemoryDAO implements UserDAO{
 
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     public UserInMemoryDAO() {
         users.add(new Costumer("user1@gmail.com", "user1", "user1", "user1"));
