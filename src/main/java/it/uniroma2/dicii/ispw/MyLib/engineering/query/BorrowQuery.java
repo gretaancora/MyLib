@@ -15,12 +15,13 @@ public class BorrowQuery {
         return stmt.executeQuery();
     }
 
-    public static int addBorrow(Connection conn, String ISBN, short copy, String costumer) throws SQLException {
+    public static int addBorrow(Connection conn, String ISBN, short copy, String costumer, LocalDateTime inReq) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(Query.ADD_BORROW);
 
         stmt.setString(1, costumer);
         stmt.setString(2, ISBN);
         stmt.setShort(3, copy);
+        stmt.setTimestamp(4, Timestamp.valueOf(inReq));
 
         return stmt.executeUpdate();
     }

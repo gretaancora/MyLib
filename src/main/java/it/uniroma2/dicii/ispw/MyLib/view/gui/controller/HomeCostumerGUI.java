@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +16,13 @@ import java.util.logging.Logger;
 public class HomeCostumerGUI {
     @FXML
     private VBox menu;
-    protected User user;
+    protected Costumer costumer;
 
-    private static final Logger logger = Logger.getLogger(HomeCostumerGUI.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
 
     protected HomeCostumerGUI() {}
-    public HomeCostumerGUI(User user) { this.user = user;}
+    public HomeCostumerGUI(Costumer costumer) { this.costumer = costumer;}
 
     //funzione per il bottone Prenota Ripetizione
     @FXML
@@ -28,7 +30,7 @@ public class HomeCostumerGUI {
         //metodo che porta alla pagina di gestione del profilo
         try {
             FXMLLoader loader = new FXMLLoader(HomeCostumerGUI.class.getResource("/view/borrowBook.fxml"));
-            loader.setControllerFactory(c -> new BorrowBookGUI(user));
+            loader.setControllerFactory(c -> new BorrowBookGUI(costumer));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) menu.getScene().getWindow();

@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.MyLib.controller.ManageReservationsController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.BorrowNotFoundException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import it.uniroma2.dicii.ispw.MyLib.view.cli.State;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 public class ManagePendingReservationsState extends State {
 
-    private static final Logger log = Logger.getLogger(ManagePendingReservationsState.class.getName());
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     private Librarian librarian;
 

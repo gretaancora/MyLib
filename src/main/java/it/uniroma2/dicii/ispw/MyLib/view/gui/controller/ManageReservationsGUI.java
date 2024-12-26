@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +18,10 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
 
     @FXML
     private AnchorPane pendingBox;
-    private static final Logger logger = Logger.getLogger(ManageReservationsGUI.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public ManageReservationsGUI(){}
-    public ManageReservationsGUI(User user) {this.user = user;}
+    public ManageReservationsGUI(Librarian librarian) {this.librarian = librarian;}
 
     //vado alla pagina di tutte le richieste arrivate
     public void managePendingReservations(){
@@ -27,7 +29,7 @@ public class ManageReservationsGUI extends HomeLibrarianGUI{
         //metodo che porta alla pagina di gestione delle prenotazioni
         try {
             FXMLLoader loader = new FXMLLoader(ManageReservationsGUI.class.getResource("/view/pendingReservations.fxml"));
-            loader.setControllerFactory(c -> new ManagePendingReservationsGUI(user));
+            loader.setControllerFactory(c -> new ManagePendingReservationsGUI(librarian));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) pendingBox.getScene().getWindow();

@@ -6,6 +6,8 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.WrongCredentialsException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
@@ -34,7 +36,7 @@ public class LoginGUIController {
 
     protected User user;
 
-    private static final Logger logger = Logger.getLogger(LoginGUIController.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
 
 
@@ -107,10 +109,10 @@ public class LoginGUIController {
 
             if (user instanceof Librarian) {
                 loader = new FXMLLoader(LoginGUIController.class.getResource("/view/homeLibrarian.fxml"));
-                loader.setControllerFactory(c -> new HomeLibrarianGUI(user));
+                loader.setControllerFactory(c -> new HomeLibrarianGUI((Librarian) user));
             } else {
                 loader = new FXMLLoader(LoginGUIController.class.getResource("/view/homeCostumer.fxml"));
-                loader.setControllerFactory(c -> new HomeCostumerGUI(user));
+                loader.setControllerFactory(c -> new HomeCostumerGUI((Costumer) user));
             }
             Parent parent = loader.load();
             Scene scene = new Scene(parent);

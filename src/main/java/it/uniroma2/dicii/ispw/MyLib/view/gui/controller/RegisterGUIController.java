@@ -5,6 +5,7 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.bean.RegisterBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.InvalidEmail;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class RegisterGUIController {
 
     protected User user;
 
-    private static final Logger logger = Logger.getLogger(RegisterGUIController.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
     
 
     // Pattern regex per validare l'email

@@ -13,22 +13,21 @@ public class LoginController {
 
     public User start(LoginBean loginBean) throws WrongCredentialsException, UserNotFoundException, UnsupportedUserTypeException, DAOException {
         UserDAO dao = DAOFactory.getDAOFactory().createUserDAO();
-        LoginBean loggedinBean;
+        LoginBean loggedInBean;
 
-        loggedinBean = dao.getUserInfoByEmail(loginBean.getEmail());
+        loggedInBean = dao.getUserInfoByEmail(loginBean.getEmail());
 
 
-        if (!BCrypt.checkpw(loginBean.getPassword(), loggedinBean.getPassword())){
-            System.out.println("Passwords don't match");
+        if (!BCrypt.checkpw(loginBean.getPassword(), loggedInBean.getPassword())){
             throw new WrongCredentialsException();
         }else{
-            if(loggedinBean.getType().name().equalsIgnoreCase("librarian")) {
+            if(loggedInBean.getType().name().equalsIgnoreCase("librarian")) {
 
-                return dao.loadLibrarian(loggedinBean.getEmail());
+                return dao.loadLibrarian(loggedInBean.getEmail());
 
-            } else if (loggedinBean.getType().name().equalsIgnoreCase("costumer")) {
+            } else if (loggedInBean.getType().name().equalsIgnoreCase("costumer")) {
 
-                return dao.loadCostumer(loggedinBean.getEmail());
+                return dao.loadCostumer(loggedInBean.getEmail());
 
             } else{
                 throw new UnsupportedUserTypeException();

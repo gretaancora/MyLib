@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +16,12 @@ import java.util.logging.Logger;
 public class HomeLibrarianGUI {
     @FXML
     private VBox menu;
-    protected User user;
-    private static final Logger logger = Logger.getLogger(HomeLibrarianGUI.class.getName());
+    protected Librarian librarian;
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     //costruttori-------------------------------------------------------------
     protected HomeLibrarianGUI() {}
-    public HomeLibrarianGUI(User user) {this.user = user;}
+    public HomeLibrarianGUI(Librarian librarian) {this.librarian = librarian;}
 
 
 
@@ -36,7 +38,7 @@ public class HomeLibrarianGUI {
         //metodo che porta alla pagina di gestione delle prenotazioni
         try {
             FXMLLoader loader = new FXMLLoader(HomeLibrarianGUI.class.getResource("/view/manageReservation.fxml"));
-            loader.setControllerFactory(c -> new ManageReservationsGUI(user));
+            loader.setControllerFactory(c -> new ManageReservationsGUI(librarian));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) menu.getScene().getWindow();

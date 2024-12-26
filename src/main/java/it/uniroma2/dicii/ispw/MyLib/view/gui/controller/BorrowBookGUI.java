@@ -4,6 +4,8 @@ import it.uniroma2.dicii.ispw.MyLib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
+import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import javafx.fxml.FXML;
@@ -30,9 +32,9 @@ public class BorrowBookGUI extends HomeCostumerGUI{
     private String filter;
     private String type;
 
-    private static final Logger logger = Logger.getLogger(BorrowBookGUI.class.getName());
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
-    public BorrowBookGUI(User user) {this.user = user;}
+    public BorrowBookGUI(Costumer costumer) {this.costumer = costumer;}
 
     @FXML
     public void initialize() {
@@ -71,7 +73,7 @@ public class BorrowBookGUI extends HomeCostumerGUI{
 
         try {
             FXMLLoader loader = new FXMLLoader(BorrowBookGUI.class.getResource("/view/searchResults.fxml"));
-            loader.setControllerFactory(c -> new SearchResultsGUI(user, books));
+            loader.setControllerFactory(c -> new SearchResultsGUI(costumer, books));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) searchBook.getScene().getWindow();
