@@ -2,8 +2,10 @@ package it.uniroma2.dicii.ispw.MyLib.controller;
 
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.factory.DAOFactory;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public class ManageReservationsController {
     public BorrowBean activateReservation(BorrowBean bean) throws DAOException {
         var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
-        var manageReservationDAO = new ManageReservationMySQLDAO();
+        ManageReservationDAO manageReservationDAO = DAOFactory.getDAOFactory().createManageReservationDAO();
         return manageReservationDAO.activateReservation(borrow);
     }
 
@@ -21,7 +23,7 @@ public class ManageReservationsController {
         List<Borrow> searchResults;
         List<BorrowBean> searchResultsBean = new ArrayList<>();
 
-        var menageReservationDAO = new ManageReservationMySQLDAO();
+        ManageReservationDAO menageReservationDAO = DAOFactory.getDAOFactory().createManageReservationDAO();
 
         searchResults = menageReservationDAO.getPendingReservations();
 

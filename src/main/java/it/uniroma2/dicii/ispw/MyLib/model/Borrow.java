@@ -80,6 +80,17 @@ public class Borrow {
         this.position = position;
     }
 
+    //per manage borrow in memory mode
+    public Borrow(Book book, String costumer, short copy, LocalDateTime inReq, String position, LocalDate inDate, LocalDate endDate){
+        this.book = book;
+        this.costumer = costumer;
+        this.copy = copy;
+        this.inReq = inReq;
+        this.position = position;
+        this.inDate = inDate;
+        this.endDate = endDate;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.book).append(" ").append(this.copy).append(" ").append(this.costumer).append(" ").append(this.inDate == null ? "" : this.inDate).append(" ").append(this.endDate == null ? "" : this.endDate).append(" ").append(this.restDate == null ? "" : this.restDate).append(" ").append(this.fine).append('\n');

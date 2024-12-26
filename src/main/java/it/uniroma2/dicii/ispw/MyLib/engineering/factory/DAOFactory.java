@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.MyLib.engineering.factory;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationDAO;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.ManageReservationDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.dao.UserDAO;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 
@@ -15,6 +17,7 @@ public abstract class DAOFactory {
 
     /** Recupera dal file config.properties il tipo di persistenza utilizzata,
      * se non è possibile come default viene utilizzato MYSQL */
+
     public static synchronized DAOFactory getDAOFactory(){
         if ( me == null ){
             Properties properties = new Properties();
@@ -31,12 +34,16 @@ public abstract class DAOFactory {
                 me = new JsonDAOFactory();
             }else if(persistenceType.equalsIgnoreCase("MySQL")){
                 me = new MySQLDAOFactory();
-            }else{
+            }else if (persistenceType.equalsIgnoreCase("demo")){
                 me = new InMemoryDAOFactory();
+            }else{
+                me = new MySQLDAOFactory();
             }
         }
         return me;
     }
 
     public abstract UserDAO createUserDAO();
+    public abstract MakeReservationDAO createMakeReservationDAO();
+    public abstract ManageReservationDAO createManageReservationDAO();
 }

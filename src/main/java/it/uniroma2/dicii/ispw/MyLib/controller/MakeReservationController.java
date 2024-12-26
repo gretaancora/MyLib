@@ -3,8 +3,9 @@ package it.uniroma2.dicii.ispw.MyLib.controller;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationMySQLDAO;
+import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.MyLib.engineering.factory.DAOFactory;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
 import it.uniroma2.dicii.ispw.MyLib.model.Filter;
@@ -22,7 +23,7 @@ public class MakeReservationController {
 
         Filter filter = new Filter(filterBean.getFilter(), filterBean.getFilterType());
 
-        var makeReservationDAO = new MakeReservationMySQLDAO();
+        MakeReservationDAO makeReservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
 
         searchResults = makeReservationDAO.searchBooks(filter);
 
@@ -45,7 +46,7 @@ public class MakeReservationController {
         // inserisce un borrow nel db e restituisce un model avente le info della copia selezionata*/
 
         try{
-            var reservationDAO = new MakeReservationMySQLDAO();
+            MakeReservationDAO reservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
             reservationDAO.reserveBook(borrow);
 
             /*RichiesteArrivateCollection.getInstance().aggiungiRichiesta(prenotazioneModel); //pattern Observer*/

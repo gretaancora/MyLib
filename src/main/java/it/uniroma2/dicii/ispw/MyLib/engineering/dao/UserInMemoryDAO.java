@@ -6,8 +6,6 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.EmailAlreadyInUseExce
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.MyLib.model.*;
 import org.mindrot.jbcrypt.BCrypt;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserInMemoryDAO implements UserDAO{
@@ -15,10 +13,7 @@ public class UserInMemoryDAO implements UserDAO{
     private List<User> users;
 
     public UserInMemoryDAO() {
-        List<Borrow> pending_borrow = new ArrayList<>();
-        Book book = new Book("9788806220457", "Delitto e castigo", "Fëdor Dostoevskij", "Einaudi", (short) 2014, "romanzo");
-        pending_borrow.add(new Borrow(book, "user2@gmail.com", (short) 1, LocalDateTime.now()));
-        users.add(new Costumer("user1@gmail.com", "user1", "user1", "user1", pending_borrow));
+        users.add(new Costumer("user1@gmail.com", "user1", "user1", "user1"));
         users.add(new Librarian("user2@gmail.com", "user2", "user2", "user2"));
     }
 
@@ -69,4 +64,6 @@ public class UserInMemoryDAO implements UserDAO{
 
         throw new UserNotFoundException();
     }
+
+    public List<User> getUsers() {return this.users;}
 }
