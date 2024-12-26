@@ -63,7 +63,7 @@ public class ManagePendingReservationsState extends State {
             }
             Printer.println("Activation succeeded!");
             Printer.println("Initial date: " + borrowBean.getInDate() + "\t" + "Ending date: " + borrowBean.getEndDate());
-            this.execute(stateMachine);
+            stateMachine.goBack();
         }
 
     }

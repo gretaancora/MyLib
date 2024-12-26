@@ -68,7 +68,7 @@ public class Book {
     public short getPubYear() {return this.pubYear;}
     public String getGenres() {return this.genres;}
     public String getAvailability() {return this.availability==true ? "available" : "not available";}
-    public short getNumAvailableCopies() {return this.getNumAvailableCopies();}
+    public short getNumAvailableCopies() {return this.numAvailableCopies;}
 
     public void reduceNumAvailCopies() {
         if (this.numAvailableCopies == 0){
