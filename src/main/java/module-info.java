@@ -46,5 +46,9 @@ module it.uniroma2.dicii.ispw.librarymanagmentsystem {
 
     exports it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
     opens it.uniroma2.dicii.ispw.MyLib.view.gui.controller to javafx.fxml;
+    exports it.uniroma2.dicii.ispw.MyLib.view.gui.controller.costumer;
+    opens it.uniroma2.dicii.ispw.MyLib.view.gui.controller.costumer to javafx.fxml;
+    exports it.uniroma2.dicii.ispw.MyLib.view.gui.controller.librarian;
+    opens it.uniroma2.dicii.ispw.MyLib.view.gui.controller.librarian to javafx.fxml;
 
 }

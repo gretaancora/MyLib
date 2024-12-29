@@ -44,7 +44,7 @@ public class Main extends Application {
             // Interfaccia grafica
             launchGUI(stage);
         } else if (interfaceType.equalsIgnoreCase("cli")) {
-            // Interfaccia a riga di comando
+            // Interfaccia a linea di comando
             launchCLI();
         } else {
             Printer.errorPrint("Type of interface specified not supported, launching gui interface...");

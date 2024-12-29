@@ -7,7 +7,6 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.UserNotFoundException
 import it.uniroma2.dicii.ispw.MyLib.model.*;
 import it.uniroma2.dicii.ispw.MyLib.other.SupportedUserTypes;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +67,4 @@ public class UserInMemoryDAO implements UserDAO{
         throw new UserNotFoundException();
     }
 
-    public List<User> getUsers() {return this.users;}
 }

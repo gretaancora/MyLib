@@ -1,8 +1,8 @@
-package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
+package it.uniroma2.dicii.ispw.MyLib.view.gui.controller.librarian;
 
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
-import it.uniroma2.dicii.ispw.MyLib.model.User;
+import it.uniroma2.dicii.ispw.MyLib.view.gui.controller.LoginGUIController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

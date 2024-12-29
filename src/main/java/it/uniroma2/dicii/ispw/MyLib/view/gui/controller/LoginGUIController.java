@@ -10,6 +10,8 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
 import it.uniroma2.dicii.ispw.MyLib.model.User;
+import it.uniroma2.dicii.ispw.MyLib.view.gui.controller.costumer.HomeCostumerGUI;
+import it.uniroma2.dicii.ispw.MyLib.view.gui.controller.librarian.HomeLibrarianGUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

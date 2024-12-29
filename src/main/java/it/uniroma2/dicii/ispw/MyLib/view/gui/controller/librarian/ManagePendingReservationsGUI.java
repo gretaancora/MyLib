@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
+package it.uniroma2.dicii.ispw.MyLib.view.gui.controller.librarian;
 
 import it.uniroma2.dicii.ispw.MyLib.controller.ManageReservationsController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
@@ -7,7 +7,6 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
 import it.uniroma2.dicii.ispw.MyLib.model.Librarian;
-import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class ManagePendingReservationsGUI extends HomeLibrarianGUI{
+public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
     @FXML
     private TableView<BorrowBean> resultsTable;
     @FXML

@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
+package it.uniroma2.dicii.ispw.MyLib.view.gui.controller.costumer;
 
 import it.uniroma2.dicii.ispw.MyLib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.FilterBean;
@@ -6,7 +6,6 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
-import it.uniroma2.dicii.ispw.MyLib.model.User;
 import it.uniroma2.dicii.ispw.MyLib.other.Printer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class BorrowBookGUI extends HomeCostumerGUI{
+public class BorrowBookGUI extends HomeCostumerGUI {
     @FXML
     private TextField searchBook;
     @FXML

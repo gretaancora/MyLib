@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.MyLib.view.gui.controller;
+package it.uniroma2.dicii.ispw.MyLib.view.gui.controller.costumer;
 
 import it.uniroma2.dicii.ispw.MyLib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BookBean;
@@ -6,7 +6,6 @@ import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.dao.MakeReservationMySQLDAO;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.Costumer;
-import it.uniroma2.dicii.ispw.MyLib.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class MakeReservationGUI extends HomeCostumerGUI{
+public class MakeReservationGUI extends HomeCostumerGUI {
     /*
     controller grafico che si occupa della pagina di conferma di una ripetizione
      */
