@@ -50,7 +50,7 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
 
         try {
             while (rs.next()) {
-                var book = new Book(rs.getString("ISBN"), rs.getString("title"), rs.getString("authors"), rs.getString("editor"), rs.getShort("pubYear"), rs.getString("genres"), rs.getShort("numAvailableCopies") == 0 ? false : true);
+                var book = new Book(rs.getString("ISBN"), rs.getString("title"), rs.getString("authors"), rs.getString("editor"), rs.getShort("pubYear"), rs.getString("genres"), rs.getShort("numAvailableCopies") != 0);
                 books.add(book);
             }
         } catch (SQLException e) {

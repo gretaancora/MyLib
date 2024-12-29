@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 
 public class BorrowQuery {
 
+    public BorrowQuery(){}
+
     public static ResultSet searchBookCopy(Connection conn, String ISBN) throws SQLException {
 
         PreparedStatement stmt = conn.prepareStatement(Query.SEARCH_BOOK_COPY);

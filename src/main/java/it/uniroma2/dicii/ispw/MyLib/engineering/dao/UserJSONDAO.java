@@ -98,9 +98,7 @@ public class UserJSONDAO implements UserDAO {
                 String content = Files.readString(costumerInfoFile);
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
 
-                Costumer costumer = gson.fromJson(content, Costumer.class);
-
-                return costumer;
+                return gson.fromJson(content, Costumer.class);
 
             } else {
                 throw new UserNotFoundException();
@@ -118,11 +116,9 @@ public class UserJSONDAO implements UserDAO {
 
             if (Files.exists(librarianInfoFile)) {
                 String content = Files.readString(librarianInfoFile);
-
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-                Librarian librarian = gson.fromJson(content, Librarian.class);
 
-                return librarian;
+                return gson.fromJson(content, Librarian.class);
 
             } else {
                 throw new UserNotFoundException();

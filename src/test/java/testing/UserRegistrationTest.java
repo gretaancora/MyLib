@@ -1,3 +1,5 @@
+package testing;
+
 import it.uniroma2.dicii.ispw.MyLib.controller.LoginController;
 import it.uniroma2.dicii.ispw.MyLib.controller.RegisterController;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.LoginBean;

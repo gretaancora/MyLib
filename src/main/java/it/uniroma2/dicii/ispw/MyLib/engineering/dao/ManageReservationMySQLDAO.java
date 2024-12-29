@@ -3,20 +3,22 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.dao;
 import it.uniroma2.dicii.ispw.MyLib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.MyLib.engineering.query.BorrowQuery;
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Connector;
 import it.uniroma2.dicii.ispw.MyLib.model.Book;
 import it.uniroma2.dicii.ispw.MyLib.model.Borrow;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class ManageReservationMySQLDAO implements ManageReservationDAO{
+
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public BorrowBean activateReservation(Borrow borrow) throws DAOException {
         Connection conn = null;
@@ -36,14 +38,13 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            log.severe("Error occurred activating reservation transaction: " + e.getMessage());
 
             if (conn != null) {
                 try {
                     conn.rollback();
-                    System.out.println("Error occurred activating reservation transaction: " + e.getMessage());
                 } catch (SQLException rollbackEx) {
-                    rollbackEx.printStackTrace();
+                    log.severe("Error in ManageReservationDAO (during rollback): " + e.getMessage());
                     throw new DAOException("Error in ManageReservationDAO (during rollback): " + e.getMessage());
                 }
             }

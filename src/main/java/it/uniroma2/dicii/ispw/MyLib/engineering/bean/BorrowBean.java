@@ -1,6 +1,5 @@
 package it.uniroma2.dicii.ispw.MyLib.engineering.bean;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
