@@ -1,11 +1,9 @@
 package it.uniroma2.dicii.ispw.MyLib.engineering.dao;
 
-import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     private static List<Book> books = new ArrayList<>();
@@ -23,21 +21,21 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
         if (filter.getFilterType().equalsIgnoreCase("author")) {
             for (Book book : books) {
                 if(book.getAuthors().contains(filter.getFilter())) {
-                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() == 0 ? false : true);
+                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }
             }
         } else if (filter.getFilterType().equalsIgnoreCase("title")) {
             for (Book book : books) {
                 if(book.getTitle().equalsIgnoreCase(filter.getFilter())) {
-                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() == 0 ? false : true);
+                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }
             }
         } else {
             for (Book book : books) {
                 if(book.getAuthors().contains(filter.getFilter()) || book.getTitle().equalsIgnoreCase(filter.getFilter()) || book.getGenres().equalsIgnoreCase(filter.getFilter()) || book.getISBN().equalsIgnoreCase(filter.getFilter())){
-                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() == 0 ? false : true);
+                    var b = new Book(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }
             }
