@@ -1,10 +1,11 @@
 package it.uniroma2.dicii.ispw.MyLib.engineering.dao;
 
+import it.uniroma2.dicii.ispw.MyLib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.MyLib.model.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     private static List<Book> books = new ArrayList<>();
