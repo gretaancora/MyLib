@@ -41,7 +41,7 @@ public class MakeReservationController {
         //carico nella lista di ripetizioneInfoBean i risultati della ricerca
 
         for (Book book: searchResults){
-            var result = new BookBean(book.getISBN(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getYear(), book.getGenres(), book.getAvailability());
+            var result = new BookBean(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getYear(), book.getGenres(), book.getAvailability());
             searchResultsBean.add(result);
         }
 
@@ -51,7 +51,7 @@ public class MakeReservationController {
 
     public void reserveBook(BorrowBean borrowBean, Costumer costumer) {
         //creo model a partire dalla bean
-        var book = new Book(borrowBean.getBook().getISBN(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
+        var book = new Book(borrowBean.getBook().getIsbn(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
         var borrow = new Borrow(book, borrowBean.getCostumer());
 
         //passo model alla dao che si connette al db, seleziona la prima copia disponibile del libro desiderato,

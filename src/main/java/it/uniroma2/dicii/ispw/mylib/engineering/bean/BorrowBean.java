@@ -49,7 +49,7 @@ public class BorrowBean {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getCostumer()).append(" ").append(this.getBook().getISBN()).append(" ").append(this.getCopy()).append(" ").append(this.getPosition());
+        sb.append(this.getCostumer()).append(" ").append(this.getBook().getIsbn()).append(" ").append(this.getCopy()).append(" ").append(this.getPosition());
         return sb.toString();
     }
 }

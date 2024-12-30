@@ -26,10 +26,10 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
             conn = Connector.getConnection();
             conn.setAutoCommit(false);
 
-            int res = BorrowQuery.activateBorrow(conn, borrow.getBook().getISBN(), borrow.getCostumer(), borrow.getCopy(), borrow.getInReq());
+            int res = BorrowQuery.activateBorrow(conn, borrow.getBook().getIsbn(), borrow.getCostumer(), borrow.getCopy(), borrow.getInReq());
             if (res == 0) throw new SQLException();
 
-            res = BorrowQuery.setReservationDates(conn, borrow.getBook().getISBN(), borrow.getCopy());
+            res = BorrowQuery.setReservationDates(conn, borrow.getBook().getIsbn(), borrow.getCopy());
             if (res == 0) throw new SQLException();
 
             conn.commit();

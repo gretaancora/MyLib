@@ -114,12 +114,12 @@
          </Text>
       </VBox>
       <VBox layoutX="229.0" layoutY="93.0" prefHeight="150.0" prefWidth="165.0">
-         <Label fx:id="ISBNLabel" prefHeight="22.0" prefWidth="145.0" text="label">
+         <Label fx:id="isbnLabel" prefHeight="22.0" prefWidth="145.0" text="label">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
-         <Label fx:id="TitleLabel" prefHeight="22.0" prefWidth="173.0" text="label">
+         <Label fx:id="titleLabel" prefHeight="22.0" prefWidth="173.0" text="label">
             <VBox.margin>
                <Insets top="13.0" />
             </VBox.margin>
@@ -127,7 +127,7 @@
                <Font size="14.0" />
             </font>
          </Label>
-         <Label fx:id="AuthorsLabel" prefHeight="22.0" prefWidth="143.0" text="label">
+         <Label fx:id="authorsLabel" prefHeight="22.0" prefWidth="143.0" text="label">
             <VBox.margin>
                <Insets top="12.0" />
             </VBox.margin>
@@ -135,7 +135,7 @@
                <Font size="14.0" />
             </font>
          </Label>
-         <Label fx:id="EditorLabel" prefHeight="22.0" prefWidth="145.0" text="label">
+         <Label fx:id="editorLabel" prefHeight="22.0" prefWidth="145.0" text="label">
             <VBox.margin>
                <Insets top="12.0" />
             </VBox.margin>
@@ -168,12 +168,12 @@
          </Text>
       </VBox>
       <VBox layoutX="493.0" layoutY="93.0" prefHeight="150.0" prefWidth="148.0">
-         <Label fx:id="YearLabel" prefHeight="22.0" prefWidth="157.0" text="label">
+         <Label fx:id="yearLabel" prefHeight="22.0" prefWidth="157.0" text="label">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
-         <Label fx:id="GenresLabel" prefHeight="22.0" prefWidth="153.0" text="label">
+         <Label fx:id="genresLabel" prefHeight="22.0" prefWidth="153.0" text="label">
             <VBox.margin>
                <Insets top="12.0" />
             </VBox.margin>
@@ -182,7 +182,7 @@
             </font>
          </Label>
       </VBox>
-      <Label fx:id="ErrorLabel" layoutX="340.0" layoutY="261.0" text="Label" visible="false" />
+      <Label fx:id="errorLabel" layoutX="340.0" layoutY="261.0" text="Label" visible="false" />
    </AnchorPane>
    <Text fx:id="titolo" fill="#000000ab" layoutX="352.0" layoutY="77.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Confirm Reservation" textAlignment="CENTER" wrappingWidth="499.2001373767853" AnchorPane.topAnchor="30.0">
       <font>

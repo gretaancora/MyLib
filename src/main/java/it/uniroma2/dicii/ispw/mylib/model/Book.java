@@ -3,7 +3,7 @@ package it.uniroma2.dicii.ispw.mylib.model;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
 
 public class Book {
-    private String ISBN;
+    private String isbn;
     private String title;
     private String authors;
     private String editor;
@@ -14,8 +14,8 @@ public class Book {
     private short numAvailableCopies;
 
     //per ricerca
-    public Book(String ISBN, String title, String authors, String editor, short pubYear, String genres, boolean availability){
-        this.ISBN =ISBN;
+    public Book(String isbn, String title, String authors, String editor, short pubYear, String genres, boolean availability){
+        this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.editor = editor;
@@ -25,8 +25,8 @@ public class Book {
     }
 
     //per borrow
-    public Book(String ISBN, String title, String authors, String editor, short pubYear, String genres){
-        this.ISBN =ISBN;
+    public Book(String isbn, String title, String authors, String editor, short pubYear, String genres){
+        this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.editor = editor;
@@ -34,11 +34,11 @@ public class Book {
         this.genres = genres;
     }
 
-    public Book(String ISBN) {this.ISBN = ISBN;}
+    public Book(String ISBN) {this.isbn = ISBN;}
 
     //per in memory make reservation
-    public Book(String ISBN, String title, String authors, String editor, short pubYear, String genres, short numCopies, short numAvailableCopies){
-        this.ISBN =ISBN;
+    public Book(String isbn, String title, String authors, String editor, short pubYear, String genres, short numCopies, short numAvailableCopies){
+        this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.editor = editor;
@@ -56,11 +56,11 @@ public class Book {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.ISBN).append(" ").append(this.title).append(" ").append(this.authors).append(" ").append(this.editor).append(" ").append(this.pubYear).append(" ").append(this.genres).append(" ").append(this.availability==true? "available" : "not available").append('\n');
+        sb.append(this.isbn).append(" ").append(this.title).append(" ").append(this.authors).append(" ").append(this.editor).append(" ").append(this.pubYear).append(" ").append(this.genres).append(" ").append(this.availability? "available" : "not available").append('\n');
         return sb.toString();
     }
 
-    public String getISBN() {return this.ISBN;}
+    public String getIsbn() {return this.isbn;}
     public String getTitle() {return this.title;}
     public String getAuthors() {return this.authors;}
     public String getEditor() {return this.editor;}

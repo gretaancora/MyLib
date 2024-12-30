@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 
 public class ConfirmActivationGUI extends HomeLibrarianGUI {
     @FXML
-    private Label InitialDate;
+    private Label initialDate;
     @FXML
-    private Label EndDate;
+    private Label endDate;
     private Librarian lib;
     private BorrowBean bean;
 
@@ -19,7 +19,7 @@ public class ConfirmActivationGUI extends HomeLibrarianGUI {
     }
 
     public void initialize(){
-        InitialDate.setText(String.valueOf(bean.getInDate()));
-        EndDate.setText(String.valueOf(bean.getEndDate()));
+        initialDate.setText(String.valueOf(bean.getInDate()));
+        endDate.setText(String.valueOf(bean.getEndDate()));
     }
 }

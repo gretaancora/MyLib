@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.mylib.engineering.bean;
 
 public class BookBean {
-    private String ISBN;
+    private String isbn;
     private String title;
     private String authors;
     private String editor;
@@ -10,8 +10,8 @@ public class BookBean {
     private String availability;
 
     //per ricerca
-    public BookBean(String ISBN, String title, String authors, String editor, String pubYear, String genres, String availability){
-        this.ISBN =ISBN;
+    public BookBean(String isbn, String title, String authors, String editor, String pubYear, String genres, String availability){
+        this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.editor = editor;
@@ -21,8 +21,8 @@ public class BookBean {
     }
 
     //per borrow
-    public BookBean(String ISBN, String title, String authors, String editor, String pubYear, String genres){
-        this.ISBN =ISBN;
+    public BookBean(String isbn, String title, String authors, String editor, String pubYear, String genres){
+        this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.editor = editor;
@@ -31,10 +31,10 @@ public class BookBean {
     }
 
     public BookBean(String isbn) {
-        this.ISBN = isbn;
+        this.isbn = isbn;
     }
 
-    public String getISBN() {return this.ISBN;}
+    public String getIsbn() {return this.isbn;}
     public String getTitle() {return this.title;}
     public String getAuthors() {return this.authors;}
     public String getEditor() {return this.editor;}
@@ -44,7 +44,7 @@ public class BookBean {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getISBN()).append(" ").append(this.getTitle()).append(" ").append(this.getAuthors()).append(" ").append(this.getEditor()).append(" ").append(this.getPubYear()).append(" ").append(this.getGenres()).append(" ").append(this.getAvailability());
+        sb.append(this.getIsbn()).append(" ").append(this.getTitle()).append(" ").append(this.getAuthors()).append(" ").append(this.getEditor()).append(" ").append(this.getPubYear()).append(" ").append(this.getGenres()).append(" ").append(this.getAvailability());
         return sb.toString();
     }
 

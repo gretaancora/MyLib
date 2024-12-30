@@ -19,7 +19,7 @@ public class ManageReservationsController {
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public BorrowBean activateReservation(BorrowBean bean) throws DAOException {
-        var borrow = new Borrow(new Book(bean.getBook().getISBN()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
+        var borrow = new Borrow(new Book(bean.getBook().getIsbn()), bean.getCostumer(), bean.getCopy(), bean.getInReq());
 
         ManageReservationDAO manageReservationDAO = DAOFactory.getDAOFactory().createManageReservationDAO();
         try {
@@ -47,7 +47,7 @@ public class ManageReservationsController {
 
 
         for (Borrow result: searchResults){
-            var bookBean = new BookBean(result.getBook().getISBN());
+            var bookBean = new BookBean(result.getBook().getIsbn());
             var borrowBean = new BorrowBean(bookBean, result.getCostumer(), result.getCopy(), result.getInReq(), result.getPosition());
             searchResultsBean.add(borrowBean);
         }

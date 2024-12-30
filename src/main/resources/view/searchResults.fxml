@@ -75,14 +75,14 @@
             <content>
                <TableView fx:id="resultsTable" prefHeight="421.0" prefWidth="682.0">
                  <columns>
-                   <TableColumn fx:id="ISBN" prefWidth="75.0" text="ISBN" />
-                   <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
-                     <TableColumn fx:id="Authors" prefWidth="75.0" text="Authors" />
-                     <TableColumn fx:id="Editor" prefWidth="75.0" text="Editor" />
-                     <TableColumn fx:id="Year" prefWidth="75.0" text="Year" />
-                     <TableColumn fx:id="Genres" prefWidth="75.0" text="Genres" />
-                     <TableColumn fx:id="Availability" prefWidth="75.0" text="Availability" />
-                     <TableColumn fx:id="Borrow" prefWidth="75.0" />
+                   <TableColumn fx:id="isbn" prefWidth="75.0" text="ISBN" />
+                   <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                     <TableColumn fx:id="authors" prefWidth="75.0" text="Authors" />
+                     <TableColumn fx:id="editor" prefWidth="75.0" text="Editor" />
+                     <TableColumn fx:id="year" prefWidth="75.0" text="Year" />
+                     <TableColumn fx:id="genres" prefWidth="75.0" text="Genres" />
+                     <TableColumn fx:id="availability" prefWidth="75.0" text="Availability" />
+                     <TableColumn fx:id="borrow" prefWidth="75.0" />
                  </columns>
                </TableView>
             </content>

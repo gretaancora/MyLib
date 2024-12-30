@@ -114,9 +114,17 @@ public class BorrowState extends State {
 
 
     private String getFilter(Scanner in) {
-    Printer.print("Insert filter you want to use: ");
-    String filter = in.nextLine();
-    return filter;
+        Printer.print("Insert filter you want to use: ");
+        String filter;
+        while (true) {
+            try {
+                filter = in.nextLine();
+                break;
+            } catch (NoSuchElementException e) {
+                Printer.println("Please insert a filter.");
+            }
+        }
+        return filter;
     }
 
     private BookBean selectBook(List<BookBean> books, Scanner in) throws BookNotFoundException {
