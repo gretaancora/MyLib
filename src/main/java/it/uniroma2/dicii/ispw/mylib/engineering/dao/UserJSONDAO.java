@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UserNotFoundException;
+import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.ConfigurationJSON;
 import it.uniroma2.dicii.ispw.mylib.other.LocalDateAdapter;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
@@ -15,9 +16,11 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class UserJSONDAO implements UserDAO {
     private static final String BASE_DIRECTORY = ConfigurationJSON.USER_BASE_DIRECTORY;
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     @Override
     public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, DAOException {
@@ -71,12 +74,13 @@ public class UserJSONDAO implements UserDAO {
                         }
                     });
                 } catch (IOException ex) {
-                    Printer.errorPrint("Error occurred removing user directory: " + ex.getMessage());
-                    throw new DAOException("Error in UserJSONDAO (removing user directory: " + e.getMessage());
+                    log.severe(e.getMessage());
+                    throw new DAOException("Error in UserJSONDAO (removing user directory): " + e.getMessage());
                 }
             }
 
-            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+            log.severe(e.getMessage());
+            throw new DAOException("Error in UserJSONDAO (insert costumer): " + e.getMessage());
         }
     }
 
@@ -104,7 +108,8 @@ public class UserJSONDAO implements UserDAO {
                 throw new UserNotFoundException();
             }
         } catch (IOException e) {
-            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+            log.severe(e.getMessage());
+            throw new DAOException("Error in UserJSONDAO (load costumer): " + e.getMessage());
         }
     }
 
@@ -124,7 +129,8 @@ public class UserJSONDAO implements UserDAO {
                 throw new UserNotFoundException();
             }
         } catch (IOException e) {
-            throw new DAOException("Error in UserJSONDAO: " + e.getMessage());
+            log.severe(e.getMessage());
+            throw new DAOException("Error in UserJSONDAO (load librarian): " + e.getMessage());
         }
     }
 
@@ -144,8 +150,8 @@ public class UserJSONDAO implements UserDAO {
             return new LoginBean(email, jsonObject.getAsJsonPrimitive("password").getAsString(), SupportedUserTypes.valueOf(jsonObject.getAsJsonPrimitive("type").getAsString()));
 
         } catch (IOException e) {
-            Printer.errorPrint(String.format("ClientDAOJSON: %s", e.getMessage()));
-            throw new DAOException("Error in login DAO JSON.");
+            log.severe(e.getMessage());
+            throw new DAOException("Error in UserJSONDAO (getUserInfoByEmail): " + e.getMessage());
         }
 
     }

@@ -13,10 +13,15 @@ import java.util.List;
 public class UserInMemoryDAO implements UserDAO{
 
     private List<User> users = new ArrayList<>();
+    private static final String email1 = "user1@gmail.com";
+    private static final String user1 = "user1";
+    private static final String email2 = "user2@gmail.com";
+    private static final String user2 = "user2";
+
 
     public UserInMemoryDAO() {
-        users.add(new Costumer("user1@gmail.com", "user1", "user1", "user1"));
-        users.add(new Librarian("user2@gmail.com", "user2", "user2", "user2"));
+        users.add(new Costumer(email1, user1, user1, user1));
+        users.add(new Librarian(email2, user2, user2, user2));
     }
 
     @Override
@@ -57,10 +62,10 @@ public class UserInMemoryDAO implements UserDAO{
     @Override
     public LoginBean getUserInfoByEmail(String email) throws UserNotFoundException {
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getEmail().equals("user1@gmail.com")) {
-                return new LoginBean("user1@gmail.com", BCrypt.hashpw("user1", BCrypt.gensalt()), SupportedUserTypes.COSTUMER);
-            }else if(user.getEmail().equals(email) && user.getEmail().equals("user2@gmail.com")){
-                return new LoginBean("user2@gmail.com", BCrypt.hashpw("user2", BCrypt.gensalt()), SupportedUserTypes.LIBRARIAN);
+            if (user.getEmail().equals(email) && user.getEmail().equals(email1)) {
+                return new LoginBean(email1, BCrypt.hashpw(user1, BCrypt.gensalt()), SupportedUserTypes.COSTUMER);
+            }else if(user.getEmail().equals(email) && user.getEmail().equals(email2)){
+                return new LoginBean(email2, BCrypt.hashpw(user2, BCrypt.gensalt()), SupportedUserTypes.LIBRARIAN);
             }
         }
 
