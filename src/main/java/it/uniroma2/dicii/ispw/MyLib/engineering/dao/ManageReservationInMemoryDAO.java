@@ -18,10 +18,12 @@ public class ManageReservationInMemoryDAO implements ManageReservationDAO{
 
     @Override
     public BorrowBean activateReservation(Borrow borrow) {
+
         for (Borrow b : pendingBorrows) {
             if (b.getBook().getISBN().equalsIgnoreCase(borrow.getBook().getISBN()) && b.getCopy() == borrow.getCopy() && b.getCostumer().equals(borrow.getCostumer()) && b.getInReq().equals(borrow.getInReq())) {
                 pendingBorrows.remove(borrow);
                 activeBorrows.add(new Borrow(borrow.getBook(), borrow.getCostumer(), borrow.getCopy(), borrow.getInReq(), borrow.getPosition(), LocalDate.now(), LocalDate.now().plusMonths(1)));
+                break;
             }
         }
 
