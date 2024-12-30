@@ -3,6 +3,9 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.query;
 import java.sql.*;
 
 public class SearchQuery {
+
+    private SearchQuery() {}
+
     public static ResultSet searchBookByAuthor(Connection conn, String author) throws SQLException {
 
         PreparedStatement stmt = conn.prepareStatement(Query.SEARCH_BOOK_BY_AUTHOR);

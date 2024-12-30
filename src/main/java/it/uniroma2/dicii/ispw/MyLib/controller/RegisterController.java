@@ -13,8 +13,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.util.logging.Logger;
 
 public class RegisterController {
-
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
+
     public boolean registerCostumer(RegisterBean regBean) throws EmailAlreadyInUseException, DAOException {
 
         if(regBean != null) {
