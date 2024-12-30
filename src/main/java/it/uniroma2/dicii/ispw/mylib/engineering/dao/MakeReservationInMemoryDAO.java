@@ -20,21 +20,21 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
 
         if (filter.getFilterType().equalsIgnoreCase("author")) {
             for (Book book : books) {
-                if(book.getAuthors().contains(filter.getFilter())) {
+                if(book.getAuthors().contains(filter.getFlt())) {
                     var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }
             }
         } else if (filter.getFilterType().equalsIgnoreCase("title")) {
             for (Book book : books) {
-                if(book.getTitle().equalsIgnoreCase(filter.getFilter())) {
+                if(book.getTitle().equalsIgnoreCase(filter.getFlt())) {
                     var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }
             }
         } else {
             for (Book book : books) {
-                if(book.getAuthors().contains(filter.getFilter()) || book.getTitle().equalsIgnoreCase(filter.getFilter()) || book.getGenres().equalsIgnoreCase(filter.getFilter()) || book.getIsbn().equalsIgnoreCase(filter.getFilter())){
+                if(book.getAuthors().contains(filter.getFlt()) || book.getTitle().equalsIgnoreCase(filter.getFlt()) || book.getGenres().equalsIgnoreCase(filter.getFlt()) || book.getIsbn().equalsIgnoreCase(filter.getFlt())){
                     var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                     booksList.add(b);
                 }

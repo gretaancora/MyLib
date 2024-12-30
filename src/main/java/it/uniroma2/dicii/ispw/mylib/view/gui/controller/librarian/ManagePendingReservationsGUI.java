@@ -61,8 +61,8 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
         costumer.setCellValueFactory(new PropertyValueFactory<>("costumer"));
         book.setCellValueFactory(cellData -> {
             BorrowBean borrowBean = cellData.getValue();
-            BookBean book = borrowBean.getBook();
-            String isbn = book.getIsbn();
+            BookBean bookBean = borrowBean.getBook();
+            String isbn = bookBean.getIsbn();
             return new SimpleStringProperty(isbn);
         });
         copy.setCellValueFactory(new PropertyValueFactory<>("copy"));
