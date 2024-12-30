@@ -8,7 +8,6 @@ public class LoginQuery {
 
     private LoginQuery() {}
 
-
     public static boolean checkEmailReg(Connection conn, String email) throws SQLException {
 
         PreparedStatement stmt = conn.prepareStatement(Query.SEARCH_EMAIL);

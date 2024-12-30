@@ -10,11 +10,11 @@ public class ConfirmActivationGUI extends HomeLibrarianGUI {
     private Label InitialDate;
     @FXML
     private Label EndDate;
-    private Librarian librarian;
+    private Librarian lib;
     private BorrowBean bean;
 
-    public ConfirmActivationGUI(Librarian librarian, BorrowBean bean) {
-        this.librarian = librarian;
+    public ConfirmActivationGUI(Librarian lib, BorrowBean bean) {
+        this.lib = lib;
         this.bean = bean;
     }
 

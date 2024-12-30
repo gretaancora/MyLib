@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.MyLib.engineering.query;
 
 public class Query {
 
-    Query(){}
+    private Query(){}
 
     /*--------------------Login Queries-----------------------------*/
 

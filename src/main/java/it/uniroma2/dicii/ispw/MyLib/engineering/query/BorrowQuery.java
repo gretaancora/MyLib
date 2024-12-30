@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 
 public class BorrowQuery {
 
+    private BorrowQuery() {}
+
+    /*--------------------Borrow Queries Costumer-------------------*/
+
     public static ResultSet searchBookCopy(Connection conn, String ISBN) throws SQLException {
 
         PreparedStatement stmt = conn.prepareStatement(Query.SEARCH_BOOK_COPY);
@@ -58,6 +62,7 @@ public class BorrowQuery {
 
 
     /*--------------------Borrow Queries Librarian-------------------*/
+
     public static int activateBorrow(Connection conn, String book, String costumer, short copy, LocalDateTime inReq) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(Query.UPDATE_STATUS_BORROW);
 

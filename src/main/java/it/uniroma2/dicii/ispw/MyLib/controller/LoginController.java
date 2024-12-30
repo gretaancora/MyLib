@@ -12,8 +12,6 @@ import java.util.logging.Logger;
 
 public class LoginController {
 
-    public LoginController() {}
-
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public User start(LoginBean loginBean) throws WrongCredentialsException, UserNotFoundException, UnsupportedUserTypeException, DAOException {
