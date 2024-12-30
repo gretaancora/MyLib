@@ -15,6 +15,7 @@ public class BookCopy {
 
     public String getIsbn() {return this.isbn;}
     public short getCopyNum() {return this.copyNum;}
+    public boolean getAvailability() {return this.availability;}
 
     public void setAvailability(boolean b) {
         this.availability = b;

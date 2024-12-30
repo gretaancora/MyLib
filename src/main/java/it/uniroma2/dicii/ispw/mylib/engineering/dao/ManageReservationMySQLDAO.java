@@ -7,6 +7,8 @@ import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Connector;
 import it.uniroma2.dicii.ispw.mylib.model.Book;
 import it.uniroma2.dicii.ispw.mylib.model.Borrow;
+import it.uniroma2.dicii.ispw.mylib.other.Printer;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +36,13 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
 
             conn.commit();
 
+            try {
+                conn.setAutoCommit(true);
+
+            } catch (SQLException e) {
+                handleDAOException(e);
+            }
+
             return new BorrowBean(LocalDate.now(), LocalDate.now().plusMonths(1));
 
         } catch (SQLException e) {
@@ -41,14 +50,17 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
             if (conn != null) {
                 try {
                     conn.rollback();
-                } catch (SQLException rollbackEx) {
-                    log.severe("Error in ManageReservationDAO (during rollback): " + e.getMessage());
-                    throw new DAOException("Error in ManageReservationDAO (during rollback): " + e.getMessage());
+                    conn.setAutoCommit(true);
+                    handleDAOException(e);
+                } catch (SQLException r) {
+                    handleDAOException(r);
                 }
+                handleDAOException(e);
             }
 
-            log.severe("Error occurred activating reservation transaction: " + e.getMessage());
-            throw new DAOException("Error in ManageReservationDAO: " + e.getMessage());
+            log.severe("Error in ManageReservationMySQLDAO: " + e.getMessage());
+            Printer.errorPrint("Error occurred managing reservations.");
+            throw new DAOException(e.getMessage());
 
         }
     }
@@ -62,10 +74,15 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
                 pendingBorrows.add(borrow);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DAOException("Error in ManageReservationDAO (getting pending request): " + e.getMessage());
+            handleDAOException(e);
         }
 
         return pendingBorrows;
+    }
+
+    private void handleDAOException(Exception e) throws DAOException {
+        log.severe("Error in ManageReservationMySQLDAO: " + e.getMessage());
+        Printer.errorPrint("Error occurred managing reservations.");
+        throw new DAOException(e.getMessage());
     }
 }

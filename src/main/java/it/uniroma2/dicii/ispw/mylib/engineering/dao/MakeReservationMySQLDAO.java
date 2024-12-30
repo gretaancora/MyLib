@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.mylib.engineering.dao;
 
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.query.BorrowQuery;
 import it.uniroma2.dicii.ispw.mylib.engineering.query.SearchQuery;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
@@ -61,8 +62,7 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
     }
 
 
-    public void reserveBook(Borrow borrow, Costumer costumer) throws DAOException {
-        Borrow borrowInfo;
+    public void reserveBook(Borrow borrow, Costumer costumer) throws DAOException, NoAvailableCopy {
         Connection conn = null;
 
         try {
@@ -72,31 +72,10 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
 
             ResultSet rs = BorrowQuery.searchBookCopy(Connector.getConnection(), borrow.getBook().getIsbn());
 
-            /*prendi la copia ottenuta, aggiungi numero di copia a book, aggiungi borrow in persistenza
-             (ricordati di modificare il numero di copie available e lo stato della copia prestata),
-              restituisci le info del borrow per farle vedere all'utente*/
-
-            if (rs.next()) {
-                borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"), LocalDateTime.now());
-
-                int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy(), borrowInfo.getCostumer(), borrowInfo.getInReq());
-                if(rs1==0){
-                    throw new SQLException();
-                }
-
-                int rs2 = BorrowQuery.updateStatusCopy(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy());
-                if(rs2==0){
-                    throw new SQLException();
-                }
-
-                int rs3 = BorrowQuery.updateNumAvailCopies(Connector.getConnection(), borrowInfo.getBook().getIsbn());
-                if(rs3==0){
-                    throw new SQLException();
-                }
-
-                conn.commit();
-
-                costumer.addPedingBorrows(borrowInfo);
+            if(!rs.next()){
+                throw new NoAvailableCopy(borrow.getBook().getTitle());
+            }else {
+                reserveBookCopy(conn, rs, borrow, costumer);
             }
 
         } catch (SQLException e) {
@@ -124,6 +103,35 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
             }
 
         }
+    }
+
+
+    /*prendi la copia ottenuta, aggiungi numero di copia a book, aggiungi borrow in persistenza
+       (ricordati di modificare il numero di copie available e lo stato della copia prestata),
+       restituisci le info del borrow per farle vedere all'utente*/
+    private void reserveBookCopy(Connection conn, ResultSet rs, Borrow borrow, Costumer costumer) throws SQLException {
+
+        var borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"), LocalDateTime.now());
+
+        int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy(), borrowInfo.getCostumer(), borrowInfo.getInReq());
+        if (rs1 == 0) {
+            throw new SQLException();
+        }
+
+        int rs2 = BorrowQuery.updateStatusCopy(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy());
+        if (rs2 == 0) {
+            throw new SQLException();
+        }
+
+        int rs3 = BorrowQuery.updateNumAvailCopies(Connector.getConnection(), borrowInfo.getBook().getIsbn());
+        if (rs3 == 0) {
+            throw new SQLException();
+        }
+
+        conn.commit();
+
+        costumer.addPedingBorrows(borrowInfo);
+
     }
 
 

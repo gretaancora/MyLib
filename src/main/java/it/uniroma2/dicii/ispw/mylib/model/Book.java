@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.mylib.model;
 
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
 
 public class Book {
@@ -70,9 +71,10 @@ public class Book {
     public String getAvailability() {return this.availability ? "available" : "not available";}
     public short getNumAvailableCopies() {return this.numAvailableCopies;}
 
-    public void reduceNumAvailCopies() {
+    public void reduceNumAvailCopies() throws NoAvailableCopy {
         if (this.numAvailableCopies == 0){
-            Printer.errorPrint("Error making reservation: trying to take a copy of a book which has 0 available copies!");
+            Printer.errorPrint("Error making reservation.");
+            throw new NoAvailableCopy(getTitle());
         }else{
             this.numAvailableCopies--;
         }

@@ -7,7 +7,6 @@ import it.uniroma2.dicii.ispw.mylib.engineering.factory.DAOFactory;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.User;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.util.logging.Logger;
 
 public class LoginController {
