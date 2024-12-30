@@ -31,15 +31,13 @@ public class HomeLibrarianState extends State {
                 choice = scan.nextInt();
                 scan.nextLine();
 
-                if(choice==1){
-                    Printer.println("Feature not implemented yet.");
-                }else if(choice==2){
-                    stateMachine.goNext(new ManageReservationsState(librarian));
-                }else if(choice==3){
-                    new StateMachineImpl().start();
-                }else{
-                    Printer.println("Invalid choice. Try again...");
+                switch (choice){
+                    case 1 -> Printer.println("Feature not implemented yet.");
+                    case 2 -> stateMachine.goNext(new ManageReservationsState(librarian));
+                    case 3 -> new StateMachineImpl().start();
+                    default -> Printer.println("Invalid choice. Try again...");
                 }
+
             } catch (InputMismatchException e){
                 Printer.errorPrint("Invalid choice. Try again...");
                 scan.nextLine();

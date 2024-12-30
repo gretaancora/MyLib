@@ -75,6 +75,7 @@ public class BorrowState extends State {
     }
 
     private void notifyAvailability(BookBean bookBean) {
+        Printer.println("Tracking availability of " + bookBean.getTitle());
         Printer.println("Notify feature not implemented yet.");
     }
 

@@ -19,18 +19,18 @@ public class InitialState extends State {
                 Printer.print("Enter your choice: ");
                 choice = input.nextInt();
                 input.nextLine();
-                if(choice == 1) {
-                    stateMachine.goNext(new LoginState());
-                }else if (choice == 2) {
-                    stateMachine.goNext(new RegisterState());
-                }else {
-                    Printer.println("Invalid choice. Try again...");
+                
+                switch (choice) {
+                    case 1 -> stateMachine.goNext(new LoginState());
+                    case 2 -> stateMachine.goNext(new RegisterState());
+                    default -> Printer.println("Invalid choice. Try again...");
                 }
+
             } catch (InputMismatchException e) {
                 input.nextLine();
-                System.out.println("Invalid choice. Try again...");
+                Printer.println("Invalid choice. Try again...");
             } catch (NoSuchElementException e) {
-                System.out.println("Invalid choice. Try again...");
+                Printer.println("Invalid choice. Try again...");
             }
         }
     }

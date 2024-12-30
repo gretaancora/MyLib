@@ -125,8 +125,7 @@ public class SearchResultsGUI extends HomeCostumerGUI {
             Stage stage = (Stage) resultsTable.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
-            //logger.severe("Error in SearchResultsGUI (choosing book): " + e.getMessage());
-            e.printStackTrace();
+            logger.severe("Error in SearchResultsGUI (choosing book): " + e.getMessage());
         }
     }
 
@@ -145,7 +144,6 @@ public class SearchResultsGUI extends HomeCostumerGUI {
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in SearchResultsGUI (going back to search): " + e.getMessage());
-
         }
 
     }

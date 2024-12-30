@@ -38,8 +38,6 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
 
         } catch (SQLException e) {
 
-            log.severe("Error occurred activating reservation transaction: " + e.getMessage());
-
             if (conn != null) {
                 try {
                     conn.rollback();
@@ -49,6 +47,7 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
                 }
             }
 
+            log.severe("Error occurred activating reservation transaction: " + e.getMessage());
             throw new DAOException("Error in ManageReservationDAO: " + e.getMessage());
 
         }

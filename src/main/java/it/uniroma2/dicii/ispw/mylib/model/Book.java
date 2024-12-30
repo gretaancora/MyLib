@@ -34,7 +34,7 @@ public class Book {
         this.genres = genres;
     }
 
-    public Book(String ISBN) {this.isbn = ISBN;}
+    public Book(String isbn) {this.isbn = isbn;}
 
     //per in memory make reservation
     public Book(String isbn, String title, String authors, String editor, short pubYear, String genres, short numCopies, short numAvailableCopies){
