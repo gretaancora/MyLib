@@ -77,8 +77,8 @@
             <Image url="@../view/images/congratsIcon.png" />
         </ImageView>
       <Text layoutX="147.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial date: " />
-      <Label fx:id="InitialDate" layoutX="211.0" layoutY="154.0" text="Label" />
+      <Label fx:id="initialDate" layoutX="211.0" layoutY="154.0" text="Label" />
       <Text layoutX="292.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending date:" />
-      <Label fx:id="EndDate" layoutX="363.0" layoutY="155.0" text="Label" />
+      <Label fx:id="endDate" layoutX="363.0" layoutY="155.0" text="Label" />
     </AnchorPane>
 </AnchorPane>

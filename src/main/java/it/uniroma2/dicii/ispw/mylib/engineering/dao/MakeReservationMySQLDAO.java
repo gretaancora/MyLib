@@ -70,7 +70,7 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
 
             conn.setAutoCommit(false);
 
-            ResultSet rs = BorrowQuery.searchBookCopy(Connector.getConnection(), borrow.getBook().getISBN());
+            ResultSet rs = BorrowQuery.searchBookCopy(Connector.getConnection(), borrow.getBook().getIsbn());
 
             /*prendi la copia ottenuta, aggiungi numero di copia a book, aggiungi borrow in persistenza
              (ricordati di modificare il numero di copie available e lo stato della copia prestata),
@@ -79,17 +79,17 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
             if (rs.next()) {
                 borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"), LocalDateTime.now());
 
-                int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getISBN(), borrowInfo.getCopy(), borrowInfo.getCostumer(), borrowInfo.getInReq());
+                int rs1 = BorrowQuery.addBorrow(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy(), borrowInfo.getCostumer(), borrowInfo.getInReq());
                 if(rs1==0){
                     throw new SQLException();
                 }
 
-                int rs2 = BorrowQuery.updateStatusCopy(Connector.getConnection(), borrowInfo.getBook().getISBN(), borrowInfo.getCopy());
+                int rs2 = BorrowQuery.updateStatusCopy(Connector.getConnection(), borrowInfo.getBook().getIsbn(), borrowInfo.getCopy());
                 if(rs2==0){
                     throw new SQLException();
                 }
 
-                int rs3 = BorrowQuery.updateNumAvailCopies(Connector.getConnection(), borrowInfo.getBook().getISBN());
+                int rs3 = BorrowQuery.updateNumAvailCopies(Connector.getConnection(), borrowInfo.getBook().getIsbn());
                 if(rs3==0){
                     throw new SQLException();
                 }

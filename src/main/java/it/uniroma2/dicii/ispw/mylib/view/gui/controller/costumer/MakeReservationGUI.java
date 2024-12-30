@@ -23,19 +23,19 @@ public class MakeReservationGUI extends HomeCostumerGUI {
      */
 
     @FXML
-    private Label ISBNLabel;
+    private Label isbnLabel;
     @FXML
-    private Label TitleLabel;
+    private Label titleLabel;
     @FXML
-    private Label AuthorsLabel;
+    private Label authorsLabel;
     @FXML
-    private Label EditorLabel;
+    private Label editorLabel;
     @FXML
-    private Label YearLabel;
+    private Label yearLabel;
     @FXML
-    private Label GenresLabel;
+    private Label genresLabel;
     @FXML
-    private Label ErrorLabel;
+    private Label errorLabel;
 
     BookBean book;
     List<BookBean> bookBeans;
@@ -51,12 +51,12 @@ public class MakeReservationGUI extends HomeCostumerGUI {
     /*----------------------------------------------------------------------------------------------------------------*/
     public void initialize(){
 
-        ISBNLabel.setText(book.getISBN());
-        TitleLabel.setText(book.getTitle());
-        EditorLabel.setText(book.getEditor());
-        YearLabel.setText(book.getPubYear());
-        AuthorsLabel.setText(book.getAuthors());
-        GenresLabel.setText(book.getGenres());
+        isbnLabel.setText(book.getIsbn());
+        titleLabel.setText(book.getTitle());
+        editorLabel.setText(book.getEditor());
+        yearLabel.setText(book.getPubYear());
+        authorsLabel.setText(book.getAuthors());
+        genresLabel.setText(book.getGenres());
 
     }
 
@@ -66,14 +66,14 @@ public class MakeReservationGUI extends HomeCostumerGUI {
         metodo lanciato quando viene premuto il pulsante invio di prenotazione*/
 
         //controlla che l'utente non abbia già due pending borrow
-        if (costumer.getPending_borrows()==null || costumer.getPending_borrows().size() < 2) {
+        if (costumer.getPendingBorrows()==null || costumer.getPendingBorrows().size() < 2) {
             var borrowBean = new BorrowBean(book, costumer.getEmail());
 
             var makeReservationController = new MakeReservationController();
             makeReservationController.reserveBook(borrowBean, costumer);
             loadConfirmation();
         } else {
-            ErrorLabel.setText("You have reached the maximum number of pending reservations.");
+            errorLabel.setText("You have reached the maximum number of pending reservations.");
         }
 
     }
@@ -88,7 +88,7 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             loader.setControllerFactory(c -> new HomeCostumerGUI(this.costumer));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) ISBNLabel.getScene().getWindow();
+            Stage stage = (Stage) isbnLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in MakeReservationGUI (loading confirmation page): " + e.getMessage());
@@ -101,7 +101,7 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             loader.setControllerFactory(c -> new SearchResultsGUI(this.costumer, bookBeans));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) ISBNLabel.getScene().getWindow();
+            Stage stage = (Stage) isbnLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

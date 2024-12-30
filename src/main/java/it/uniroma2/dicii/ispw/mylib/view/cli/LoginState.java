@@ -46,12 +46,12 @@ public class LoginState extends State {
             this.execute(stateMachine);
         }
 
-        State homeState;
+        State homeState = null;
 
-        if (user instanceof Librarian) {
-            homeState = new HomeLibrarianState((Librarian) user);
-        } else {
-            homeState = new HomeCostumerState((Costumer) user);
+        if (user instanceof Librarian librarian) {
+            homeState = new HomeLibrarianState(librarian);
+        } else if (user instanceof Costumer costumer) {
+            homeState = new HomeCostumerState(costumer);
         }
 
         stateMachine.goNext(homeState);

@@ -25,24 +25,19 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
     @FXML
     private TableView<BorrowBean> resultsTable;
     @FXML
-    private TableColumn<BorrowBean, String> Costumer;
+    private TableColumn<BorrowBean, String> costumer;
     @FXML
-    private TableColumn<BorrowBean, String> Book;
+    private TableColumn<BorrowBean, String> book;
     @FXML
-    private TableColumn<BorrowBean, String> Copy;
+    private TableColumn<BorrowBean, String> copy;
     @FXML
-    private TableColumn<BorrowBean, String> Position;
+    private TableColumn<BorrowBean, String> position;
     @FXML
-    private Label ErrorLabel;
+    private Label errorLabel;
     @FXML
-    private TableColumn<BorrowBean, Button> Activate;
+    private TableColumn<BorrowBean, Button> activate;
 
-
-    //inizializzo una lista, in cui popolo gli elementi della tabella
-    //private RichiesteArrivateCollection richiesteArrivateCollection; //istanza del Concrete Subject del pattern Observer
-    List<Borrow> borrows = new ArrayList<>();
     List<BorrowBean> borrowBeans = new ArrayList<>();
-
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public ManagePendingReservationsGUI(Librarian librarian) {this.librarian = librarian;}
@@ -58,22 +53,22 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
         try {
             borrowBeans = manageReservationsController.getPendingReservations();
         } catch (DAOException e) {
-            ErrorLabel.setText("Error in getting pending borrows. Try again...");
+            errorLabel.setText("Error in getting pending borrows. Try again...");
         }
 
         resultsTable.getItems().addAll(borrowBeans);
 
-        Costumer.setCellValueFactory(new PropertyValueFactory<>("costumer"));
-        Book.setCellValueFactory(cellData -> {
+        costumer.setCellValueFactory(new PropertyValueFactory<>("costumer"));
+        book.setCellValueFactory(cellData -> {
             BorrowBean borrowBean = cellData.getValue();
             BookBean book = borrowBean.getBook();
-            String isbn = book.getISBN();
+            String isbn = book.getIsbn();
             return new SimpleStringProperty(isbn);
         });
-        Copy.setCellValueFactory(new PropertyValueFactory<>("copy"));
-        Position.setCellValueFactory(new PropertyValueFactory<>("position"));
+        copy.setCellValueFactory(new PropertyValueFactory<>("copy"));
+        position.setCellValueFactory(new PropertyValueFactory<>("position"));
         //Imposto la factory per la colonna "Activate"
-        Activate.setCellFactory(param -> new ActivateButtonCell());
+        activate.setCellFactory(param -> new ActivateButtonCell());
 
     }
 
@@ -89,7 +84,7 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
                 try {
                     bean = manageReservationsController.activateReservation(bean);
                 } catch (DAOException e) {
-                    ErrorLabel.setText("Error in activating the selected borrow. Try again...");
+                    errorLabel.setText("Error in activating the selected borrow. Try again...");
                 }
                 loadConfirmation(bean);
             });

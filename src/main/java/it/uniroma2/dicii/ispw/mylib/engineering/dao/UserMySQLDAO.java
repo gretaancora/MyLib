@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 
 public class UserMySQLDAO implements UserDAO {
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
-    public UserMySQLDAO() {}
 
     @Override
     public LoginBean getUserInfoByEmail(String email) throws UserNotFoundException, DAOException {

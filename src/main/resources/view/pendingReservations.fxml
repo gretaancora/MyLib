@@ -77,11 +77,11 @@
                      <children>
                         <TableView fx:id="resultsTable" layoutX="-2.0" prefHeight="430.0" prefWidth="738.0">
                           <columns>
-                            <TableColumn fx:id="Costumer" prefWidth="193.1999785900116" text="Costumer" />
-                            <TableColumn fx:id="Book" prefWidth="171.00001525878906" text="Book" />
-                              <TableColumn fx:id="Copy" prefWidth="115.39996337890625" text="Copy" />
-                              <TableColumn fx:id="Position" minWidth="0.0" prefWidth="163.60003662109375" text="Position" />
-                              <TableColumn fx:id="Activate" prefWidth="98.20001220703125" text="Activate" />
+                            <TableColumn fx:id="costumer" prefWidth="193.1999785900116" text="Costumer" />
+                            <TableColumn fx:id="book" prefWidth="171.00001525878906" text="Book" />
+                              <TableColumn fx:id="copy" prefWidth="115.39996337890625" text="Copy" />
+                              <TableColumn fx:id="position" minWidth="0.0" prefWidth="163.60003662109375" text="Position" />
+                              <TableColumn fx:id="activate" prefWidth="98.20001220703125" text="Activate" />
                           </columns>
                         </TableView>
                      </children>
@@ -95,6 +95,6 @@
             <Image url="@images/backButtonIcon.png" />
          </image>
       </ImageView>
-      <Label fx:id="ErrorLabel" layoutX="590.0" layoutY="99.0" text="Label" visible="false" />
+      <Label fx:id="errorLabel" layoutX="590.0" layoutY="99.0" text="Label" visible="false" />
     </children>
 </AnchorPane>

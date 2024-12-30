@@ -20,21 +20,21 @@ public class SearchResultsGUI extends HomeCostumerGUI {
     @FXML
     private TableView<BookBean> resultsTable;
     @FXML
-    private TableColumn<BookBean, String> ISBN;
+    private TableColumn<BookBean, String> isbn;
     @FXML
-    private TableColumn<BookBean, String> Title;
+    private TableColumn<BookBean, String> title;
     @FXML
-    private TableColumn<BookBean, String> Authors;
+    private TableColumn<BookBean, String> authors;
     @FXML
-    private TableColumn<BookBean, String> Editor;
+    private TableColumn<BookBean, String> editor;
     @FXML
-    private TableColumn<BookBean, String> Year;
+    private TableColumn<BookBean, String> year;
     @FXML
-    private TableColumn<BookBean, String> Genres;
+    private TableColumn<BookBean, String> genres;
     @FXML
-    private TableColumn<BookBean, String> Availability;
+    private TableColumn<BookBean, String> availability;
     @FXML
-    private TableColumn<BookBean, Button> Borrow;
+    private TableColumn<BookBean, Button> borrow;
 
 
     //inizializzo una lista, in cui popolo gli elementi della tabella
@@ -59,15 +59,15 @@ public class SearchResultsGUI extends HomeCostumerGUI {
     }
 
     private void impostaColonneTabella() {
-        ISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-        Title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        Authors.setCellValueFactory(new PropertyValueFactory<>("authors"));
-        Editor.setCellValueFactory(new PropertyValueFactory<>("editor"));
-        Year.setCellValueFactory(new PropertyValueFactory<>("pubYear"));
-        Genres.setCellValueFactory(new PropertyValueFactory<>("genres"));
-        Availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        isbn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        authors.setCellValueFactory(new PropertyValueFactory<>("authors"));
+        editor.setCellValueFactory(new PropertyValueFactory<>("editor"));
+        year.setCellValueFactory(new PropertyValueFactory<>("pubYear"));
+        genres.setCellValueFactory(new PropertyValueFactory<>("genres"));
+        availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
 
-        Borrow.setCellFactory(param -> new ButtonCell());
+        borrow.setCellFactory(param -> new ButtonCell());
     }
 
 
