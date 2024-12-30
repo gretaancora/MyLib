@@ -1,12 +1,12 @@
 package testing;
 
-import it.uniroma2.dicii.ispw.MyLib.controller.LoginController;
-import it.uniroma2.dicii.ispw.MyLib.controller.RegisterController;
-import it.uniroma2.dicii.ispw.MyLib.engineering.bean.LoginBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.bean.RegisterBean;
-import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.DAOException;
-import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.EmailAlreadyInUseException;
-import it.uniroma2.dicii.ispw.MyLib.engineering.exceptions.WrongCredentialsException;
+import it.uniroma2.dicii.ispw.mylib.controller.LoginController;
+import it.uniroma2.dicii.ispw.mylib.controller.RegisterController;
+import it.uniroma2.dicii.ispw.mylib.engineering.bean.LoginBean;
+import it.uniroma2.dicii.ispw.mylib.engineering.bean.RegisterBean;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.EmailAlreadyInUseException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.WrongCredentialsException;
 import org.junit.Assert;
 import org.junit.Test;
 
