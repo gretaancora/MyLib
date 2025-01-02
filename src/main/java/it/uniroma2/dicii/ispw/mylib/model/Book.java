@@ -36,23 +36,6 @@ public class Book {
 
     public Book(String isbn) {this.isbn = isbn;}
 
-    //per in memory make reservation
-    public Book(String isbn, String title, String authors, String editor, short pubYear, String genres, short numCopies, short numAvailableCopies){
-        this.isbn = isbn;
-        this.title = title;
-        this.authors = authors;
-        this.editor = editor;
-        this.pubYear = pubYear;
-        this.genres = genres;
-
-        if(numAvailableCopies>numCopies){
-            this.numCopies = numCopies;
-            this.numAvailableCopies = numCopies;
-        }else{
-            this.numCopies = numCopies;
-            this.numAvailableCopies = numAvailableCopies;
-        }
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -75,6 +58,16 @@ public class Book {
             throw new NoAvailableCopy(getTitle());
         }else{
             this.numAvailableCopies--;
+        }
+    }
+
+    public void setNumCopies(short numCopies, short numAvailableCopies) {
+        if(numAvailableCopies>numCopies){
+            this.numCopies = numCopies;
+            this.numAvailableCopies = numCopies;
+        }else{
+            this.numCopies = numCopies;
+            this.numAvailableCopies = numAvailableCopies;
         }
     }
 }
