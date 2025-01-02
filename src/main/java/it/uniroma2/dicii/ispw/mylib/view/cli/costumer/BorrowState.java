@@ -141,17 +141,9 @@ public class BorrowState extends State {
             Printer.println("No book found. Try to use another filter...");
             throw new BookNotFoundException();
         } else {
-            Printer.printlnBlu("Select the book you want to use (insert the relative number): ");
+            Printer.printlnBlu("Select the book you want (insert the relative number): ");
 
-            int i = 1;
-            for (BookBean book : books) {
-                Printer.print(i++ + ") " + book.toString());
-                if (book.getAvailability().equalsIgnoreCase("not available")) {
-                    Printer.println(" -> notify availability");
-                } else {
-                    Printer.println(" -> borrow");
-                }
-            }
+            printBooks(books);
 
             int choice;
             while (true) {
@@ -169,6 +161,20 @@ public class BorrowState extends State {
             }
 
             return books.get(--choice);
+        }
+    }
+
+    private void printBooks(List<BookBean> books) {
+
+        int i = 1;
+
+        for (BookBean book : books) {
+            Printer.print(i++ + ") " + book.toString());
+            if (book.getAvailability().equalsIgnoreCase("not available")) {
+                Printer.println(" -> notify availability");
+            } else {
+                Printer.println(" -> borrow");
+            }
         }
     }
 }
