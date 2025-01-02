@@ -53,6 +53,7 @@ public class UserJSONDAO implements UserDAO {
             Files.writeString(costumerInfoFile, json);
 
         } catch (JsonIOException | IOException e) {
+
             if(userDirectory!=null) {
                 try {
                     /*viene creata una classe anonima che estende SimpleFileVisitor<Path>.
@@ -78,8 +79,8 @@ public class UserJSONDAO implements UserDAO {
                 }
             }
 
-            log.severe(e.getMessage());
-            throw new DAOException("Error in UserJSONDAO (insert costumer): " + e.getMessage());
+            log.severe("Error in UserJSONDAO (insert costumer): " + e.getMessage());
+            throw new DAOException();
         }
     }
 
@@ -107,8 +108,8 @@ public class UserJSONDAO implements UserDAO {
                 throw new UserNotFoundException();
             }
         } catch (IOException e) {
-            log.severe(e.getMessage());
-            throw new DAOException("Error in UserJSONDAO (load costumer): " + e.getMessage());
+            log.severe("Error in UserJSONDAO (load costumer): " + e.getMessage());
+            throw new DAOException();
         }
     }
 
@@ -128,8 +129,8 @@ public class UserJSONDAO implements UserDAO {
                 throw new UserNotFoundException();
             }
         } catch (IOException e) {
-            log.severe(e.getMessage());
-            throw new DAOException("Error in UserJSONDAO (load librarian): " + e.getMessage());
+            log.severe("Error in UserJSONDAO (load librarian): " + e.getMessage());
+            throw new DAOException();
         }
     }
 
@@ -149,8 +150,8 @@ public class UserJSONDAO implements UserDAO {
             return new LoginBean(email, jsonObject.getAsJsonPrimitive("password").getAsString(), SupportedUserTypes.valueOf(jsonObject.getAsJsonPrimitive("type").getAsString()));
 
         } catch (IOException e) {
-            log.severe(e.getMessage());
-            throw new DAOException("Error in UserJSONDAO (getUserInfoByEmail): " + e.getMessage());
+            log.severe("Error in UserJSONDAO (getUserInfoByEmail): " + e.getMessage());
+            throw new DAOException();
         }
 
     }
