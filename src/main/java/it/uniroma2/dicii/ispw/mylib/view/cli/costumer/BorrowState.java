@@ -6,6 +6,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.BookNotFoundException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
 import it.uniroma2.dicii.ispw.mylib.other.SupportedFilterTypes;
@@ -67,7 +68,11 @@ public class BorrowState extends State {
 
         }else{
             var borrowBean = new BorrowBean(bookBean, costumer.getEmail());
-            makeReservationController.reserveBook(borrowBean, costumer);
+            try {
+                makeReservationController.reserveBook(borrowBean, costumer);
+            } catch (NoAvailableCopy e) {
+                stateMachine.goBack();
+            }
             Printer.println("Reservation succeeded!\n Go into section 'show profile' in order to see it.");
 
             stateMachine.goBack();

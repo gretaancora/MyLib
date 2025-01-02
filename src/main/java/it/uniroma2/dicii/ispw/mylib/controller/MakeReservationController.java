@@ -5,6 +5,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.dao.MakeReservationDAO;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.factory.DAOFactory;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.Book;
@@ -49,7 +50,7 @@ public class MakeReservationController {
 
     }
 
-    public void reserveBook(BorrowBean borrowBean, Costumer costumer) {
+    public void reserveBook(BorrowBean borrowBean, Costumer costumer) throws NoAvailableCopy {
         //creo model a partire dalla bean
         var book = new Book(borrowBean.getBook().getIsbn(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
         var borrow = new Borrow(book, borrowBean.getCostumer());

@@ -73,7 +73,6 @@ public class Book {
 
     public void reduceNumAvailCopies() throws NoAvailableCopy {
         if (this.numAvailableCopies == 0){
-            Printer.errorPrint("Error making reservation.");
             throw new NoAvailableCopy(getTitle());
         }else{
             this.numAvailableCopies--;

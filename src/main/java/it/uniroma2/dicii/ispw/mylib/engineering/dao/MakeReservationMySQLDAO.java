@@ -73,6 +73,8 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
             ResultSet rs = BorrowQuery.searchBookCopy(Connector.getConnection(), borrow.getBook().getIsbn());
 
             if(!rs.next()){
+                logger.severe("No copy available for book: " + borrow.getBook().getIsbn());
+                Printer.errorPrint("No available copies of the selected book.");
                 throw new NoAvailableCopy(borrow.getBook().getTitle());
             }else {
                 reserveBookCopy(conn, rs, borrow, costumer);

@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.mylib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.dao.MakeReservationMySQLDAO;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.Costumer;
 import javafx.fxml.FXML;
@@ -70,7 +71,11 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             var borrowBean = new BorrowBean(book, costumer.getEmail());
 
             var makeReservationController = new MakeReservationController();
-            makeReservationController.reserveBook(borrowBean, costumer);
+            try {
+                makeReservationController.reserveBook(borrowBean, costumer);
+            } catch (NoAvailableCopy e) {
+                errorLabel.setText("Book not available.");
+            }
             loadConfirmation();
         } else {
             errorLabel.setText("You have reached the maximum number of pending reservations.");

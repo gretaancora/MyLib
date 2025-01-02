@@ -1,15 +1,21 @@
 package it.uniroma2.dicii.ispw.mylib.engineering.dao;
 
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
+import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.*;
+import it.uniroma2.dicii.ispw.mylib.other.Printer;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     private static List<Book> books = new ArrayList<>();
     private static List<BookCopy> copies = new ArrayList<>();
     private List<Book> bookList = new ArrayList<>();
+
+    private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public MakeReservationInMemoryDAO() {
         books.add(new Book("9788806220457", "Delitto e castigo", "Fëdor Dostoevskij", "Einaudi", (short) 2014, "romanzo", (short) 1, (short) 1));
@@ -77,7 +83,13 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
 
         for (Book book : books) {
             if (book.getIsbn().equalsIgnoreCase(bookCopy.getIsbn())){
-                book.reduceNumAvailCopies();
+                try {
+                    book.reduceNumAvailCopies();
+                } catch (NoAvailableCopy e) {
+                    logger.severe("Error in MakeReservationInMemoryDAO: " + e.getMessage());
+                    Printer.errorPrint("Error searching for an available copy of the book.");
+                    throw new NoAvailableCopy(e.getMessage());
+                }
             }
         }
 
