@@ -7,7 +7,6 @@ import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UserNotFoundException
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.ConfigurationJSON;
 import it.uniroma2.dicii.ispw.mylib.other.LocalDateAdapter;
-import it.uniroma2.dicii.ispw.mylib.other.Printer;
 import it.uniroma2.dicii.ispw.mylib.model.Costumer;
 import it.uniroma2.dicii.ispw.mylib.model.Librarian;
 import com.google.gson.*;

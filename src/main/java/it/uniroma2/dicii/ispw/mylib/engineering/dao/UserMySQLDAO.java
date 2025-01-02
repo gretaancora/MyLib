@@ -19,6 +19,11 @@ import java.util.logging.Logger;
 
 public class UserMySQLDAO implements UserDAO {
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
+    private static final String STATE = "state";
+    private static final String COPY_NUM = "copyNum";
+    private static final String IN_DATE = "inDate";
+    private static final String END_DATE = "endDate";
+
 
     @Override
     public LoginBean getUserInfoByEmail(String email) throws UserNotFoundException, DAOException {
@@ -41,40 +46,45 @@ public class UserMySQLDAO implements UserDAO {
 
     @Override
     public void insertCostumer(Costumer costumer) throws EmailAlreadyInUseException, DAOException {
-        Connection conn;
 
         try {
 
             boolean bool = LoginQuery.checkEmailReg(Connector.getConnection(), costumer.getEmail());
 
             if (bool) {
-                try{
 
-                    conn = Connector.getConnection();
-
-                    conn.setAutoCommit(false);
-
-                    if(LoginQuery.insertUser(conn, costumer) == 0) {
-                        throw new DAOException("Error in UserMySQLDAO");
-                    }
-
-                    if(LoginQuery.insertCostumer(conn, costumer) == 0) {
-                        throw new DAOException("Error in UserMySQLDAO");
-                    }
-
-                    conn.commit();
-
-                }catch (SQLException e) {
-                    logger.severe("Error in UserMySQLDAO (insertCostumer): " + e.getMessage());
-                    Printer.errorPrint("Error adding costumer.");
-                    throw new DAOException();
-                }
+                insert(costumer);
 
             } else {
                 throw new EmailAlreadyInUseException();
             }
 
         } catch (SQLException e) {
+            logger.severe("Error in UserMySQLDAO (insertCostumer): " + e.getMessage());
+            Printer.errorPrint("Error adding costumer.");
+            throw new DAOException();
+        }
+
+    }
+
+    private void insert(Costumer costumer) throws DAOException {
+        try{
+
+            Connection conn = Connector.getConnection();
+
+            conn.setAutoCommit(false);
+
+            if(LoginQuery.insertUser(conn, costumer) == 0) {
+                throw new DAOException("Error in UserMySQLDAO");
+            }
+
+            if(LoginQuery.insertCostumer(conn, costumer) == 0) {
+                throw new DAOException("Error in UserMySQLDAO");
+            }
+
+            conn.commit();
+
+        }catch (SQLException e) {
             logger.severe("Error in UserMySQLDAO (insertCostumer): " + e.getMessage());
             Printer.errorPrint("Error adding costumer.");
             throw new DAOException();
@@ -105,18 +115,18 @@ public class UserMySQLDAO implements UserDAO {
 
             while(rs.next()){
                 var book = new Book(rs.getString("ISBN"), rs.getString("title"), rs.getString("authors"), rs.getString("editor"), rs.getShort("pubYear"), rs.getString("genres"));
-                if(rs.getString("state").equalsIgnoreCase("pending")) {
-                    var borrow = new Borrow(book, rs.getShort("copyNum"));
+                if(rs.getString(STATE).equalsIgnoreCase("pending")) {
+                    var borrow = new Borrow(book, rs.getShort(COPY_NUM));
                     costumer.addPedingBorrows(borrow);
-                }else if(rs.getString("state").equalsIgnoreCase("finished")){
-                    var borrow = new Borrow(book, rs.getShort("copyNum"), rs.getDate("inDate").toLocalDate(), rs.getDate("endDate").toLocalDate(), rs.getDate("restDate").toLocalDate());
+                }else if(rs.getString(STATE).equalsIgnoreCase("finished")){
+                    var borrow = new Borrow(book, rs.getShort(COPY_NUM), rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate(), rs.getDate("restDate").toLocalDate());
                     costumer.addFinishedBorrows(borrow);
-                }else if(rs.getString("state").equalsIgnoreCase("active")) {
+                }else if(rs.getString(STATE).equalsIgnoreCase("active")) {
                     if(LocalDate.now().isAfter(rs.getDate("endDate").toLocalDate())){
-                        var borrow = new Borrow(book, rs.getShort("copyNum"), rs.getDate("inDate").toLocalDate(), rs.getDate("endDate").toLocalDate(), Borrow.calculateFine(rs.getDate("inDate").toLocalDate(), rs.getDate("endDate").toLocalDate()));
+                        var borrow = new Borrow(book, rs.getShort(COPY_NUM), rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate(), Borrow.calculateFine(rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate()));
                         costumer.addOverdueBorrows(borrow);
                     }else{
-                        var borrow = new Borrow(book, rs.getShort("copyNum"), rs.getDate("inDate").toLocalDate(), rs.getDate("endDate").toLocalDate());
+                        var borrow = new Borrow(book, rs.getShort(COPY_NUM), rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate());
                         costumer.addActiveBorrows(borrow);
                     }
                 }

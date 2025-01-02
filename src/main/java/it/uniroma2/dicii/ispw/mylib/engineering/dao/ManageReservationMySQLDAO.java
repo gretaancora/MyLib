@@ -36,13 +36,6 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
 
             conn.commit();
 
-            try {
-                conn.setAutoCommit(true);
-
-            } catch (SQLException e) {
-                handleDAOException(e);
-            }
-
             return new BorrowBean(LocalDate.now(), LocalDate.now().plusMonths(1));
 
         } catch (SQLException e) {
@@ -58,9 +51,7 @@ public class ManageReservationMySQLDAO implements ManageReservationDAO{
                 handleDAOException(e);
             }
 
-            log.severe("Error in ManageReservationMySQLDAO: " + e.getMessage());
-            Printer.errorPrint("Error occurred managing reservations.");
-            throw new DAOException(e.getMessage());
+            return null;
 
         }
     }
