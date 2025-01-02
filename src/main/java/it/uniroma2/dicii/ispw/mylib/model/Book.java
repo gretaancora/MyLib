@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.mylib.model;
 
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
+import it.uniroma2.dicii.ispw.mylib.other.Printer;
 
 public class Book {
     private String isbn;
@@ -10,6 +11,8 @@ public class Book {
     private short pubYear;
     private String genres;
     private boolean availability;
+
+    //i seguenti attributi mi servono per l'inserimento di un libro (es_ make reservation in memory dao)
     private short numCopies;
     private short numAvailableCopies;
 
@@ -54,6 +57,7 @@ public class Book {
     public short getNumAvailableCopies() {return this.numAvailableCopies;}
 
     public void reduceNumAvailCopies() throws NoAvailableCopy {
+        Printer.println("Num available copies: " + this.numAvailableCopies);
         if (this.numAvailableCopies == 0){
             throw new NoAvailableCopy(getTitle());
         }else{
