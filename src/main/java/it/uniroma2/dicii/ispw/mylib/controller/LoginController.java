@@ -21,6 +21,7 @@ public class LoginController {
 
 
         if (!BCrypt.checkpw(loginBean.getPassword(), loggedInBean.getPassword())){
+            log.severe("Error in Login Controller: Wrong credentials.");
             throw new WrongCredentialsException();
         }else{
             if(loggedInBean.getType().name().equalsIgnoreCase("librarian")) {

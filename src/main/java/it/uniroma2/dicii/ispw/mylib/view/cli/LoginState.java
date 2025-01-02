@@ -6,7 +6,6 @@ import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UnsupportedUserTypeException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.WrongCredentialsException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UserNotFoundException;
-import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
 import it.uniroma2.dicii.ispw.mylib.view.cli.costumer.HomeCostumerState;
 import it.uniroma2.dicii.ispw.mylib.view.cli.librarian.HomeLibrarianState;
@@ -15,11 +14,9 @@ import it.uniroma2.dicii.ispw.mylib.model.User;
 import it.uniroma2.dicii.ispw.mylib.model.Costumer;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class LoginState extends State {
 
-    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
     @Override
     public void execute(StateMachine stateMachine) {
         LoginBean loginBean = this.authenticate();
@@ -29,19 +26,15 @@ public class LoginState extends State {
         try {
             user = loginController.start(loginBean);
         } catch (UserNotFoundException e) {
-            log.severe("Error in LoginState: " + e.getMessage());
             Printer.errorPrint("Wrong credentials. Try again...");
             this.execute(stateMachine);
         } catch (WrongCredentialsException e) {
-            log.severe("Error in LoginState: " + e.getMessage());
             Printer.errorPrint("Wrong credentials. Try again...");
             this.execute(stateMachine);
         } catch (UnsupportedUserTypeException e) {
-            log.severe("Error in LoginState: " + e.getMessage());
             Printer.errorPrint("Unsupported user type. Try again...");
             stateMachine.goBack();
         } catch (DAOException e) {
-            log.severe("Error in LoginState: " + e.getMessage());
             Printer.errorPrint("Error occurred during login. Try again...");
             this.execute(stateMachine);
         }

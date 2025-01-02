@@ -39,6 +39,7 @@ public class LoginGUIController {
     protected User user;
 
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
+    private static final String WRONG_CREDENTIALS = "Wrong credentials.";
 
 
 
@@ -73,13 +74,13 @@ public class LoginGUIController {
 
         } catch (UserNotFoundException u) {
             credentialsError.setVisible(false);
-            wrongCredentials.setText("Wrong credentials.");
+            wrongCredentials.setText(WRONG_CREDENTIALS);
         } catch (UnsupportedUserTypeException e) {
             credentialsError.setVisible(false);
-            wrongCredentials.setText("Wrong credentials.");
+            wrongCredentials.setText(WRONG_CREDENTIALS);
         } catch (WrongCredentialsException e) {
             credentialsError.setVisible(false);
-            wrongCredentials.setText("Wrong credentials.");
+            wrongCredentials.setText(WRONG_CREDENTIALS);
         } catch (DAOException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText("Error occurred during login. Try again....");
