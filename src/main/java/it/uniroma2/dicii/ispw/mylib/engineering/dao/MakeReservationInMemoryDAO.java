@@ -88,7 +88,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
                 } catch (NoAvailableCopy e) {
                     logger.severe("Error in MakeReservationInMemoryDAO: " + e.getMessage());
                     Printer.errorPrint("Error searching for an available copy of the book.");
-                    throw new NoAvailableCopy(e.getMessage());
+                    throw new NoAvailableCopy();
                 }
             }
         }

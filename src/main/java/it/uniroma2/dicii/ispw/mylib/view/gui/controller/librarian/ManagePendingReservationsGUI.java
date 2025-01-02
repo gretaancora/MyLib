@@ -99,7 +99,6 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
                 Stage stage = (Stage) resultsTable.getScene().getWindow();
                 stage.setScene(scene);
             } catch (IOException e) {
-                e.printStackTrace();
                 logger.severe("Error in ManagePendingReservationsGUI " + e.getMessage());
             }
         }

@@ -109,7 +109,6 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             Stage stage = (Stage) isbnLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
-            e.printStackTrace();
             logger.severe("Error in MakeReservationGUI (going back to search results): " + e.getMessage());
         }
     }
