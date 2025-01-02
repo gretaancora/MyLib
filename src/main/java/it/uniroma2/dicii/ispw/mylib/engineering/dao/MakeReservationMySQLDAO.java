@@ -7,7 +7,6 @@ import it.uniroma2.dicii.ispw.mylib.engineering.query.SearchQuery;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.Book;
 import it.uniroma2.dicii.ispw.mylib.model.Borrow;
-import it.uniroma2.dicii.ispw.mylib.model.Costumer;
 import it.uniroma2.dicii.ispw.mylib.model.Filter;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Connector;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
