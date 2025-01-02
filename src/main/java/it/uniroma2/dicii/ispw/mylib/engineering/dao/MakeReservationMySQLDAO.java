@@ -61,8 +61,8 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
         return books;
     }
 
-
-    public void reserveBook(Borrow borrow, Costumer costumer) throws DAOException, NoAvailableCopy {
+    @Override
+    public Borrow reserveBook(Borrow borrow) throws DAOException, NoAvailableCopy {
         Connection conn = null;
 
         try {
@@ -77,13 +77,14 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
                 Printer.errorPrint("No available copies of the selected book.");
                 throw new NoAvailableCopy(borrow.getBook().getTitle());
             }else {
-                reserveBookCopy(conn, rs, borrow, costumer);
+                return reserveBookCopy(conn, rs, borrow);
             }
 
         } catch (SQLException e) {
 
             if (conn != null) {
                 try {
+                    conn.setAutoCommit(true);
                     conn.rollback();
                     handleDAOException(e);
                 } catch (SQLException r) {
@@ -91,18 +92,9 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
                 }
             }
 
-            handleDAOException(e);
-
-        } finally {
-
-            if (conn != null) {
-                try {
-                    conn.setAutoCommit(true);
-
-                } catch (SQLException e) {
-                    handleDAOException(e);
-                }
-            }
+            logger.severe(e.getMessage());
+            Printer.errorPrint("Error occurred making the reservation.");
+            throw new DAOException();
 
         }
     }
@@ -111,7 +103,7 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
     /*prendi la copia ottenuta, aggiungi numero di copia a book, aggiungi borrow in persistenza
        (ricordati di modificare il numero di copie available e lo stato della copia prestata),
        restituisci le info del borrow per farle vedere all'utente*/
-    private void reserveBookCopy(Connection conn, ResultSet rs, Borrow borrow, Costumer costumer) throws SQLException {
+    private Borrow reserveBookCopy(Connection conn, ResultSet rs, Borrow borrow) throws SQLException {
 
         var borrowInfo = new Borrow(borrow.getBook(), borrow.getCostumer(), rs.getShort("copyNum"), LocalDateTime.now());
 
@@ -131,15 +123,14 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
         }
 
         conn.commit();
-
-        costumer.addPedingBorrows(borrowInfo);
+        return borrowInfo;
 
     }
 
 
     private void handleDAOException(Exception e) throws DAOException {
-        logger.severe(e.getMessage());
+        logger.severe("Error in MakeReservationMySQLDAO: " + e.getMessage());
         Printer.errorPrint("Error occurred making the reservation.");
-        throw new DAOException(e.getMessage());
+        throw new DAOException();
     }
 }

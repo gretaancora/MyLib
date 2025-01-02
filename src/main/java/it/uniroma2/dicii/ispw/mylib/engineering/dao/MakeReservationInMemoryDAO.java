@@ -67,13 +67,12 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     }
 
     @Override
-    public void reserveBook(Borrow borrow, Costumer costumer) throws NoAvailableCopy {
+    public Borrow reserveBook(Borrow borrow) throws NoAvailableCopy {
 
         int choice = 0;
         for (BookCopy bookCopy : copies) {
             if(bookCopy.getIsbn().equals(borrow.getBook().getIsbn()) && bookCopy.getAvailability()) {
                 borrow = new Borrow(borrow.getBook(), borrow.getCostumer(), bookCopy.getCopyNum(), LocalDateTime.now());
-                costumer.addPedingBorrows(borrow);
                 break;
             }
             choice++;
@@ -91,8 +90,11 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
                     Printer.errorPrint("Error searching for an available copy of the book.");
                     throw new NoAvailableCopy();
                 }
+                break;
             }
         }
+
+        return borrow;
 
     }
 }

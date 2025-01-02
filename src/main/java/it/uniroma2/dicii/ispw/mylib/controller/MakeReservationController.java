@@ -39,8 +39,6 @@ public class MakeReservationController {
             throw new DAOException();
         }
 
-        //carico nella lista di ripetizioneInfoBean i risultati della ricerca
-
         for (Book book: searchResults){
             var result = new BookBean(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getYear(), book.getGenres(), book.getAvailability());
             searchResultsBean.add(result);
@@ -60,8 +58,7 @@ public class MakeReservationController {
 
         try{
             MakeReservationDAO reservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
-            reservationDAO.reserveBook(borrow, costumer);
-            costumer.addPedingBorrows(borrow);
+            costumer.addPedingBorrows(reservationDAO.reserveBook(borrow));
         } catch (DAOException e){
             log.severe("Error in MakeReservationController (reserveBook): " + e.getMessage());
             Printer.errorPrint("Error borrowing book.");

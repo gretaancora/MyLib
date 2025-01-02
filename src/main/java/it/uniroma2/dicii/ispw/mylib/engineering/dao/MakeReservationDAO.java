@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface MakeReservationDAO {
     List<Book> searchBooks(Filter filter) throws DAOException;
-    void reserveBook(Borrow borrow, Costumer costumer) throws DAOException, NoAvailableCopy;
+    Borrow reserveBook(Borrow borrow) throws DAOException, NoAvailableCopy;
 }

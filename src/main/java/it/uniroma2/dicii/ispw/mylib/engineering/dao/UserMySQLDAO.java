@@ -33,7 +33,7 @@ public class UserMySQLDAO implements UserDAO {
             if (!rs.next()) {
                 throw new UserNotFoundException();
             } else {
-                return new LoginBean(email, rs.getString("password"), SupportedUserTypes.valueOf(rs.getString("type")));
+                return new LoginBean(email, rs.getString("password"), SupportedUserTypes.valueOf((rs.getString("type")).toUpperCase()));
 
             }
         } catch (SQLException e) {
