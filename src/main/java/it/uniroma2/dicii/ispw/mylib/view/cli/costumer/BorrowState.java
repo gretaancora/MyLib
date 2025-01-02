@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 
 public class BorrowState extends State {
 
+    private static final String INVALID_CHOICE = "Please enter a valid option!";
+
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     private Costumer costumer;
@@ -105,10 +107,10 @@ public class BorrowState extends State {
                 break;
 
             } catch (InputMismatchException e) {
-                Printer.println("Please enter a valid option!");
+                Printer.println(INVALID_CHOICE);
                 in.nextLine();
             } catch (NoSuchElementException e) {
-                Printer.println("Please enter a valid option!");
+                Printer.println(INVALID_CHOICE);
             }
         }
 
@@ -159,10 +161,10 @@ public class BorrowState extends State {
                     break;
 
                 } catch (InputMismatchException e) {
-                    Printer.println("Insert a valid option!");
+                    Printer.println(INVALID_CHOICE);
                     in.nextLine();
                 } catch (NoSuchElementException e) {
-                    Printer.println("Please enter a valid option!");
+                    Printer.println(INVALID_CHOICE);
                 }
             }
 

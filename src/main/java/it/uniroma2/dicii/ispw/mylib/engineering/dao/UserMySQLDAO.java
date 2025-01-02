@@ -122,7 +122,7 @@ public class UserMySQLDAO implements UserDAO {
                     var borrow = new Borrow(book, rs.getShort(COPY_NUM), rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate(), rs.getDate("restDate").toLocalDate());
                     costumer.addFinishedBorrows(borrow);
                 }else if(rs.getString(STATE).equalsIgnoreCase("active")) {
-                    if(LocalDate.now().isAfter(rs.getDate("endDate").toLocalDate())){
+                    if(LocalDate.now().isAfter(rs.getDate(END_DATE).toLocalDate())){
                         var borrow = new Borrow(book, rs.getShort(COPY_NUM), rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate(), Borrow.calculateFine(rs.getDate(IN_DATE).toLocalDate(), rs.getDate(END_DATE).toLocalDate()));
                         costumer.addOverdueBorrows(borrow);
                     }else{

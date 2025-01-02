@@ -1,7 +1,6 @@
 package it.uniroma2.dicii.ispw.mylib.model;
 
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
-import it.uniroma2.dicii.ispw.mylib.other.Printer;
 
 public class Book {
     private String isbn;
