@@ -125,6 +125,25 @@ public class Query {
                     relevance DESC;
                 """;
 
+    public static final String SHOW_CATALOG = """
+                SELECT 
+                    b.ISBN,
+                    b.title,
+                    b.editor,
+                    b.pubYear,
+                    b.numAvailableCopies,
+                    GROUP_CONCAT(DISTINCT CONCAT(ba.author) SEPARATOR ', ') AS authors,
+                    GROUP_CONCAT(DISTINCT bg.genre SEPARATOR ', ') AS genres
+                FROM 
+                    book b
+                LEFT JOIN 
+                    bookauthor ba ON b.ISBN = ba.book
+                LEFT JOIN 
+                    bookgenre bg ON b.ISBN = bg.book
+                GROUP BY 
+                    b.ISBN, b.title, b.editor, b.pubYear, b.numAvailableCopies;
+                """;
+
 
     /*--------------------Borrow Queries Costumer-------------------*/
     public static final String SEARCH_BOOK_COPY = """

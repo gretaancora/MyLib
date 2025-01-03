@@ -28,7 +28,13 @@ public class MakeReservationMySQLDAO implements MakeReservationDAO{
         List<Book> books = new ArrayList<>();
 
         //controllo del filterType e ricerca associata
-        if (filter.getFilterType().equalsIgnoreCase("author")) {
+        if (filter.getFlt()==null){
+            try {
+                rs = SearchQuery.showCatalog(Connector.getConnection());
+            }catch (SQLException e) {
+                handleDAOException(e);
+            }
+        }else if (filter.getFilterType().equalsIgnoreCase("author")) {
             try {
                 rs = SearchQuery.searchBookByAuthor(Connector.getConnection(), filter.getFlt());
             } catch (SQLException e) {

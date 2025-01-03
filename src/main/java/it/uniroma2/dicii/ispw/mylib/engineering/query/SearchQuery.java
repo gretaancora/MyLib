@@ -38,4 +38,8 @@ public class SearchQuery {
 
     }
 
+    public static ResultSet showCatalog(Connection conn) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement(Query.SHOW_CATALOG);
+        return stmt.executeQuery();
+    }
 }
