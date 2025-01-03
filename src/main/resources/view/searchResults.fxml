@@ -75,14 +75,14 @@
             <content>
                <TableView fx:id="resultsTable" prefHeight="421.0" prefWidth="682.0">
                  <columns>
-                   <TableColumn fx:id="isbn" prefWidth="75.0" text="ISBN" />
-                   <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
-                     <TableColumn fx:id="authors" prefWidth="75.0" text="Authors" />
-                     <TableColumn fx:id="editor" prefWidth="75.0" text="Editor" />
-                     <TableColumn fx:id="year" prefWidth="75.0" text="Year" />
-                     <TableColumn fx:id="genres" prefWidth="75.0" text="Genres" />
-                     <TableColumn fx:id="availability" prefWidth="75.0" text="Availability" />
-                     <TableColumn fx:id="borrow" prefWidth="75.0" />
+                   <TableColumn fx:id="isbn" minWidth="-Infinity" prefWidth="93.19997864961624" text="ISBN" />
+                   <TableColumn fx:id="title" minWidth="-Infinity" prefWidth="96.5999755859375" text="Title" />
+                     <TableColumn fx:id="authors" minWidth="-Infinity" prefWidth="112.00001525878906" text="Authors" />
+                     <TableColumn fx:id="editor" minWidth="-Infinity" prefWidth="58.39996337890625" text="Editor" />
+                     <TableColumn fx:id="year" minWidth="-Infinity" prefWidth="55.39996337890625" text="Year" />
+                     <TableColumn fx:id="genres" minWidth="-Infinity" prefWidth="74.4000244140625" text="Genres" />
+                     <TableColumn fx:id="availability" minWidth="-Infinity" prefWidth="81.79998779296875" text="Availability" />
+                     <TableColumn fx:id="borrow" minWidth="-Infinity" prefWidth="101.4000244140625" />
                  </columns>
                </TableView>
             </content>
