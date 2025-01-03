@@ -51,15 +51,15 @@ public class SearchResultsGUI extends HomeCostumerGUI {
     @FXML
     public void initialize() {
         configureTable();
-        impostaColonneTabella();
+        configureColumns();
     }
 
     private void configureTable() {
         resultsTable.getItems().addAll(bookBeans);
     }
 
-    private void impostaColonneTabella() {
-        isbn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+    private void configureColumns() {
+        isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         authors.setCellValueFactory(new PropertyValueFactory<>("authors"));
         editor.setCellValueFactory(new PropertyValueFactory<>("editor"));

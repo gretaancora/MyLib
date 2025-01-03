@@ -27,8 +27,9 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
 
     @Override
     public List<Book> searchBooks(Filter filter) {
-
-        if (filter.getFilterType().equalsIgnoreCase("author")) {
+        if (filter.getFlt() == null) {
+            showCatalog();
+        } else if (filter.getFilterType().equalsIgnoreCase("author")) {
             searchByAuthor(filter.getFlt());
         } else if (filter.getFilterType().equalsIgnoreCase("title")) {
             searchByTitle(filter.getFlt());
@@ -37,6 +38,10 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
         }
 
         return getBookList();
+    }
+
+    private void showCatalog() {
+        bookList = books;
     }
 
     private void searchByAllFields(String flt) {

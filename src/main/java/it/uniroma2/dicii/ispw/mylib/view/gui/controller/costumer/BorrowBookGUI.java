@@ -43,28 +43,26 @@ public class BorrowBookGUI extends HomeCostumerGUI {
     public void searchMethod(){
 
         if(this.searchBook.getText().isEmpty()) {
-            fieldsError.setText("Required field.");
+            this.filter = null;
+            this.type = null;
 
         } else {
             this.filter = this.searchBook.getText();
             this.type = filterType.getValue();
-
-            //creo bean con i filtri della ricerca da passare <l controller
-            var filterBean = new FilterBean(filter, type);
-
-            //istanzio il controller per effettuare la ricercae gli passo il bean
-            var makeReservationController = new MakeReservationController();
-
-            //chiama il controller applicativo e gli passa il BEAN che contiene la subject
-            try {
-                loadResults(makeReservationController.searchMethod(filterBean));
-            } catch (DAOException e) {
-                logger.severe("Error in BorrowBookGUI: " + e.getMessage());
-                fieldsError.setText("Error searching for book.");
-            }
-
-            Printer.println("Search finished.");
         }
+
+        var filterBean = new FilterBean(filter, type);
+
+        var makeReservationController = new MakeReservationController();
+
+        try {
+            loadResults(makeReservationController.searchMethod(filterBean));
+        } catch (DAOException e) {
+            logger.severe("Error in BorrowBookGUI: " + e.getMessage());
+            fieldsError.setText("Error searching for book.");
+        }
+
+        logger.info("Search finished.");
     }
 
 
