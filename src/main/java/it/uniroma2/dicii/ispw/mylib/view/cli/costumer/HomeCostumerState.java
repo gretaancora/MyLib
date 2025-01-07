@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class HomeCostumerState extends State {
     private Costumer costumer;
-    private static final String INVALID_CHOICE = "Invalid choice. Try again...";
 
     public HomeCostumerState(Costumer costumer) {
         super();
@@ -37,14 +36,14 @@ public class HomeCostumerState extends State {
                     case 1 -> Printer.println("Feature not implemented yet.");
                     case 2 -> stateMachine.goNext(new BorrowState(costumer));
                     case 3 -> new StateMachineImpl().start();
-                    default -> Printer.println(INVALID_CHOICE);
+                    default -> Printer.invalidChoicePrint();
                 }
 
             } catch (InputMismatchException e){
-                Printer.errorPrint(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
                 scan.nextLine();
             }catch (NoSuchElementException e){
-                Printer.errorPrint(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
             }
         }
     }

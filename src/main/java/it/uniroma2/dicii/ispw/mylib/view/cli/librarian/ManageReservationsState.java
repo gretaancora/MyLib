@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class ManageReservationsState extends State {
 
     private Librarian librarian;
-    private static final String INVALID_CHOICE = "Invalid choice. Try again...";
 
     public ManageReservationsState(Librarian librarian) {
         super();
@@ -38,14 +37,14 @@ public class ManageReservationsState extends State {
                     case 1 -> stateMachine.goNext(new ManagePendingReservationsState(librarian));
                     case 2, 3 -> Printer.println("Feature not implemented yet.");
                     case 4 -> new StateMachineImpl().start();
-                    default -> Printer.println(INVALID_CHOICE);
+                    default -> Printer.invalidChoicePrint();
                 }
 
             } catch (InputMismatchException e){
-                Printer.errorPrint(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
                 scan.nextLine();
             }catch (NoSuchElementException e){
-                Printer.errorPrint(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
             }
         }
     }
