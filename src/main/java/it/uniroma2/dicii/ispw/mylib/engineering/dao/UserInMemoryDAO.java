@@ -6,7 +6,6 @@ import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.EmailAlreadyInUseExce
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UserNotFoundException;
 import it.uniroma2.dicii.ispw.mylib.model.*;
 import it.uniroma2.dicii.ispw.mylib.other.SupportedUserTypes;
-import org.mindrot.jbcrypt.BCrypt;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,8 @@ public class UserInMemoryDAO implements UserDAO{
 
 
     public UserInMemoryDAO() {
-        users.add(new Costumer(EMAIL_1, USER_1, USER_1, USER_1));
-        users.add(new Librarian(EMAIL_2, USER_2, USER_2, USER_2));
+        users.add(new Costumer(EMAIL_1, "$2a$10$mNuM3heDto6ECbifGRuLm.0.6khzYOOX5jDk3fQ0ChAxt8N6eepWq", USER_1, USER_1, SupportedUserTypes.COSTUMER, new ArrayList<>()));
+        users.add(new Librarian(EMAIL_2, "$2a$10$hPA5CMm1W2.3m2zMS2z4.Ow62gKwGmOKbUZq2J/qtfJRBEHX8q1aO", USER_2, USER_2, SupportedUserTypes.LIBRARIAN));
     }
 
     @Override
@@ -62,10 +61,8 @@ public class UserInMemoryDAO implements UserDAO{
     @Override
     public LoginBean getUserInfoByEmail(String email) throws UserNotFoundException {
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getEmail().equals(EMAIL_1)) {
-                return new LoginBean(EMAIL_1, BCrypt.hashpw(USER_1, BCrypt.gensalt()), SupportedUserTypes.COSTUMER);
-            }else if(user.getEmail().equals(email) && user.getEmail().equals(EMAIL_2)){
-                return new LoginBean(EMAIL_2, BCrypt.hashpw(USER_2, BCrypt.gensalt()), SupportedUserTypes.LIBRARIAN);
+            if (user.getEmail().equals(email)) {
+                return new LoginBean(user.getEmail(), user.getPassword(), user.getType());
             }
         }
 
