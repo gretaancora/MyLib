@@ -44,7 +44,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     private void showCatalog() throws DAOException {
         for (Book book : books){
             if(!this.bookList.add(new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0))){
-                handleException("adding book in showCatalog()");
+                throw new DAOException("Error in MakeReservationDAO: adding book in showCatalog()");
             }
         }
     }
@@ -54,7 +54,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
             if(book.getAuthors().contains(flt) || book.getTitle().equalsIgnoreCase(flt) || book.getGenres().equalsIgnoreCase(flt) || book.getIsbn().equalsIgnoreCase(flt)){
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                 if(!this.bookList.add(b)){
-                    handleException("adding book in searchByAllFields()");
+                    throw new DAOException("Error in MakeReservationDAO: adding book in searchByAllFields()");
                 }
             }
         }
@@ -65,7 +65,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
             if(book.getTitle().equalsIgnoreCase(title)) {
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                 if(!this.bookList.add(b)){
-                    handleException("adding book in searchByTitle()");
+                    throw new DAOException("Error in MakeReservationDAO: adding book in searchByTitle()");
                 }
             }
         }
@@ -76,7 +76,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
             if(book.getAuthors().contains(author)) {
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
                 if (!this.bookList.add(b)){
-                    handleException("adding book in searchByAuthor()");
+                    throw new DAOException("Error in MakeReservationDAO: adding book in searchByAuthor()");
                 }
             }
         }
@@ -112,11 +112,5 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
 
         return borrow;
 
-    }
-
-    public void handleException(String msg) throws DAOException {
-        logger.severe(String.format("Error in MakeReservationInMemoryDAO: %s", msg));
-        Printer.errorPrint("Error occurred making reservation.");
-        throw new DAOException();
     }
 }
