@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.mylib.engineering.dao;
 
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.*;
@@ -11,8 +12,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class MakeReservationInMemoryDAO implements MakeReservationDAO{
-    private static List<Book> books = new ArrayList<>();
-    private static List<BookCopy> copies = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
+    private List<BookCopy> copies = new ArrayList<>();
     private List<Book> bookList = new ArrayList<>();
 
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
@@ -26,7 +27,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     public List<Book> getBookList() {return this.bookList;}
 
     @Override
-    public List<Book> searchBooks(Filter filter) {
+    public List<Book> searchBooks(Filter filter) throws DAOException {
         if (filter.getFlt() == null) {
             showCatalog();
         } else if (filter.getFilterType().equalsIgnoreCase("author")) {
@@ -40,33 +41,43 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
         return getBookList();
     }
 
-    private void showCatalog() {
-        bookList = books;
+    private void showCatalog() throws DAOException {
+        for (Book book : books){
+            if(!this.bookList.add(new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0))){
+                handleException("adding book in showCatalog()");
+            }
+        }
     }
 
-    private void searchByAllFields(String flt) {
+    private void searchByAllFields(String flt) throws DAOException {
         for (Book book : books) {
             if(book.getAuthors().contains(flt) || book.getTitle().equalsIgnoreCase(flt) || book.getGenres().equalsIgnoreCase(flt) || book.getIsbn().equalsIgnoreCase(flt)){
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
-                this.bookList.add(b);
+                if(!this.bookList.add(b)){
+                    handleException("adding book in searchByAllFields()");
+                }
             }
         }
     }
 
-    private void searchByTitle(String title) {
+    private void searchByTitle(String title) throws DAOException {
         for (Book book : books) {
             if(book.getTitle().equalsIgnoreCase(title)) {
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
-                this.bookList.add(b);
+                if(!this.bookList.add(b)){
+                    handleException("adding book in searchByTitle()");
+                }
             }
         }
     }
 
-    private void searchByAuthor(String author) {
+    private void searchByAuthor(String author) throws DAOException {
         for (Book book : books) {
             if(book.getAuthors().contains(author)) {
                 var b = new Book(book.getIsbn(), book.getTitle(), book.getAuthors(), book.getEditor(), book.getPubYear(), book.getGenres(), book.getNumAvailableCopies() != 0);
-                this.bookList.add(b);
+                if (!this.bookList.add(b)){
+                    handleException("adding book in searchByAuthor()");
+                }
             }
         }
     }
@@ -101,5 +112,11 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
 
         return borrow;
 
+    }
+
+    public void handleException(String msg) throws DAOException {
+        logger.severe("Error in MakeReservationInMemoryDAO: " + msg);
+        Printer.errorPrint("Error occurred making reservation.");
+        throw new DAOException();
     }
 }
