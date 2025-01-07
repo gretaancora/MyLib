@@ -76,11 +76,9 @@ public class LoginGUIController {
         } catch (UserNotFoundException u) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);
-            Printer.println("Wrong credentials.");
         } catch (UnsupportedUserTypeException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);
-            Printer.println("Unsupported user type.");
         } catch (WrongCredentialsException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);

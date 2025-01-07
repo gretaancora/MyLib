@@ -115,7 +115,7 @@ public class MakeReservationInMemoryDAO implements MakeReservationDAO{
     }
 
     public void handleException(String msg) throws DAOException {
-        logger.severe("Error in MakeReservationInMemoryDAO: " + msg);
+        logger.severe(String.format("Error in MakeReservationInMemoryDAO: %s", msg));
         Printer.errorPrint("Error occurred making reservation.");
         throw new DAOException();
     }
