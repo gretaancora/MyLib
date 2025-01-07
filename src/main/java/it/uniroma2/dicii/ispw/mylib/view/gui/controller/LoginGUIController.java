@@ -10,6 +10,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.Costumer;
 import it.uniroma2.dicii.ispw.mylib.model.Librarian;
 import it.uniroma2.dicii.ispw.mylib.model.User;
+import it.uniroma2.dicii.ispw.mylib.other.Printer;
 import it.uniroma2.dicii.ispw.mylib.view.gui.controller.costumer.HomeCostumerGUI;
 import it.uniroma2.dicii.ispw.mylib.view.gui.controller.librarian.HomeLibrarianGUI;
 import javafx.fxml.FXML;
@@ -75,9 +76,11 @@ public class LoginGUIController {
         } catch (UserNotFoundException u) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);
+            Printer.println("Wrong credentials.");
         } catch (UnsupportedUserTypeException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);
+            Printer.println("Unsupported user type.");
         } catch (WrongCredentialsException e) {
             credentialsError.setVisible(false);
             wrongCredentials.setText(WRONG_CREDENTIALS);

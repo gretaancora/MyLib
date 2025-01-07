@@ -4,18 +4,22 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.LoginBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.EmailAlreadyInUseException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.UserNotFoundException;
+import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.*;
+import it.uniroma2.dicii.ispw.mylib.other.Printer;
 import it.uniroma2.dicii.ispw.mylib.other.SupportedUserTypes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserInMemoryDAO implements UserDAO{
 
-    private List<User> users = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
     private static final String EMAIL_1 = "user1@gmail.com";
     private static final String USER_1 = "user1";
     private static final String EMAIL_2 = "user2@gmail.com";
     private static final String USER_2 = "user2";
+    private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
 
     public UserInMemoryDAO() {
@@ -31,7 +35,9 @@ public class UserInMemoryDAO implements UserDAO{
             }
         }
 
-        if(!users.add(costumer)){
+        if(!users.add(new Costumer(costumer.getEmail(), costumer.getPassword(), costumer.getName(), costumer.getSurname(), SupportedUserTypes.COSTUMER, new ArrayList<>()))){
+            log.severe("Error in RegisterController: trying to add the new costumer to the users' list.");
+            Printer.errorPrint("Error occurred during registration.");
             throw new DAOException();
         }
     }
