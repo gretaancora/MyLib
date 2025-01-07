@@ -23,16 +23,16 @@ public class HomeLibrarianState extends State {
         showMenu();
 
         Scanner scan = new Scanner(System.in);
-        int choice;
+        int choice1;
 
         while(true) {
             Printer.print("Enter your choice: ");
 
             try{
-                choice = scan.nextInt();
+                choice1 = scan.nextInt();
                 scan.nextLine();
 
-                switch (choice){
+                switch (choice1){
                     case 1 -> Printer.println("Feature not implemented yet.");
                     case 2 -> stateMachine.goNext(new ManageReservationsState(librarian));
                     case 3 -> new StateMachineImpl().start();
