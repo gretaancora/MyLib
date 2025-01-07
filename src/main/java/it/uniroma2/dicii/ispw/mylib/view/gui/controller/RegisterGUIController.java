@@ -63,7 +63,7 @@ public class RegisterGUIController {
             surname = this.surnameField.getText();
 
 
-            //controllo la forma dell'email inserito
+            //controllo la forma dell'email inserita
             email = this.emailField.getText();
             try{
                 isValidEmail(email);
@@ -97,8 +97,7 @@ public class RegisterGUIController {
             RegisterController registerController = new RegisterController();
             registerController.registerCostumer(registerBean);
 
-            Printer.println("---------------------------------------------------------");
-            Printer.println("Registration succeeded!");
+            logger.info("Registration succeeded!");
             loadConfirmation();
 
         }catch(EmailAlreadyInUseException e) {
