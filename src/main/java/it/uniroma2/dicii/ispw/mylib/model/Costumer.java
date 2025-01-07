@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.mylib.model;
 
+import it.uniroma2.dicii.ispw.mylib.other.SupportedUserTypes;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,8 @@ public class Costumer extends User {
     }
 
     //creazione user per in memory mode
-    public Costumer(String email, String password, String name, String surname, List<Borrow> pendingBorrows) {
-        super(email, name, surname, password);
+    public Costumer(String email, String password, String name, String surname, SupportedUserTypes type, List<Borrow> pendingBorrows) {
+        super(email, name, surname, password, type);
         this.membershipDate = LocalDate.now();
         this.membershipStatus = true;
         this.pendingBorrows = pendingBorrows;

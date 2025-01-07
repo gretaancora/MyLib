@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.mylib.model;
 
 import it.uniroma2.dicii.ispw.mylib.other.SupportedRoleTypes;
+import it.uniroma2.dicii.ispw.mylib.other.SupportedUserTypes;
 
 import java.time.LocalDate;
 
@@ -16,8 +17,8 @@ public class Librarian extends User {
     }
 
     //creazione librarian per in memory mode
-    public Librarian(String email, String password, String name, String surname) {
-        super(email, name, surname, password);
+    public Librarian(String email, String password, String name, String surname, SupportedUserTypes type) {
+        super(email, name, surname, password, type);
         this.empDate = LocalDate.now();
         this.role = SupportedRoleTypes.SUPERVISOR;
     }
