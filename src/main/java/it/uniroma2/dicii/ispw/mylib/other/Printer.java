@@ -27,4 +27,7 @@ public class Printer {
     public static void errorPrint(String message) {
         System.out.println(ANSI_RED + message + ANSI_RESET);
     }
+
+    //stampa errore scelta utente
+    public static final void invalidChoicePrint() {System.out.println(ANSI_RED + "Invalid choice. Try again..." + ANSI_RED);}
 }
