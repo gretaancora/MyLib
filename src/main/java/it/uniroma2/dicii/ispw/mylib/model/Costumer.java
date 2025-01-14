@@ -9,20 +9,16 @@ import java.util.List;
 public class Costumer extends User {
     private LocalDate membershipDate;
     private boolean membershipStatus;
-    private List<Borrow> pendingBorrows;
-    private List<Borrow> activeBorrows;
-    private List<Borrow> overdueBorrows;
-    private List<Borrow> finishedBorrows;
+    private List<Borrow> pendingBorrows = new ArrayList<>();
+    private List<Borrow> activeBorrows = new ArrayList<>();
+    private List<Borrow> overdueBorrows = new ArrayList<>();
+    private List<Borrow> finishedBorrows = new ArrayList<>();
 
     //login
     public Costumer(String email, String name, String surname, LocalDate subDate, boolean membershipStatus) {
         super(email, name, surname);
         this.membershipDate = subDate;
         this.membershipStatus = membershipStatus;
-        this.pendingBorrows = new ArrayList<>();
-        this.activeBorrows = new ArrayList<>();
-        this.overdueBorrows = new ArrayList<>();
-        this.finishedBorrows = new ArrayList<>();
     }
 
     //registrazione
@@ -31,10 +27,6 @@ public class Costumer extends User {
         super(email, name, surname, password);
         this.membershipDate = subDate;
         this.membershipStatus = true;
-        this.pendingBorrows = new ArrayList<>();
-        this.activeBorrows = new ArrayList<>();
-        this.overdueBorrows = new ArrayList<>();
-        this.finishedBorrows = new ArrayList<>();
     }
 
     // se data non inserita attivazione odierna
@@ -42,10 +34,6 @@ public class Costumer extends User {
         super(email, name, surname, password);
         this.membershipDate = LocalDate.now();
         this.membershipStatus = true;
-        this.pendingBorrows = new ArrayList<>();
-        this.activeBorrows = new ArrayList<>();
-        this.overdueBorrows = new ArrayList<>();
-        this.finishedBorrows = new ArrayList<>();
     }
 
     //creazione user per in memory mode
@@ -54,9 +42,6 @@ public class Costumer extends User {
         this.membershipDate = LocalDate.now();
         this.membershipStatus = true;
         this.pendingBorrows = pendingBorrows;
-        this.activeBorrows = new ArrayList<>();
-        this.overdueBorrows = new ArrayList<>();
-        this.finishedBorrows = new ArrayList<>();
     }
 
 
