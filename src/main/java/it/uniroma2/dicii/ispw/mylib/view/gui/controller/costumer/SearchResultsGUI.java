@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class SearchResultsGUI extends HomeCostumerGUI {
 
 
     //inizializzo una lista, in cui popolo gli elementi della tabella
-    List<BookBean> bookBeans = null;
+    List<BookBean> bookBeans = new ArrayList<>();
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
     public SearchResultsGUI() {}
@@ -55,6 +56,7 @@ public class SearchResultsGUI extends HomeCostumerGUI {
     }
 
     private void configureTable() {
+        resultsTable.setPlaceholder(new Label("No book found"));
         resultsTable.getItems().addAll(bookBeans);
     }
 
