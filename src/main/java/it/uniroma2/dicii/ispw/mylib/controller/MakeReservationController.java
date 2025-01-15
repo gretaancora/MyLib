@@ -5,6 +5,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.dao.MakeReservationDAO;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.MaxPendingBorrowsException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.factory.DAOFactory;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
@@ -48,20 +49,27 @@ public class MakeReservationController {
 
     }
 
-    public void reserveBook(BorrowBean borrowBean, Costumer costumer) throws NoAvailableCopy {
-        //creo model a partire dalla bean
-        var book = new Book(borrowBean.getBook().getIsbn(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
-        var borrow = new Borrow(book, borrowBean.getCostumer());
+    public void reserveBook(BorrowBean borrowBean, Costumer costumer) throws NoAvailableCopy, MaxPendingBorrowsException {
 
-        //passo model alla dao che si connette al db, seleziona la prima copia disponibile del libro desiderato,
-        // inserisce un borrow nel db e restituisce un model avente le info della copia selezionata*/
+        //controllo che il costumer possa effettuae la prenotazione
+        if(costumer.getPendingBorrows().size() < 2) {
 
-        try{
-            MakeReservationDAO reservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
-            costumer.addPedingBorrows(reservationDAO.reserveBook(borrow));
-        } catch (DAOException e){
-            log.severe("Error in MakeReservationController (reserveBook): " + e.getMessage());
-            Printer.errorPrint("Error borrowing book.");
+            //creo model a partire dalla bean
+            var book = new Book(borrowBean.getBook().getIsbn(), borrowBean.getBook().getTitle(), borrowBean.getBook().getAuthors(), borrowBean.getBook().getEditor(), Short.valueOf(borrowBean.getBook().getPubYear()), borrowBean.getBook().getGenres());
+            var borrow = new Borrow(book, borrowBean.getCostumer());
+
+            //passo model alla dao che si connette al db, seleziona la prima copia disponibile del libro desiderato,
+            // inserisce un borrow nel db e restituisce un model avente le info della copia selezionata*/
+
+            try {
+                MakeReservationDAO reservationDAO = DAOFactory.getDAOFactory().createMakeReservationDAO();
+                costumer.addPedingBorrows(reservationDAO.reserveBook(borrow));
+            } catch (DAOException e) {
+                log.severe("Error in MakeReservationController (reserveBook): " + e.getMessage());
+                Printer.errorPrint("Error borrowing book.");
+            }
+        }else{
+            throw new MaxPendingBorrowsException();
         }
 
     }

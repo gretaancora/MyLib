@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.mylib.controller.MakeReservationController;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.BookBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.dao.MakeReservationMySQLDAO;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.MaxPendingBorrowsException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.model.Costumer;
@@ -61,25 +62,22 @@ public class MakeReservationGUI extends HomeCostumerGUI {
 
     }
 
+    /*metodo lanciato quando viene premuto il pulsante borrow*/
     public void reserveBook() {
 
-        /*
-        metodo lanciato quando viene premuto il pulsante invio di prenotazione*/
+        var borrowBean = new BorrowBean(book, costumer.getEmail());
 
-        //controlla che l'utente non abbia già due pending borrow
-        if (costumer.getPendingBorrows()==null || costumer.getPendingBorrows().size() < 2) {
-            var borrowBean = new BorrowBean(book, costumer.getEmail());
-
-            var makeReservationController = new MakeReservationController();
-            try {
-                makeReservationController.reserveBook(borrowBean, costumer);
-            } catch (NoAvailableCopy e) {
-                errorLabel.setText("Book not available.");
-            }
-            loadConfirmation();
-        } else {
+        var makeReservationController = new MakeReservationController();
+        try {
+            makeReservationController.reserveBook(borrowBean, costumer);
+        } catch (NoAvailableCopy e) {
+            errorLabel.setText("Book not available.");
+        } catch (MaxPendingBorrowsException e) {
             errorLabel.setText("You have reached the maximum number of pending reservations.");
+            goToHomePage();
         }
+
+        loadConfirmation();
 
     }
 
@@ -110,6 +108,19 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in MakeReservationGUI (going back to search results): " + e.getMessage());
+        }
+    }
+
+    private void goToHomePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MakeReservationMySQLDAO.class.getResource("/view/homeCostumer.fxml"));
+            loader.setControllerFactory(c -> new HomeCostumerGUI(this.costumer));
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) isbnLabel.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            logger.severe("Error in MakeReservationGUI (going back to home page): " + e.getMessage());
         }
     }
 }
