@@ -74,6 +74,9 @@
          <ScrollPane>
             <content>
                <TableView fx:id="resultsTable" prefHeight="421.0" prefWidth="682.0">
+                  <placeholder>
+                     <Label text="No book found" />
+                  </placeholder>
                  <columns>
                    <TableColumn fx:id="isbn" minWidth="-Infinity" prefWidth="93.19997864961624" text="ISBN" />
                    <TableColumn fx:id="title" minWidth="-Infinity" prefWidth="96.5999755859375" text="Title" />
@@ -89,5 +92,4 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <Text layoutX="436.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" />
 </AnchorPane>
