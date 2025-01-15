@@ -46,6 +46,9 @@ public class ManagePendingReservationsGUI extends HomeLibrarianGUI {
 
     public void initialize(){
 
+        //setto placeholder nel caso la lista fosse vuota
+        resultsTable.setPlaceholder(new Label("No pending reservation found"));
+
         //creo un'istanza di controller applicativo corrispondente
         var manageReservationsController = new ManageReservationsController();
 
