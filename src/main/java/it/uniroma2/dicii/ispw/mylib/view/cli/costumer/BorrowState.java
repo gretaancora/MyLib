@@ -92,7 +92,7 @@ public class BorrowState extends State {
         Printer.printlnBlu("--------------BORROW--------------");
     }
 
-    public String getFilterType(Scanner in) {
+    private String getFilterType(Scanner in) {
         int choice;
 
         while (true) {

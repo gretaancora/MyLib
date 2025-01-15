@@ -75,7 +75,7 @@ public class ManagePendingReservationsState extends State {
     }
 
 
-    public BorrowBean selectBorrow(List<BorrowBean> borrows, Scanner in) throws BorrowNotFoundException {
+    private BorrowBean selectBorrow(List<BorrowBean> borrows, Scanner in) throws BorrowNotFoundException {
         int i = 1;
         int choice;
 
