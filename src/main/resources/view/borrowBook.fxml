@@ -52,7 +52,7 @@
          </effect>
       </Button>
    </VBox>
-   <Text fx:id="titolo" fill="#000000ab" layoutX="374.0" layoutY="69.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Borrow A Book" textAlignment="CENTER" wrappingWidth="428.8001129627228" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="197.19988703727722" AnchorPane.topAnchor="30.0">
+   <Text fx:id="titolo" fill="#000000ab" layoutX="374.0" layoutY="69.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="#titolo" text="Borrow a Book" textAlignment="CENTER" wrappingWidth="428.8001129627228" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="197.19988703727722" AnchorPane.topAnchor="30.0">
       <font>
          <Font size="40.0" />
       </font>
@@ -72,7 +72,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="292.0" layoutY="251.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#searchMethod" prefHeight="39.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@../view/style/button.css" text="Search" />
+      <Button layoutX="292.0" layoutY="285.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#searchMethod" prefHeight="39.0" prefWidth="94.0" styleClass="custom-button2" stylesheets="@../view/style/button.css" text="Search" />
       <Label fx:id="fieldsError" layoutX="286.0" layoutY="110.0" prefHeight="18.0" prefWidth="107.0" textAlignment="CENTER" textFill="#d40000" wrapText="true" />
       <Text layoutX="147.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="testo">
          <font>
@@ -82,8 +82,8 @@
       <Label fx:id="tariffaValue" contentDisplay="RIGHT" layoutX="329.0" layoutY="437.0" prefHeight="18.0" prefWidth="33.0" />
       <ComboBox fx:id="filterType" editable="true" layoutX="225.0" layoutY="171.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="207.0" styleClass="combo-box" />
       <Text layoutX="225.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By:" />
-      <Text layoutX="286.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="go to" />
-      <Text layoutX="319.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advanced Search" underline="true" />
+      <Text layoutX="284.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="go to" />
+      <Text layoutX="317.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advanced Search" underline="true" />
    </AnchorPane>
    <stylesheets>
       <URL value="@style/base.css" />
