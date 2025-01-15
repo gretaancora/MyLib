@@ -6,6 +6,7 @@ import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.FilterBean;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.BookNotFoundException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.DAOException;
+import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.MaxPendingBorrowsException;
 import it.uniroma2.dicii.ispw.mylib.engineering.exceptions.NoAvailableCopy;
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
@@ -21,9 +22,6 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class BorrowState extends State {
-
-    private static final String INVALID_CHOICE = "Please enter a valid option!";
-
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     private Costumer costumer;
@@ -74,6 +72,8 @@ public class BorrowState extends State {
                 makeReservationController.reserveBook(borrowBean, costumer);
             } catch (NoAvailableCopy e) {
                 stateMachine.goBack();
+            } catch (MaxPendingBorrowsException e) {
+                Printer.errorPrint("You have reached the maximum number of pending borrows.");
             }
             Printer.println("Reservation succeeded!\n Go into section 'show profile' in order to see it.");
 
@@ -107,10 +107,10 @@ public class BorrowState extends State {
                 break;
 
             } catch (InputMismatchException e) {
-                Printer.println(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
                 in.nextLine();
             } catch (NoSuchElementException e) {
-                Printer.println(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
             }
         }
 
@@ -153,10 +153,10 @@ public class BorrowState extends State {
                     break;
 
                 } catch (InputMismatchException e) {
-                    Printer.println(INVALID_CHOICE);
+                    Printer.invalidChoicePrint();
                     in.nextLine();
                 } catch (NoSuchElementException e) {
-                    Printer.println(INVALID_CHOICE);
+                    Printer.invalidChoicePrint();
                 }
             }
 
