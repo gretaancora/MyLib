@@ -50,7 +50,7 @@ public class LoginState extends State {
         stateMachine.goNext(homeState);
     }
 
-    public LoginBean authenticate() {
+    private LoginBean authenticate() {
         var in = new Scanner(System.in);
         String password;
         String email;

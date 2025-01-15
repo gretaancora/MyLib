@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class InitialState extends State {
 
-    private static final String INVALID_CHOICE = "Invalid choice. Try again...";
-
     @Override
     public void execute(StateMachine stateMachine) {
         Scanner input = new Scanner(System.in);
@@ -25,14 +23,14 @@ public class InitialState extends State {
                 switch (choice) {
                     case 1 -> stateMachine.goNext(new LoginState());
                     case 2 -> stateMachine.goNext(new RegisterState());
-                    default -> Printer.println(INVALID_CHOICE);
+                    default -> Printer.invalidChoicePrint();
                 }
 
             } catch (InputMismatchException e) {
                 input.nextLine();
-                Printer.println(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
             } catch (NoSuchElementException e) {
-                Printer.println(INVALID_CHOICE);
+                Printer.invalidChoicePrint();
             }
         }
     }

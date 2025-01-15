@@ -72,7 +72,7 @@ public class RegisterState extends State {
         Printer.printlnBlu("--------------REGISTER--------------");
     }
 
-    public static void isValidEmail(String email) throws InvalidEmail {
+    private static void isValidEmail(String email) throws InvalidEmail {
         if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
             throw new InvalidEmail();
         }

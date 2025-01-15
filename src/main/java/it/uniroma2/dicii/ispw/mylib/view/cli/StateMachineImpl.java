@@ -5,12 +5,11 @@ import java.util.Deque;
 
 public class StateMachineImpl implements StateMachine {
     /*utilizzo una deque come pila di stati visitati sulla quale effettuare operazioni di push e pop*/
-    private Deque<State> stateHistory;
+    private Deque<State> stateHistory = new ArrayDeque<>();
     private State currentState;
 
     //alla creazione della macchina setto il current state
     public StateMachineImpl() {
-        this.stateHistory = new ArrayDeque<>();
         this.currentState = new InitialState();
     }
 
