@@ -15,16 +15,12 @@ import java.util.logging.Logger;
 public class UserInMemoryDAO implements UserDAO{
 
     private static List<User> users = new ArrayList<>();
-    private static final String EMAIL_1 = "user1@gmail.com";
-    private static final String USER_1 = "user1";
-    private static final String EMAIL_2 = "user2@gmail.com";
-    private static final String USER_2 = "user2";
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     //viene runnato una sola volta
     static {
-        users.add(new Costumer(EMAIL_1, "$2a$10$mNuM3heDto6ECbifGRuLm.0.6khzYOOX5jDk3fQ0ChAxt8N6eepWq", USER_1, USER_1, SupportedUserTypes.COSTUMER, new ArrayList<>()));
-        users.add(new Librarian(EMAIL_2, "$2a$10$hPA5CMm1W2.3m2zMS2z4.Ow62gKwGmOKbUZq2J/qtfJRBEHX8q1aO", USER_2, USER_2, SupportedUserTypes.LIBRARIAN));
+        users.add(new Costumer("user1@gmail.com", "$2a$10$mNuM3heDto6ECbifGRuLm.0.6khzYOOX5jDk3fQ0ChAxt8N6eepWq", "user1", "user1", SupportedUserTypes.COSTUMER, new ArrayList<>()));
+        users.add(new Librarian("user2@gmail.com", "$2a$10$hPA5CMm1W2.3m2zMS2z4.Ow62gKwGmOKbUZq2J/qtfJRBEHX8q1aO", "user2", "user2", SupportedUserTypes.LIBRARIAN));
     }
 
     @Override
