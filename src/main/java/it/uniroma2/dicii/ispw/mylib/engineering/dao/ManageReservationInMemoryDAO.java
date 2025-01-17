@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.mylib.engineering.dao;
 import it.uniroma2.dicii.ispw.mylib.engineering.bean.BorrowBean;
 import it.uniroma2.dicii.ispw.mylib.model.Book;
 import it.uniroma2.dicii.ispw.mylib.model.Borrow;
-import it.uniroma2.dicii.ispw.mylib.other.Printer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
