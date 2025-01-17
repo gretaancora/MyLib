@@ -51,7 +51,7 @@ public class MakeReservationController {
 
     public void reserveBook(BorrowBean borrowBean, Costumer costumer) throws NoAvailableCopy, MaxPendingBorrowsException {
 
-        //controllo che il costumer possa effettuae la prenotazione
+        //controllo che il costumer possa effettuare la prenotazione
         if(costumer.getPendingBorrows().size() < 2) {
 
             //creo model a partire dalla bean
