@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class MakeReservationInMemoryDAO implements MakeReservationDAO{
-    private List<Book> books = new ArrayList<>();
-    private List<BookCopy> copies = new ArrayList<>();
+    private static List<Book> books = new ArrayList<>();
+    private static List<BookCopy> copies = new ArrayList<>();
     private List<Book> bookList = new ArrayList<>();
 
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
-    public MakeReservationInMemoryDAO() {
+    static {
         books.add(new Book("9788806220457", "Delitto e castigo", "Fëdor Dostoevskij", "Einaudi", (short) 2014, "romanzo"));
         books.get(0).setNumCopies((short) 1, (short) 1);
         copies.add(new BookCopy("9788806220457", (short) 1, true, "NAR-A-1-1"));
