@@ -11,19 +11,9 @@ public class Borrow {
     private LocalDate inDate;
     private LocalDate endDate;
     private LocalDate restDate;
-    private float fine;
     private LocalDateTime inReq;
+    private float fine;
     private String position;
-
-    public Borrow(Book book, short copy, String costumer, LocalDate inDate, LocalDate endDate, LocalDate restDate, float fine){
-        this.book = book;
-        this.copy = copy;
-        this. costumer = costumer;
-        this.inDate = inDate;
-        this.endDate = endDate;
-        this.restDate = restDate;
-        this.fine = fine;
-    }
 
     public Borrow(Book book, short copy, LocalDate inDate, LocalDate endDate, LocalDate restDate){
         this.book = book;
@@ -31,14 +21,6 @@ public class Borrow {
         this.inDate = inDate;
         this.endDate = endDate;
         this.restDate = restDate;
-    }
-
-    public Borrow(Book book, short copy, LocalDate inDate, LocalDate endDate, float fine){
-        this.book = book;
-        this.copy = copy;
-        this.inDate = inDate;
-        this.endDate = endDate;
-        this.fine = fine;
     }
 
     public Borrow(Book book, short copy, LocalDate inDate, LocalDate endDate){
@@ -90,9 +72,17 @@ public class Borrow {
         this.endDate = endDate;
     }
 
+    public Borrow(Book book, short copy, LocalDate inDate, LocalDate endDate, float fine) {
+        this.book = book;
+        this.copy = copy;
+        this.inDate = inDate;
+        this.endDate = endDate;
+        this.fine = fine;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.book).append(" ").append(this.copy).append(" ").append(this.costumer).append(" ").append(this.inDate == null ? "" : this.inDate).append(" ").append(this.endDate == null ? "" : this.endDate).append(" ").append(this.restDate == null ? "" : this.restDate).append(" ").append(this.fine).append('\n');
+        sb.append(this.book).append(" ").append(this.copy).append(" ").append(this.costumer).append(" ").append(this.inDate == null ? "" : this.inDate).append(" ").append(this.endDate == null ? "" : this.endDate).append(" ").append(this.restDate == null ? "" : this.restDate).append('\n');
         return sb.toString();
     }
 

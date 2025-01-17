@@ -40,13 +40,13 @@ public class MakeReservationGUI extends HomeCostumerGUI {
     private Label errorLabel;
 
     BookBean book;
-    List<BookBean> bookBeans;
+    List<BookBean> results;
     private static final Logger logger = Logger.getLogger(Configurations.LOGGER_NAME);
 
-    public MakeReservationGUI(Costumer costumer, BookBean bookBean, List<BookBean> bookBeans) {
+    public MakeReservationGUI(Costumer costumer, BookBean bookBean, List<BookBean> results) {
         this.costumer = costumer;
         this.book = bookBean;
-        this.bookBeans = bookBeans;
+        this.results = results;
     }
 
 
@@ -74,7 +74,7 @@ public class MakeReservationGUI extends HomeCostumerGUI {
             errorLabel.setText("Book not available.");
         } catch (MaxPendingBorrowsException e) {
             errorLabel.setText("You have reached the maximum number of pending reservations.");
-            goToHomePage();
+            return;
         }
 
         loadConfirmation();
@@ -101,26 +101,13 @@ public class MakeReservationGUI extends HomeCostumerGUI {
     public void goToSearchResults() {
         try {
             FXMLLoader loader = new FXMLLoader(MakeReservationMySQLDAO.class.getResource("/view/searchResults.fxml"));
-            loader.setControllerFactory(c -> new SearchResultsGUI(this.costumer, bookBeans));
+            loader.setControllerFactory(c -> new SearchResultsGUI(this.costumer, results));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) isbnLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in MakeReservationGUI (going back to search results): " + e.getMessage());
-        }
-    }
-
-    private void goToHomePage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(MakeReservationMySQLDAO.class.getResource("/view/homeCostumer.fxml"));
-            loader.setControllerFactory(c -> new HomeCostumerGUI(this.costumer));
-            Parent parent = loader.load();
-            Scene scene = new Scene(parent);
-            Stage stage = (Stage) isbnLabel.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            logger.severe("Error in MakeReservationGUI (going back to home page): " + e.getMessage());
         }
     }
 }
