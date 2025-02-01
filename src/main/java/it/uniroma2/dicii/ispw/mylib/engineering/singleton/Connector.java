@@ -12,7 +12,7 @@ public class Connector {
 
     private Connector(){}
 
-    public static Connection getConnection(){
+    public static synchronized Connection getConnection(){
         try {
             if (conn == null) {
                 conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
