@@ -82,9 +82,9 @@
                           <columns>
                             <TableColumn fx:id="costumer" prefWidth="193.1999785900116" text="Costumer" />
                             <TableColumn fx:id="book" prefWidth="171.00001525878906" text="Book" />
-                              <TableColumn fx:id="copy" prefWidth="115.39996337890625" text="Copy" />
-                              <TableColumn fx:id="position" minWidth="0.0" prefWidth="163.60003662109375" text="Position" />
-                              <TableColumn fx:id="activate" prefWidth="98.20001220703125" text="Activate" />
+                              <TableColumn fx:id="copy" prefWidth="89.0" text="Copy" />
+                              <TableColumn fx:id="position" minWidth="0.0" prefWidth="158.199951171875" text="Position" />
+                              <TableColumn fx:id="activate" prefWidth="132.20001220703125" text="Activate" />
                           </columns>
                         </TableView>
                      </children>
