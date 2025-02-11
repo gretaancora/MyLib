@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.mylib;
 
 import it.uniroma2.dicii.ispw.mylib.engineering.singleton.Configurations;
 import it.uniroma2.dicii.ispw.mylib.other.Printer;
+import it.uniroma2.dicii.ispw.mylib.view.cli.StateMachine;
 import it.uniroma2.dicii.ispw.mylib.view.cli.StateMachineImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +63,7 @@ public class Main extends Application {
     }
 
     private void launchCLI() {
-        var cli = new StateMachineImpl();
+        StateMachine cli = new StateMachineImpl();
         cli.start();
     }
 
