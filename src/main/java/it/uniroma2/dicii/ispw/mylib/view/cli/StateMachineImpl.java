@@ -16,7 +16,7 @@ public class StateMachineImpl implements StateMachine {
     @Override
     public void start() {transitionTo(currentState);}
 
-    //goBack e goNext settano il current state e la stateHistory prima di eseguira la transizione
+    //goBack e goNext settano il current state e la stateHistory prima di eseguire la transizione
     @Override
     public void goBack() {
         currentState = stateHistory.pop();
@@ -30,8 +30,7 @@ public class StateMachineImpl implements StateMachine {
         transitionTo(currentState);
     }
 
-    @Override
-    public void transitionTo(State state) {
+    private void transitionTo(State state) {
         state.entry(this);
     }
 }
