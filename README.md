@@ -155,9 +155,3 @@ mvnw.cmd test
 Additional project documentation is available in the [`documentazione/`](documentazione/) directory. Build settings and dependency declarations can be found in [`pom.xml`](pom.xml).
 
 ---
-
-## 🎓 Academic Context
-
-MyLib was developed as the final project for the **Software Engineering and Web Programming** course at the **University of Rome Tor Vergata**, Faculty of Computer Engineering.
-
----
